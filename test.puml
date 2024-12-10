@@ -1,0 +1,14 @@
+@startuml
+
+class Web {
+    + label
+    + method2()
+}
+
+class Database {
+    + label
+    + method1()
+}
+
+Database --|> Web
+@enduml
