@@ -1,19 +1,23 @@
-from diagrams import Diagram
-from diagrams.aws.compute import EC2
-from diagrams.aws.database import RDS
-from diagrams.aws.network import APIGateway, ELB
-from diagrams.programming.language import Javascript
+from click import style
+from diagrams import Diagram, Edge
+from diagrams.aws.media import ElementalServer
+from diagrams.aws.database import Database
+from diagrams.aws.storage import S3
+from networkx.algorithms.bipartite.basic import color
 
-with Diagram("Advanced System", direction="TB", show=False):
-    backend = EC2("Backend")
-    database = RDS("Database")
-    api_gateway = APIGateway("Service")
-    frontend = Javascript("Frontend")
-    load_balancer = ELB("LoadBalancer")
+graph_attr = {
+    "splines":"polyline",
+    # "layout":"dot",
+}
 
-    # Connections with different directions and chained logic
-    backend << database
-    frontend >> api_gateway >> backend
-    frontend << api_gateway >> database
-    load_balancer >> api_gateway
-    database >> load_balancer
+# Create the diagram
+with Diagram("Intertwined Classes Diagram", show=False, graph_attr=graph_attr):
+    class_a = ElementalServer("ClassA")
+    class_b = Database("ClassB")
+    class_c = S3("ClassC")
+
+    # Define relationships
+    class_a >> Edge(label="interact_with_b()") >> class_b
+    class_b >> Edge(label="use_class_c()", color="red") >> class_c
+    class_c >> Edge(label="interact_with_a()") >> class_a
+    class_c >> Edge(label="interact_with_b()", color="darkgreen") >> class_b

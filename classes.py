@@ -1,50 +1,35 @@
-class Component:
+class ClassA:
     def __init__(self, name):
         self.name = name
 
-    def display_info(self):
-        print(f"Component: {self.name}")
+    def greet(self):
+        return f"Hello from {self.name}!"
 
-class Backend(Component):
-    def __init__(self, name, language):
-        super().__init__(name)
-        self.language = language
+    def interact_with_b(self, obj_b):
+        return f"{self.name} says: {obj_b.respond_to_a()}"
 
-    def display_info(self):
-        print(f"Backend: {self.name}, Language: {self.language}")
 
-    def backend_info(self):
-        print(f"{self.name} runs on {self.language}")
+class ClassB:
+    def __init__(self, id_number, obj_c):
+        self.id_number = id_number
+        self.obj_c = obj_c
 
-class Frontend(Component):
-    def __init__(self, name, framework):
-        super().__init__(name)
-        self.framework = framework
+    def respond_to_a(self):
+        return f"ClassB (ID: {self.id_number}) responding to ClassA"
 
-    def display_info(self):
-        print(f"Frontend: {self.name}, Framework: {self.framework}")
+    def use_class_c(self):
+        return self.obj_c.provide_data()
 
-    def frontend_info(self):
-        print(f"{self.name} uses {self.framework}")
 
-class Service(Component):
-    def __init__(self, name, api_version):
-        super().__init__(name)
-        self.api_version = api_version
+class ClassC:
+    def __init__(self, dataset):
+        self.dataset = dataset
 
-    def display_info(self):
-        print(f"Service: {self.name}, API Version: {self.api_version}")
+    def provide_data(self):
+        return f"ClassC provides dataset: {self.dataset}"
 
-    def service_info(self):
-        print(f"Service {self.name} is running on API version {self.api_version}")
+    def interact_with_a(self, obj_a):
+        return f"ClassC interacting with {obj_a.name}"
 
-class LoadBalancer(Service):
-    def __init__(self, name, api_version, region):
-        super().__init__(name, api_version)
-        self.region = region
-
-    def display_info(self):
-        print(f"LoadBalancer: {self.name}, Region: {self.region}, API Version: {self.api_version}")
-
-    def balancer_info(self):
-        print(f"LoadBalancer {self.name} handles traffic in {self.region}")
+    def interact_with_b(self, obj_b):
+        return f"ClassC sends data to ClassB (ID: {obj_b.id_number}): {self.dataset}"
