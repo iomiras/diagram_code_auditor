@@ -34,3 +34,10 @@ class Task:
 
     def assign_to_employee(self, employee):
         return f"Task '{self.task_name}' assigned to {employee.name}"
+
+# Employee -> Manager:
+# Via report_to_manager().
+# Manager -> Employee:
+# Via list_team() and assign_task().
+# Task -> Employee:
+# Via assign_to_employee().

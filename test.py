@@ -1,108 +1,73 @@
 import ast
 from pprint import pprint
 
-from torch.distributed.rpc.api import method_name
-
 with open("classes/classes.py", "r") as f:
     code = f.read()
 
 with open('diagrams/diagram.py', 'r') as f:
     diagram = f.read()
 
-
 class Visitor(ast.NodeVisitor):
-    def __init__(self):
-        self.all_classes = []
-        self.variable_to_class = {}
-        self.all_connections = []
-        self.last_left_classes = []
-
     def visit_Assign(self, node):
-        if isinstance(node, ast.Assign):
-            if isinstance(node.targets[0], ast.Name):
-                variable = node.targets[0].id
-                if isinstance(node.value, ast.Call):
-                    for arg in node.value.args:
-                        if isinstance(arg, ast.Constant):
-                            class_name = arg.value
-                            self.all_classes.append(class_name)
-                            self.variable_to_class[variable] = class_name
         self.generic_visit(node)
-
-    def visit_BinOp(self, node):
-        if not isinstance(node.left, ast.Name):
-            if isinstance(node.left, ast.List):
-                temp_node = node
-            else:
-                temp_node = node.left
-            if isinstance(temp_node.right, ast.Call):
-                method = next(
-                    (kw.value.value for kw in temp_node.right.keywords if kw.arg == "label"),
-                    None,
-                )
-            else:
-                method = None
-        else:
-            method = None
-
-        if method is not None:
-            left_class = resolve_left(node.left)
-
-            if isinstance(node.right, ast.Name):
-                right_class = [node.right.id]
-            elif isinstance(node.right, ast.List):
-                right_class = [elt.id for elt in node.right.elts if isinstance(elt, ast.Name)]
-            else:
-                right_class = []
-
-            for left in left_class:
-                _left = self.variable_to_class[left]
-                for right in right_class:
-                    _right = self.variable_to_class[right]
-                    if isinstance(node.op, ast.RShift):
-                        self.all_connections.append([_left, method, _right])
-                    else:
-                        self.all_connections.append([_right, method, _left])
-            #         self.all_connections.append([left, method, right])
-            # print('Left', left_class)
-            # print('Node.op and method', ast.dump(node.op, indent=4), method)
-            # print('Right', right_class)
-            # print("===========")
-
-        self.generic_visit(node)
-
-    def get_results(self):
-        return self.all_classes, self.variable_to_class, self.all_connections
-
-def resolve_left(node):
-    if isinstance(node, ast.Name):
-        return [node.id]
-    elif isinstance(node, ast.List):
-        return [elt.id for elt in node.elts if isinstance(elt, ast.Name)]
-    elif isinstance(node, ast.BinOp):
-        if isinstance(node.right, ast.Name):
-            return [node.right.id]
-        elif isinstance(node.right, ast.List):
-            return [elt.id for elt in node.right.elts if isinstance(elt, ast.Name)]
-        return resolve_left(node.left)
-    return []
-
+        print(f"Visiting {ast.dump(node, indent=4)}")
 
 def analyze_diagram(diagram):
     tree = ast.parse(diagram)
-    visitor = Visitor()
-    visitor.visit(tree)
+    # print(ast.dump(tree, indent=4))
+    variable_to_class = {}
+    all_connections = []
+    all_classes = []
+    Visitor().visit_Assign(tree)
 
-    all_classes, variable_to_class, all_connections = visitor.get_results()
+    for node in tree.body:
+        if isinstance(node, ast.With):
+            for _node in node.body:
+                if isinstance(_node, ast.With):
+                    # print("===== ITEM =====", ast.dump(_node, indent=4))
+                    # print("item Body", _node.body)
+                    items = _node.body
+                    # while isinstance(_items, ast.With) for _items in items:
+                    # TO-DO - Handle nested with statements
+                else:
+                    items = [_node]
+                for item in items:
+                    # print("====ITEM====\n", ast.dump(item, indent=4))
+                    class_left = []
+                    class_right = []
+                    if isinstance(item, ast.Assign):
+                        variable = item.targets[0].id
+                        for arg in item.value.args:
+                            class_name = arg.value
+                            all_classes.append(class_name)
+                            variable_to_class[variable] = class_name
 
-    # Print results for debugging
-    print("All Classes:", all_classes)
-    print("Variable to Class Mapping:", variable_to_class)
-    print("All Connections:")
-    pprint(all_connections)
+                    if isinstance(item, ast.Expr):
+                    # class1 = variable_to_class[item.value.left.left.id]
+                    #     print("====ITEM====\n", ast.dump(item, indent=4))
+                    #     print(variable_to_class)
+                        if isinstance(item.value.left.left, ast.Name):
+                            class_left.append(variable_to_class[item.value.left.left.id])
+                        elif isinstance(item.value.left.left, ast.List):
+
+                            class_left.append(variable_to_class[item.value.left.left.elts[0].id])
+                            class_left.append(variable_to_class[item.value.left.left.elts[1].id])
+
+                        method = item.value.left.right.keywords[0].value.value
+                        right_direction = isinstance(item.value.left.op, ast.RShift)
+                        if isinstance(item.value.right, ast.Name):
+                            class_right.append(variable_to_class[item.value.right.id])
+                        elif isinstance(item.value.right, ast.List):
+                            class_right.append(variable_to_class[item.value.right.elts[0].id])
+                            class_right.append(variable_to_class[item.value.right.elts[1].id])
+                        for i in range(len(class_left)):
+                            for j in range(len(class_right)):
+                                if right_direction:
+                                    all_connections.append([class_left[i], method, class_right[j]])
+                                else:
+                                    all_connections.append([class_right[i], method, class_left[j]])
 
     return all_classes, all_connections
-
 
 def extract_attribute_chain(node):
     if isinstance(node, ast.Attribute):
@@ -190,12 +155,12 @@ def analyze_code(code):
     return all_classes, all_connections
 
 all_diagram_classes, all_diagram_connections = analyze_diagram(diagram)
-# print(all_diagram_classes)
-# pprint(all_diagram_connections)
-#
-#
-# print("============")
-#
-# all_code_classes, all_code_connections = analyze_code(code)
-# print(all_code_classes)
-# pprint(all_code_connections)
+print(all_diagram_classes)
+pprint(all_diagram_connections)
+
+
+print("============")
+
+all_code_classes, all_code_connections = analyze_code(code)
+print(all_code_classes)
+pprint(all_code_connections)
