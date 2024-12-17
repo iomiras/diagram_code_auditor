@@ -93,9 +93,6 @@ class Service1(Service):
     def __init__(self):
         super().__init__("Service1")
 
-    def print_hello(self):
-        print("Hello from Service1")
-
 
 class Service2(Service):
     def __init__(self):
