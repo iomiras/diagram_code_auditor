@@ -2,6 +2,19 @@ class User:
     def __init__(self, name):
         self.name = name
 
+    # Standalone methods
+    def login(self):
+        print(f"{self.name} logged in")
+
+    def logout(self):
+        print(f"{self.name} logged out")
+
+    def profile_view(self):
+        print(f"{self.name} viewed profile")
+
+    def profile_update(self):
+        print(f"{self.name} updated profile")
+
     def access_via(self, devices):
         for device in devices:
             print(f"{self.name} accesses via {device.name}")
@@ -11,19 +24,35 @@ class MobileApp:
     def __init__(self, name):
         self.name = name
 
+    def update_ui(self):
+        print(f"{self.name} UI updated")
+
+    def secured_by(self, devices):
+        for device in devices:
+            print(f"{device.name} is secured by {self.name}")
+
 
 class DesktopApp:
     def __init__(self, name):
         self.name = name
+
+    def render_view(self):
+        print(f"{self.name} rendered view")
+
+    def secured_by(self, devices):
+        for device in devices:
+            print(f"{device.name} is secured by {self.name}")
 
 
 class Firewall:
     def __init__(self, name):
         self.name = name
 
-    def secured_by(self, devices):
-        for device in devices:
-            print(f"{device.name} is secured by {self.name}")
+    def filter_traffic(self):
+        print(f"{self.name} is filtering traffic")
+
+    def monitor_logs(self):
+        print(f"{self.name} is monitoring logs")
 
     def routes_to(self, target):
         print(f"{self.name} routes to {target.name}")
@@ -32,6 +61,12 @@ class Firewall:
 class LoadBalancer:
     def __init__(self, name):
         self.name = name
+
+    def check_health(self):
+        print(f"{self.name} is checking health")
+
+    def restart(self):
+        print(f"{self.name} is restarting")
 
     def balance(self, services):
         for service in services:
@@ -49,10 +84,35 @@ class Service:
         for db in databases:
             print(f"{self.name} stores data in {db.name}")
 
+    def restart_service(self):
+        print(f"{self.name} is restarting")
+
+
+# Individual Services
+class Service1(Service):
+    def __init__(self):
+        super().__init__("Service1")
+
+    def print_hello(self):
+        print("Hello from Service1")
+
+
+class Service2(Service):
+    def __init__(self):
+        super().__init__("Service2")
+
+
+class Service3(Service):
+    def __init__(self):
+        super().__init__("Service3")
+
 
 class RelationalDB:
     def __init__(self, name):
         self.name = name
+
+    def backup_data(self):
+        print(f"{self.name} is backing up data")
 
     def replicates_to(self, target_db):
         print(f"{self.name} replicates to {target_db.name}")
@@ -62,52 +122,16 @@ class NoSQLDB:
     def __init__(self, name):
         self.name = name
 
+    def clear_cache(self):
+        print(f"{self.name} cache cleared")
+
 
 class AuthServer:
     def __init__(self, name):
         self.name = name
 
+    def validate_token(self):
+        print(f"{self.name} is validating token")
+
     def queries(self, database):
         print(f"{self.name} queries {database.name}")
-
-
-# Instantiating objects
-user = User("User")
-
-# Frontend Cluster
-mobile = MobileApp("MobileApp")
-desktop = DesktopApp("DesktopApp")
-
-# Backend Cluster
-load_balancer = LoadBalancer("LoadBalancer")
-
-# Compute Cluster
-service1 = Service("Service1")
-service2 = Service("Service2")
-service3 = Service("Service3")
-
-# Database Cluster
-relational_db = RelationalDB("RelationalDB")
-nosql_db = NoSQLDB("NoSQLDB")
-
-# Security Layer
-firewall = Firewall("Firewall")
-auth_server = AuthServer("AuthServer")
-
-# Simulated relationships
-devices = [mobile, desktop]
-services = [service1, service2, service3]
-databases = [relational_db, nosql_db]
-
-# Relationships
-user.access_via(devices)
-firewall.secured_by(devices)
-firewall.routes_to(load_balancer)
-load_balancer.balance(services)
-load_balancer.authenticates_via(auth_server)
-
-for service in services:
-    service.store_data(databases)
-
-auth_server.queries(relational_db)
-relational_db.replicates_to(nosql_db)

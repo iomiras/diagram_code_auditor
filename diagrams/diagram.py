@@ -1,3 +1,4 @@
+from click import style
 from diagrams import Diagram, Cluster, Edge
 from diagrams.generic.network import Firewall
 from diagrams.generic.device import Mobile, Tablet
@@ -6,12 +7,13 @@ from diagrams.generic.compute import Rack
 from diagrams.generic.database import SQL
 from diagrams.generic.storage import Storage
 from diagrams.onprem.compute import Server
+from diagrams.generic.blank import Blank  # To depict abstract or parent classes visually
 
 graph_attr = {
     "splines": "polyline",
 }
 
-with Diagram("Class Relationships and Methods", direction="LR", show=False, graph_attr=graph_attr):
+with Diagram("Class Relationships and Methods", direction="TB", show=False, graph_attr=graph_attr):
     # User class
     user = User("User")
 
@@ -25,9 +27,18 @@ with Diagram("Class Relationships and Methods", direction="LR", show=False, grap
         load_balancer = Rack("LoadBalancer")
 
         with Cluster("Service Classes"):
+            # Parent class (Service)
+            service_parent = Server("Service")
+
+            # Child classes inheriting from Service
             service1 = Server("Service1")
             service2 = Server("Service2")
             service3 = Server("Service3")
+
+            # Inheritance edges (dotted to distinguish from regular edges)
+            service1 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+            service2 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+            service3 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
 
         load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
 
@@ -52,3 +63,27 @@ with Diagram("Class Relationships and Methods", direction="LR", show=False, grap
 
     auth_server >> Edge(label="queries()", color="brown") >> relational_db
     relational_db >> Edge(label="replicates_to()", color="darkgreen") >> nosql_db
+
+    # Standalone methods for each class (as connections to "self")
+    user >> Edge(label="login()", style="dotted") >> user
+    user >> Edge(label="logout()", style="dotted") >> user
+    user >> Edge(label="profile_view()", style="dotted") >> user
+    user >> Edge(label="profile_update()", style="dotted") >> user
+
+    mobile_app >> Edge(label="update_ui()", style="dotted") >> mobile_app
+    desktop_app >> Edge(label="render_view()", style="dotted") >> desktop_app
+
+    firewall >> Edge(label="filter_traffic()", style="dotted") >> firewall
+    firewall >> Edge(label="monitor_logs()", style="dotted") >> firewall
+
+    load_balancer >> Edge(label="check_health()", style="dotted") >> load_balancer
+    load_balancer >> Edge(label="restart()", style="dotted") >> load_balancer
+
+    service1 >> Edge(label="restart_service()", style="dotted") >> service1
+    service2 >> Edge(label="restart_service()", style="dotted") >> service2
+    service3 >> Edge(label="restart_service()", style="dotted") >> service3
+
+    relational_db >> Edge(label="backup_data()", style="dotted") >> relational_db
+    nosql_db >> Edge(label="clear_cache()", style="dotted") >> nosql_db
+
+    auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
