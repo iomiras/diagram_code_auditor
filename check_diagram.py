@@ -1,9 +1,6 @@
 import ast
+import sys
 from pprint import pprint
-
-with open('diagrams/diagram.py', 'r') as f:
-    diagram = f.read()
-
 
 class DiagramVisitor(ast.NodeVisitor):
     def __init__(self):
@@ -158,22 +155,6 @@ def analyze_diagram(diagram):
 
     return all_classes, class_to_methods, all_connections
 
-all_diagram_classes, diagram_class_to_methods, all_diagram_connections = analyze_diagram(diagram)
-# pprint("All Diagram Classes:")
-# pprint(all_diagram_classes)
-# print("========================================")
-# pprint("Diagram Class to Methods:")
-# pprint(diagram_class_to_methods)
-# print("========================================")
-# print("All Connections:")
-# pprint(all_diagram_connections)
-
-
-with open("classes/classes.py", "r") as f:
-    code = f.read()
-
-import ast
-
 class CodeVisitor(ast.NodeVisitor):
     def __init__(self):
         self.classes = []  # All class names
@@ -248,13 +229,7 @@ def analyze_code(code):
     return classes, class_to_methods
 
 
-all_code_classes, code_class_to_methods = analyze_code(code)
-# pprint("All Code Classes:")
-# pprint(all_code_classes)
-# print("========================================")
-# pprint("Code Class to Methods:")
-# pprint(code_class_to_methods)
-# print("========================================")
+# all_code_classes, code_class_to_methods = analyze_code(code)
 
 def compare_classes(code_classes, diagram_classes):
     missing_classes = set(diagram_classes) - set(code_classes)
@@ -273,17 +248,56 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
             extra_methods[cls] = set()
     return missing_methods, extra_methods
 
-missing_classes, extra_classes = compare_classes(all_code_classes, all_diagram_classes)
-missing_methods, extra_methods = compare_methods(code_class_to_methods, diagram_class_to_methods)
 
-print('Missing Classes in Code, but in Diagram:')
-pprint(missing_classes)
-print("========================================")
-print('Extra Classes in Code, but not in Diagram:')
-pprint(extra_classes)
-print("========================================")
-print('Missing Methods in Code, but in Diagram:')
-pprint(missing_methods)
-print("========================================")
-print('Extra Methods in Code, but not in Diagram:')
-pprint(extra_methods)
+if __name__ == "__main__":
+    # Parse arguments
+    code_file_name = sys.argv[1]
+    diagram_file_names = sys.argv[2:]
+
+    # Analyze the code file
+    with open(code_file_name, 'r') as f:
+        code_file = f.read()
+    code_classes, code_methods = analyze_code(code_file)
+
+    # Analyze all diagram files and aggregate results
+    all_diagram_classes = set()
+    aggregated_diagram_methods = {}
+
+    for file in diagram_file_names:
+        with open(file, "r") as f:
+            diagram_file = f.read()
+        diagram_classes, diagram_methods, _ = analyze_diagram(diagram_file)
+        all_diagram_classes.update(diagram_classes)
+        for cls, methods in diagram_methods.items():
+            aggregated_diagram_methods.setdefault(cls, set()).update(methods)
+
+    # Compare classes and methods
+    missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
+    missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
+
+    # Report Results
+    print("===== Comparison Results =====")
+
+    if missing_classes:
+        print("\nMissing Classes in Code:")
+        pprint(missing_classes)
+
+    if extra_classes:
+        print("\nExtra Classes in Code:")
+        pprint(extra_classes)
+
+    if missing_methods:
+        print("\nMissing Methods in Code:")
+        pprint({cls: methods for cls, methods in missing_methods.items() if methods})
+
+    if extra_methods:
+        print("\nExtra Methods in Code:")
+        pprint({cls: methods for cls, methods in extra_methods.items() if methods})
+
+    # Exit with failure if discrepancies are found
+    if missing_classes or extra_classes or any(missing_methods.values()) or any(extra_methods.values()):
+        print("\n❌ Discrepancies found! Commit aborted.")
+        sys.exit(1)
+    else:
+        print("\n✅ Code and Diagram are in sync!")
+        sys.exit(0)
