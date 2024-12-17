@@ -1,51 +1,54 @@
 from diagrams import Diagram, Cluster, Edge
-from diagrams.aws.compute import EC2
-from diagrams.aws.database import RDS
-from diagrams.aws.network import ELB
-from diagrams.onprem.client import User
-from diagrams.onprem.database import PostgreSQL
-from diagrams.generic.storage import Storage
-from diagrams.aws.media import ElementalServer as Server
 from diagrams.generic.network import Firewall
 from diagrams.generic.device import Mobile, Tablet
+from diagrams.onprem.client import User
+from diagrams.generic.compute import Rack
+from diagrams.generic.database import SQL
+from diagrams.generic.storage import Storage
+from diagrams.onprem.compute import Server
 
 graph_attr = {
-    "splines":"polyline",
+    "splines": "polyline",
 }
 
-with Diagram("Complex Class Relationships", direction="LR", show=False, graph_attr=graph_attr):
+with Diagram("Class Relationships and Methods", direction="LR", show=False, graph_attr=graph_attr):
+    # User class
     user = User("User")
 
-    with Cluster("Frontend Cluster"):
-        mobile = Mobile("MobileApp")
-        desktop = Tablet("DesktopApp")
+    # Frontend Cluster: Classes representing frontend interfaces
+    with Cluster("Frontend Classes"):
+        mobile_app = Mobile("MobileApp")
+        desktop_app = Tablet("DesktopApp")
 
-        # frontend_services = [mobile, desktop]
+    # Backend Cluster: Core processing classes
+    with Cluster("Backend Classes"):
+        load_balancer = Rack("LoadBalancer")
 
-    with Cluster("Backend Cluster"):
-        load_balancer = ELB("LoadBalancer")
-
-        with Cluster("Compute Cluster"):
-            service1 = EC2("Service1")
-            service2 = EC2("Service2")
-            service3 = EC2("Service3")
+        with Cluster("Service Classes"):
+            service1 = Server("Service1")
+            service2 = Server("Service2")
+            service3 = Server("Service3")
 
         load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
 
-    with Cluster("Database Cluster"):
-        relational_db = RDS("RelationalDB")
+    # Database Classes
+    with Cluster("Database Classes"):
+        relational_db = SQL("RelationalDB")
         nosql_db = Storage("NoSQLDB")
 
-    with Cluster("Security Layer"):
+    # Security Layer: Security-related classes
+    with Cluster("Security Classes"):
         firewall = Firewall("Firewall")
         auth_server = Server("AuthServer")
 
-    user >> Edge(label="access_via()", color="blue") >> [mobile, desktop]
-    [mobile, desktop] >> Edge(label="secured_by()", color="red") >> firewall >> Edge(label="routes_to()", color="green") >> load_balancer
+    # Class Relationships and Methods
+    user >> Edge(label="access_via()", color="blue") >> [mobile_app, desktop_app]
+    [mobile_app, desktop_app] >> Edge(label="secured_by()", color="red") >> firewall
+    firewall >> Edge(label="routes_to()", color="green") >> load_balancer
     load_balancer >> Edge(label="authenticates_via()", color="purple") >> auth_server
 
     for service in [service1, service2, service3]:
-        service1 >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
+        service >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
 
     auth_server >> Edge(label="queries()", color="brown") >> relational_db
     relational_db >> Edge(label="replicates_to()", color="darkgreen") >> nosql_db

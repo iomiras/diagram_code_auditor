@@ -1,7 +1,7 @@
 import ast
 from pprint import pprint
 
-with open("classes/classes.py", "r") as f:
+with open("classes/classes1.py", "r") as f:
     code = f.read()
 
 with open('diagrams/diagram.py', 'r') as f:

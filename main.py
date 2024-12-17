@@ -56,6 +56,8 @@ class Visitor(ast.NodeVisitor):
                 right_class = []
 
             for left in left_class:
+                if left not in self.variable_to_class:
+                    continue
                 _left = self.variable_to_class[left]
                 for right in right_class:
                     _right = self.variable_to_class[right]
@@ -63,13 +65,64 @@ class Visitor(ast.NodeVisitor):
                         self.all_connections.append([_left, method, _right])
                     else:
                         self.all_connections.append([_right, method, _left])
-            #         self.all_connections.append([left, method, right])
-            # print('Left', left_class)
-            # print('Node.op and method', ast.dump(node.op, indent=4), method)
-            # print('Right', right_class)
-            # print("===========")
 
         self.generic_visit(node)
+
+    def visit_For(self, node):
+        """
+        Visit a For loop node and extract connections.
+        """
+        # Extract the loop variable (target)
+        if isinstance(node.target, ast.Name):
+            loop_var = node.target.id
+        else:
+            return  # Unsupported target type
+
+        # Extract iteration elements (iter)
+        iteration_elements = []
+        if isinstance(node.iter, ast.List):
+            iteration_elements = [
+                elt.id for elt in node.iter.elts if isinstance(elt, ast.Name)
+            ]
+
+        # Process the loop body
+        for stmt in node.body:
+            if isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.BinOp):
+                self.process_binop_in_for(stmt.value, loop_var, iteration_elements)
+
+        # Continue visiting other nodes
+        self.generic_visit(node)
+
+    def process_binop_in_for(self, node, loop_var, iteration_elements):
+        left_side = []
+        if isinstance(node.left, ast.BinOp) and isinstance(node.left.left, ast.Name):
+            if node.left.left.id == loop_var:
+                left_side = iteration_elements
+
+        method = None
+        if isinstance(node.left.right, ast.Call) and node.left.right.func.id == "Edge":
+            method = next(
+                (kw.value.value for kw in node.left.right.keywords if kw.arg == "label"),
+                None,
+            )
+
+        right_side = []
+        if isinstance(node.right, ast.List):
+            right_side = [
+                elt.id for elt in node.right.elts if isinstance(elt, ast.Name)
+            ]
+
+        # Form connections
+        if left_side and method and right_side:
+            for left in left_side:
+                for right in right_side:
+                    _left = self.variable_to_class[left]
+                    _right = self.variable_to_class[right]
+                    # if print("Node", node.left.op)
+                    if isinstance(node.left.op, ast.RShift):
+                        self.all_connections.append([_left, method, _right])
+                    else:
+                        self.all_connections.append([_right, method, _left])
 
     def get_results(self):
         return self.all_classes, self.variable_to_class, self.all_connections
@@ -87,19 +140,12 @@ def resolve_left(node):
         return resolve_left(node.left)
     return []
 
-
 def analyze_diagram(diagram):
     tree = ast.parse(diagram)
     visitor = Visitor()
     visitor.visit(tree)
 
     all_classes, variable_to_class, all_connections = visitor.get_results()
-
-    # Print results for debugging
-    print("All Classes:", all_classes)
-    print("Variable to Class Mapping:", variable_to_class)
-    print("All Connections:")
-    pprint(all_connections)
 
     return all_classes, all_connections
 
@@ -190,6 +236,10 @@ def analyze_code(code):
     return all_classes, all_connections
 
 all_diagram_classes, all_diagram_connections = analyze_diagram(diagram)
+pprint("All Classes:")
+pprint(all_diagram_classes)
+print("All Connections:")
+pprint(all_diagram_connections)
 # print(all_diagram_classes)
 # pprint(all_diagram_connections)
 #
