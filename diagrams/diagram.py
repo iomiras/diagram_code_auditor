@@ -1,4 +1,3 @@
-from click import style
 from diagrams import Diagram, Cluster, Edge
 from diagrams.generic.network import Firewall
 from diagrams.generic.device import Mobile, Tablet
@@ -7,7 +6,6 @@ from diagrams.generic.compute import Rack
 from diagrams.generic.database import SQL
 from diagrams.generic.storage import Storage
 from diagrams.onprem.compute import Server
-from diagrams.generic.blank import Blank  # To depict abstract or parent classes visually
 
 graph_attr = {
     "splines": "polyline",
