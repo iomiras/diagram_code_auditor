@@ -9,6 +9,7 @@ class DiagramVisitor(ast.NodeVisitor):
         self.all_connections = []
         self.last_left_classes = []
         self.all_class_to_methods = {}
+        self.all_lists = {}
 
     def visit_Assign(self, node):
         if isinstance(node, ast.Assign):
@@ -20,6 +21,16 @@ class DiagramVisitor(ast.NodeVisitor):
                             class_name = arg.value
                             self.all_classes.append(class_name)
                             self.variable_to_class[variable] = class_name
+                elif isinstance(node.value, ast.List):
+                    for elt in node.value.elts:
+                        if isinstance(elt, ast.Name):
+                            self.all_classes.append(self.variable_to_class[elt.id])
+                            if variable in self.all_lists:
+                                self.all_lists[variable].append(elt.id)
+                            else:
+                                self.all_lists[variable] = [elt.id]
+                            # self.all_lists[variable].append(self.variable_to_class[elt.id])
+
         self.generic_visit(node)
 
     def visit_BinOp(self, node):
@@ -65,6 +76,11 @@ class DiagramVisitor(ast.NodeVisitor):
             iteration_elements = [
                 elt.id for elt in node.iter.elts if isinstance(elt, ast.Name)
             ]
+            # print("Iteration elements", iteration_elements)
+
+        if isinstance(node.iter, ast.Name):
+            iteration_elements = self.all_lists[node.iter.id]
+            # print("iteration_elements", iteration_elements)
 
         # Process the loop body
         for stmt in node.body:
@@ -80,6 +96,7 @@ class DiagramVisitor(ast.NodeVisitor):
             if node.left.left.id == loop_var:
                 left_class = iteration_elements
 
+        # print("left_class", left_class)
         method = None
         if isinstance(node.left.right, ast.Call) and node.left.right.func.id == "Edge":
             method = extract_method_from_edge(node.left.right)
@@ -90,6 +107,7 @@ class DiagramVisitor(ast.NodeVisitor):
                 elt.id for elt in node.right.elts if isinstance(elt, ast.Name)
             ]
 
+        # print(left_class, method, right_class)
         # Form connections
         self.add_to_connections(left_class, method, right_class, node.op)
 
@@ -108,7 +126,9 @@ class DiagramVisitor(ast.NodeVisitor):
                     self.add_class_to_methods(_left, method)
                 else:
                     self.all_connections.append([_right, method, _left])
-                    self.add_class_to_methods(_left, method)
+                    self.add_class_to_methods(_right, method)
+        # print("all_connections")
+        # pprint(self.all_connections)
 
     def add_class_to_methods(self, class_name, method):
         if method == 'inherits':
@@ -251,8 +271,10 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
 
 if __name__ == "__main__":
     # Parse arguments
-    code_file_name = sys.argv[1]
-    diagram_file_names = sys.argv[2:]
+    code_file_name = "classes/classes.py"
+    diagram_file_names = ["diagrams/diagram.py"]
+    # code_file_name = sys.argv[1]
+    # diagram_file_names = sys.argv[2:]
 
     # Analyze the code file
     with open(code_file_name, 'r') as f:

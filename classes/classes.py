@@ -57,6 +57,9 @@ class Firewall:
     def routes_to(self, target):
         print(f"{self.name} routes to {target.name}")
 
+    def login(self):
+        print("Firewall login")
+
 
 class LoadBalancer:
     def __init__(self, name):

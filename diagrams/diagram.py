@@ -33,11 +33,14 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
             service2 = Server("Service2")
             service3 = Server("Service3")
 
-            # Inheritance edges (dotted to distinguish from regular edges)
-            service1 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
-            service2 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
-            service3 >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+            services = [service1, service2, service3]
+            # services_strs = ["Service1", "Service2", "Service3"]
 
+            for service in services:
+                service >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+
+        # for service_str in services_strs:
+        #     load_balancer >> Edge(label="balance()") >> service_str
         load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
 
     # Database Classes
@@ -56,7 +59,7 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
     firewall >> Edge(label="routes_to()", color="green") >> load_balancer
     load_balancer >> Edge(label="authenticates_via()", color="purple") >> auth_server
 
-    for service in [service1, service2, service3]:
+    for service in services:
         service >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
 
     auth_server >> Edge(label="queries()", color="brown") >> relational_db
@@ -73,6 +76,7 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
 
     firewall >> Edge(label="filter_traffic()", style="dotted") >> firewall
     firewall >> Edge(label="monitor_logs()", style="dotted") >> firewall
+    firewall >> Edge(label="login()", style="dotted") >> firewall
 
     load_balancer >> Edge(label="check_health()", style="dotted") >> load_balancer
     load_balancer >> Edge(label="restart()", style="dotted") >> load_balancer
