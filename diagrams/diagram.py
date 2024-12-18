@@ -34,10 +34,12 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
             service3 = Server("Service3")
 
             services = [service1, service2, service3]
+            inherit = "inherits"
             # services_strs = ["Service1", "Service2", "Service3"]
 
             for service in services:
-                service >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+                # service >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+                service >> Edge(label=inherit, style="dotted", color="gray") >> service_parent
 
         # for service_str in services_strs:
         #     load_balancer >> Edge(label="balance()") >> service_str

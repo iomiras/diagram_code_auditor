@@ -6,6 +6,9 @@ class User:
     def login(self):
         print(f"{self.name} logged in")
 
+    # def delete(self):
+    #     print(f"{self.name} deleted account")
+
     def logout(self):
         print(f"{self.name} logged out")
 
