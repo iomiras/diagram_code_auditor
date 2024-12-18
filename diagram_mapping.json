@@ -1,4 +1,5 @@
 {
+  "diagrams/diagram.py": "classes/classes.py",
   "classes/classes.py": "diagrams/diagram.py",
   "classes/classes1.py": "diagrams/diagram1.py",
   "classes/classes2.py": "diagrams/diagram2.py",
