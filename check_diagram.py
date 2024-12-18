@@ -373,7 +373,7 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
 
 if __name__ == "__main__":
     # code_file_name = "classes/classes.py"
-    # diagram_file_names = ["diagrams/
+    # diagram_file_names = ["diagrams"]
     #
     code_file_name = sys.argv[1]
     diagram_file_names = sys.argv[2:]
