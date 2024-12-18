@@ -8,7 +8,7 @@ from diagrams.generic.storage import Storage
 from diagrams.onprem.compute import Server
 
 graph_attr = {
-    "splines": "polyline",
+    "splines": "curve",
 }
 
 with Diagram("Class Relationships and Methods", direction="TB", show=False, graph_attr=graph_attr):
