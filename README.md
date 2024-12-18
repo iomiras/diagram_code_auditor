@@ -113,7 +113,7 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 
 ---
 
-## How `diagram_code_auditor.py` Works, Detailed
+## How `diagram_code_auditor.py` Works in Details
 
 ### Diagram Parsing `DiagramVisitor(ast.NodeVisitor)`
 
