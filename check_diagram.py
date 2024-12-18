@@ -420,9 +420,9 @@ if __name__ == "__main__":
         if extra_methods:
             print("\nExtra Methods in Code:")
             pprint(extra_methods)
-        print("\n❌ Discrepancies found! Commit aborted.")
+        print("\n❌ Discrepancies found! Commit aborted.\n")
         sys.exit(1)
 
     else:
-        print("\n✅ Code and Diagram are in sync!")
+        print("\n✅ Code and Diagram are in sync!\n")
         sys.exit(0)
