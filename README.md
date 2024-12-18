@@ -2,6 +2,12 @@
 
 This tool ensures that Python code and diagrams remain synchronized by validating the consistency of class definitions and methods during the development workflow. It integrates with `pre-commit` to prevent discrepancies between code and diagram files from being committed.
 
+## Libraries Used
+
+- **`ast`**: The Python Abstract Syntax Tree library is the core of this tool. It parses and analyzes both diagram and code files, extracting class definitions, methods, and their relationships in a structured manner.
+- **`sys`**: Handles command-line arguments to allow the script to dynamically process specified files during execution.
+- **`pprint`**: Provides clean and human-readable output for debug logs and comparison results.
+- **`json`**: Manages the mapping of diagram files to their corresponding code files, enabling dynamic validation workflows. This is used in conjunction with the pre-commit script to ensure file mapping integrity.
 ---
 
 ## Key Features
