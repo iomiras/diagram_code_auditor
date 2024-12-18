@@ -402,27 +402,28 @@ if __name__ == "__main__":
     missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
     missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
 
-    print("===== Comparison Results =====")
-    if missing_classes:
-        print("\nMissing Classes in Code:")
-        pprint(missing_classes)
-
-    if extra_classes:
-        print("\nExtra Classes in Code:")
-        pprint(extra_classes)
-
-    if missing_methods:
-        print("\nMissing Methods in Code:")
-        pprint(missing_methods)
-
-    if extra_methods:
-        print("\nExtra Methods in Code:")
-        pprint(extra_methods)
+    # if missing_classes or extra_classes or missing_methods or extra_methods:
 
     # Determine exit code
     if missing_classes or extra_classes or missing_methods or extra_methods:
-        print("\n❌ Discrepancies found! Commit aborted.")
+        print("===== Comparison Results =====")
+        if missing_classes:
+            print("\nMissing Classes in Code:")
+            pprint(missing_classes)
+
+        if extra_classes:
+            print("\nExtra Classes in Code:")
+            pprint(extra_classes)
+
+        if missing_methods:
+            print("\nMissing Methods in Code:")
+            pprint(missing_methods)
+
+        if extra_methods:
+            print("\nExtra Methods in Code:")
+            pprint(extra_methods)
+        # print("\n❌ Discrepancies found! Commit aborted.")
         sys.exit(1)
     else:
-        print("\n✅ Code and Diagram are in sync!")
+        # print("\n✅ Code and Diagram are in sync!")
         sys.exit(0)
