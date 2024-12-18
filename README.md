@@ -1,4 +1,4 @@
-# Diagram and Code Alignment Tool
+# Diagram and Code Alignment Tool `diagram-code-auditor`
 
 This tool ensures that Python code and diagrams remain synchronized by validating the consistency of class definitions and methods during the development workflow. It integrates with `pre-commit` to prevent discrepancies between code and diagram files from being committed.
 
@@ -32,7 +32,7 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 ### Pre-Commit Integration
 
 1. **Diagram Mapping**:
-   - The `diagram_mapping.json` file maps code files to their corresponding diagrams:
+   - The `code_diagram_mapping.json` file maps code files to their corresponding diagrams:
      ```json
      {
        "classes/classes.py": "diagrams/diagram.py",
@@ -113,7 +113,7 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 
 ---
 
-## How `check_diagram.py` Works in Details
+## How `diagram_code_auditor.py` Works in Details
 
 ### Diagram Parsing `DiagramVisitor(ast.NodeVisitor)`
 
@@ -263,7 +263,7 @@ Extra Methods in Code:
    fi
    
    # Path to the diagram mapping file
-   DIAGRAM_MAPPING="diagram_mapping.json"
+   DIAGRAM_MAPPING="code_diagram_mapping.json"
    
    # Run the Python script for each file and its corresponding diagram
    for file in $files; do
@@ -277,7 +277,7 @@ Extra Methods in Code:
             echo "File: $normalized_file"
             echo "Diagram: $diagram"
             echo "Checking $normalized_file against $diagram..."
-            python3 check_diagram.py "$normalized_file" "$diagram"
+            python3 diagram_code_auditor.py "$normalized_file" "$diagram"
             status=$?
             if [ $status -ne 0 ]; then
                 exit 1
@@ -295,7 +295,7 @@ Extra Methods in Code:
    chmod +x .git/hooks/pre-commit
    ```
 
-2. Add `diagram_mapping.json` to the root of the repository:
+2. Add `code_diagram_mapping.json` to the root of the repository:
    ```json
    {
      "classes/classes.py": "diagrams/diagram.py",
