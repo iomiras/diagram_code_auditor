@@ -1,6 +1,6 @@
 {
-  "classes/classes.py": "diagrams/diagram.py",
-  "classes/classes1.py": "diagrams/diagram1.py",
-  "classes/classes2.py": "diagrams/diagram2.py",
-  "classes/classes3.py": "diagrams/diagram3.py"
+  "classes_examples/classes.py": "diagram_examples/diagram.py",
+  "classes_examples/classes1.py": "diagram_examples/diagram1.py",
+  "classes_examples/classes2.py": "diagram_examples/diagram2.py",
+  "classes_examples/classes3.py": "diagram_examples/diagram3.py"
 }
