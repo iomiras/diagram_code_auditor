@@ -194,6 +194,8 @@ class DiagramVisitor(ast.NodeVisitor):
         right_class_ids = []
         if isinstance(node.right, ast.List):
             right_class_ids = [elt.id for elt in node.right.elts if isinstance(elt, ast.Name)]
+        elif isinstance(node.right, ast.Name):
+            right_class_ids = [node.right.id]
 
         self.add_to_connections(left_class_ids, method, right_class_ids, node.op)
 
@@ -203,6 +205,7 @@ class DiagramVisitor(ast.NodeVisitor):
         For example, A >> Edge(label="method") >> B means A.method connects to B.
         """
         if method is None:
+            # print("Method", method)
             # No method label found, skip adding a method connection
             return
 
@@ -236,7 +239,10 @@ class DiagramVisitor(ast.NodeVisitor):
         Add a method to a class in the internal mapping, ensuring no duplicates.
         """
         if method == 'inherits':
-            self.all_class_to_methods[class_name].extend(self.all_class_to_methods[another_class_name])
+            if class_name in self.all_class_to_methods:
+                self.all_class_to_methods[class_name].extend(self.all_class_to_methods[another_class_name])
+            else:
+                self.all_class_to_methods[class_name] = self.all_class_to_methods[another_class_name]
             return
         if class_name not in self.all_class_to_methods:
             self.all_class_to_methods[class_name] = []
