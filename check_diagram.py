@@ -220,22 +220,23 @@ class DiagramVisitor(ast.NodeVisitor):
 
                 # If classes are the same, just add method to the class
                 if left_class == right_class:
-                    self.add_class_to_methods(left_class, method)
+                    self.add_class_to_methods(left_class, method, right_class)
                     continue
 
                 # Depending on the operator, decide the connection direction
                 if isinstance(op, ast.RShift):
                     self.all_connections.append([left_class, method, right_class])
-                    self.add_class_to_methods(left_class, method)
+                    self.add_class_to_methods(left_class, method, right_class)
                 else:
                     self.all_connections.append([right_class, method, left_class])
-                    self.add_class_to_methods(right_class, method)
+                    self.add_class_to_methods(right_class, method, left_class)
 
-    def add_class_to_methods(self, class_name, method):
+    def add_class_to_methods(self, class_name, method, another_class_name):
         """
         Add a method to a class in the internal mapping, ensuring no duplicates.
         """
-        if method == 'inherits':  # ignore 'inherits' pseudo-methods
+        if method == 'inherits':
+            self.all_class_to_methods[class_name].extend(self.all_class_to_methods[another_class_name])
             return
         if class_name not in self.all_class_to_methods:
             self.all_class_to_methods[class_name] = []
