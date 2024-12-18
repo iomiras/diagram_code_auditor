@@ -31,7 +31,9 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
             service >> Edge(label="restart_service()", style="dotted") >> service
             service >> Edge(label="store_data()", style="dotted") >> service
 
-            for svc in [service1, service2, service3]:
+            service_list = [service1, service2, service3]
+
+            for svc in service_list:
                 svc >> Edge(label="inherits", style="dotted", color="gray") >> service
 
         load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
@@ -49,7 +51,7 @@ with Diagram("Class Relationships and Methods", direction="TB", show=False, grap
     firewall >> Edge(label="routes_to()") >> load_balancer
     load_balancer >> Edge(label="authenticates_via()") >> auth_server
 
-    for _service in [service1, service2, service3]:
+    for _service in service_list:
         _service >> Edge(label="store_data()") >> [relational_db, nosql_db]
 
     auth_server >> Edge(label="queries()") >> relational_db
