@@ -2,7 +2,7 @@ import ast
 import sys
 from pprint import pprint
 
-def extract_method_from_edge(node):
+def extract_method_from_edge(node, variable_to_value={}):
     """
     Extract the 'label' keyword (method name) from an Edge(...) call.
     Returns:
@@ -20,8 +20,10 @@ def extract_method_from_edge(node):
             if isinstance(kw.value, ast.Constant):
                 return kw.value.value
             else:
-                # Label given but not as a string constant
-                print("Warning: Edge label is not a constant string:", ast.dump(kw.value))
+                if isinstance(kw.value, ast.Name):
+                    if kw.value.id in variable_to_value.keys():
+                        return variable_to_value[kw.value.id][0]
+                print("Warning: Edge label is wrong:", ast.dump(kw.value))
                 return None
     return None
 
@@ -57,7 +59,7 @@ class DiagramVisitor(ast.NodeVisitor):
         self.variable_to_class = {}
         self.all_connections = []
         self.all_class_to_methods = {}
-        self.all_lists = {}
+        self.variable_to_value = {}
 
     def visit_Assign(self, node):
         """
@@ -74,7 +76,6 @@ class DiagramVisitor(ast.NodeVisitor):
             return
         if not node.targets or not isinstance(node.targets[0], ast.Name):
             return
-
         variable = node.targets[0].id
         value = node.value
 
@@ -82,9 +83,14 @@ class DiagramVisitor(ast.NodeVisitor):
             self._handle_class_assignment(variable, value)
         elif isinstance(value, ast.List):
             self._handle_list_assignment(variable, value)
+        elif isinstance(value, ast.Constant):
+            if variable in self.variable_to_value.keys():
+                self.variable_to_value[variable].append(value.value)
+            else:
+                self.variable_to_value[variable] = [value.value]
+
 
     def _handle_class_assignment(self, variable, value):
-        # Expecting something like: variable = SomeClass("ClassName")
         for arg in value.args:
             if isinstance(arg, ast.Constant):
                 class_name = arg.value
@@ -101,10 +107,18 @@ class DiagramVisitor(ast.NodeVisitor):
                     continue
                 class_name = self.variable_to_class[class_var]
                 self.all_classes.append(class_name)
-                if variable in self.all_lists:
-                    self.all_lists[variable].append(class_var)
+                if variable in self.variable_to_value:
+                    self.variable_to_value[variable].append(self.variable_to_class[class_var])
                 else:
-                    self.all_lists[variable] = [class_var]
+                    self.variable_to_value[variable] = [self.variable_to_class[class_var]]
+
+            if isinstance(elt, ast.Constant):
+                class_name = elt.value
+                self.all_classes.append(class_name)
+                if variable in self.variable_to_value:
+                    self.variable_to_value[variable].append(class_name)
+                else:
+                    self.variable_to_value[variable] = [class_name]
 
     def visit_BinOp(self, node):
         """
@@ -117,11 +131,9 @@ class DiagramVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def _process_binop(self, node):
-        # Extract the method from the right part of the left node if present
         if not isinstance(node.left, ast.Name):
-            # left might be a complex expression, attempt to find a method
             temp_node = node.left if not isinstance(node.left, ast.List) else node
-            method = extract_method_from_edge(getattr(temp_node, 'right', None))
+            method = extract_method_from_edge(getattr(temp_node, 'right', None), self.variable_to_value)
         else:
             method = None
 
@@ -158,6 +170,7 @@ class DiagramVisitor(ast.NodeVisitor):
             return
 
         loop_var = node.target.id
+
         iteration_elements = self._get_iteration_elements(node.iter)
 
         for stmt in node.body:
@@ -171,8 +184,8 @@ class DiagramVisitor(ast.NodeVisitor):
         if isinstance(iter_node, ast.List):
             return [elt.id for elt in iter_node.elts if isinstance(elt, ast.Name)]
 
-        if isinstance(iter_node, ast.Name) and iter_node.id in self.all_lists:
-            return self.all_lists[iter_node.id]
+        if isinstance(iter_node, ast.Name) and iter_node.id in self.variable_to_value:
+            return self.variable_to_value[iter_node.id]
 
         return []
 
@@ -182,20 +195,27 @@ class DiagramVisitor(ast.NodeVisitor):
         """
         left_class_ids = []
         if (isinstance(node.left, ast.BinOp) and
-            isinstance(node.left.left, ast.Name) and
-            node.left.left.id == loop_var):
-            left_class_ids = iteration_elements
+            isinstance(node.left.left, ast.Name)):
+            if node.left.left.id == loop_var:
+                left_class_ids = iteration_elements
+            else:
+                left_class_ids = [node.left.left.id]
 
         method = None
         if (isinstance(node.left, ast.BinOp) and
             isinstance(node.left.right, ast.Call)):
-            method = extract_method_from_edge(node.left.right)
-
+            method = extract_method_from_edge(node.left.right, self.variable_to_value)
+            
         right_class_ids = []
+
         if isinstance(node.right, ast.List):
             right_class_ids = [elt.id for elt in node.right.elts if isinstance(elt, ast.Name)]
         elif isinstance(node.right, ast.Name):
             right_class_ids = [node.right.id]
+        elif isinstance(node.right, ast.Call):
+            # Handle cases where node.right is a function call, such as Server(service_str)
+            if isinstance(node.right.args[0], ast.Name) and node.right.args[0].id == loop_var:
+                right_class_ids = iteration_elements
 
         self.add_to_connections(left_class_ids, method, right_class_ids, node.op)
 
@@ -205,28 +225,47 @@ class DiagramVisitor(ast.NodeVisitor):
         For example, A >> Edge(label="method") >> B means A.method connects to B.
         """
         if method is None:
-            # print("Method", method)
-            # No method label found, skip adding a method connection
             return
 
         for left_id in left_class_ids:
-            if left_id not in self.variable_to_class:
-                print(f"Warning: {left_id} not found in variable_to_class map.")
+            if left_id in self.all_classes:
+                left_class = left_id
+            elif left_id not in self.variable_to_class and left_id not in self.all_classes:
+                print(f"Warning: Left {left_id} not found in variable_to_class map.")
                 continue
-            left_class = self.variable_to_class[left_id]
+            else:
+                left_class = self.variable_to_class[left_id]
 
+            # Handle inheritance relationships explicitly
+            if method == "inherits":
+                for right_id in right_class_ids:
+                    if right_id in self.all_classes:
+                        right_class = right_id
+                    elif right_id not in self.variable_to_class:
+                        print(f"Warning: Right {right_id} not found in variable_to_class map.")
+                        continue
+                    else:
+                        right_class = self.variable_to_class[right_id]
+
+                    # Add parent methods to child class
+                    self.add_class_to_methods(left_class, method, right_class)
+                continue
+
+            # Handle other methods and connections
             for right_id in right_class_ids:
-                if right_id not in self.variable_to_class:
-                    print(f"Warning: {right_id} not found in variable_to_class map.")
+                if right_id in self.all_classes:
+                    right_class = right_id
+                elif right_id not in self.variable_to_class:
+                    print(f"Warning: Right {right_id} not found in variable_to_class map.")
                     continue
-                right_class = self.variable_to_class[right_id]
+                else:
+                    right_class = self.variable_to_class[right_id]
 
-                # If classes are the same, just add method to the class
+                # Add the method to the class or create a connection
                 if left_class == right_class:
                     self.add_class_to_methods(left_class, method, right_class)
                     continue
 
-                # Depending on the operator, decide the connection direction
                 if isinstance(op, ast.RShift):
                     self.all_connections.append([left_class, method, right_class])
                     self.add_class_to_methods(left_class, method, right_class)
@@ -234,18 +273,17 @@ class DiagramVisitor(ast.NodeVisitor):
                     self.all_connections.append([right_class, method, left_class])
                     self.add_class_to_methods(right_class, method, left_class)
 
-    def add_class_to_methods(self, class_name, method, another_class_name):
+    def add_class_to_methods(self, class_name, method, another_class_name=None):
         """
         Add a method to a class in the internal mapping, ensuring no duplicates.
         """
         if method == 'inherits':
-            if class_name in self.all_class_to_methods:
-                self.all_class_to_methods[class_name].extend(self.all_class_to_methods[another_class_name])
-            else:
-                self.all_class_to_methods[class_name] = self.all_class_to_methods[another_class_name]
+            if another_class_name and another_class_name in self.all_class_to_methods:
+                inherited_methods = self.all_class_to_methods[another_class_name]
+                self.all_class_to_methods.setdefault(class_name, []).extend(inherited_methods)
             return
-        if class_name not in self.all_class_to_methods:
-            self.all_class_to_methods[class_name] = []
+
+        self.all_class_to_methods.setdefault(class_name, [])
         if method not in self.all_class_to_methods[class_name]:
             self.all_class_to_methods[class_name].append(method)
 
@@ -372,11 +410,11 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
 
 
 if __name__ == "__main__":
-    # code_file_name = "classes/classes.py"
-    # diagram_file_names = ["diagrams"]
-    #
-    code_file_name = sys.argv[1]
-    diagram_file_names = sys.argv[2:]
+    code_file_name = "classes_examples/classes.py"
+    diagram_file_names = ["diagram_examples/diagram.py"]
+
+    # code_file_name = sys.argv[1]
+    # diagram_file_names = sys.argv[2:]
 
     # Analyze the code file
     try:

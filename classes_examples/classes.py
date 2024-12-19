@@ -2,7 +2,6 @@ class User:
     def __init__(self, name):
         self.name = name
 
-    # Standalone methods
     def login(self):
         print(f"{self.name} logged in")
 
@@ -27,26 +26,27 @@ class MobileApp:
     def update_ui(self):
         print(f"{self.name} UI updated")
 
-    def secured_by(self, devices):
-        for device in devices:
-            print(f"{device.name} is secured by {self.name}")
+    def secured_by(self, firewall):
+        print(f"{self.name} is secured by {firewall.name}")
 
 
 class DesktopApp:
     def __init__(self, name):
         self.name = name
 
+    def secured_by(self, firewall):
+        print(f"{self.name} is secured by {firewall.name}")
+
     def render_view(self):
         print(f"{self.name} rendered view")
-
-    def secured_by(self, devices):
-        for device in devices:
-            print(f"{device.name} is secured by {self.name}")
 
 
 class Firewall:
     def __init__(self, name):
         self.name = name
+
+    def routes_to(self, server):
+        print(f"{self.name} routes to {server.name}")
 
     def filter_traffic(self):
         print(f"{self.name} is filtering traffic")
@@ -54,16 +54,16 @@ class Firewall:
     def monitor_logs(self):
         print(f"{self.name} is monitoring logs")
 
-    def routes_to(self, target):
-        print(f"{self.name} routes to {target.name}")
-
     def login(self):
-        print("Firewall login")
+        print(f"{self.name} handled login")
 
 
 class LoadBalancer:
     def __init__(self, name):
         self.name = name
+
+    def authenticates_via(self, auth_server):
+        print(f"{self.name} authenticates via {auth_server.name}")
 
     def check_health(self):
         print(f"{self.name} is checking health")
@@ -75,26 +75,28 @@ class LoadBalancer:
         for service in services:
             print(f"{self.name} balances {service.name}")
 
-    def authenticates_via(self, server):
-        print(f"{self.name} authenticates via {server.name}")
-
 
 class Service:
     def __init__(self, name):
         self.name = name
 
+    def restart_service(self):
+        print(f"{self.name} is restarting")
+
     def store_data(self, databases):
         for db in databases:
             print(f"{self.name} stores data in {db.name}")
 
-    def restart_service(self):
-        print(f"{self.name} is restarting")
+    def backup(self):
+        print(f"{self.name} is backing up data")
 
 
-# Individual Services
 class Service1(Service):
     def __init__(self):
         super().__init__("Service1")
+
+    def creates(self, server):
+        print(f"{self.name} creates new {server.name}")
 
 
 class Service2(Service):
@@ -107,15 +109,30 @@ class Service3(Service):
         super().__init__("Service3")
 
 
+class Service4:
+    def __init__(self, name):
+        self.name = name
+
+
+class Service5:
+    def __init__(self, name):
+        self.name = name
+
+
+class Service6:
+    def __init__(self, name):
+        self.name = name
+
+
 class RelationalDB:
     def __init__(self, name):
         self.name = name
 
+    def replicates_to(self, nosqldb):
+        print(f"{self.name} replicates to {nosqldb.name}")
+
     def backup_data(self):
         print(f"{self.name} is backing up data")
-
-    def replicates_to(self, target_db):
-        print(f"{self.name} replicates to {target_db.name}")
 
 
 class NoSQLDB:
@@ -131,7 +148,7 @@ class AuthServer:
         self.name = name
 
     def validate_token(self):
-        print(f"{self.name} is validating token")
+        print(f"{self.name} is validating tokens")
 
     def queries(self, database):
         print(f"{self.name} queries {database.name}")

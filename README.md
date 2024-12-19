@@ -2,12 +2,15 @@
 
 This tool ensures that Python code and diagrams remain synchronized by validating the consistency of class definitions and methods during the development workflow. It integrates with `pre-commit` to prevent discrepancies between code and diagram files from being committed.
 
+---
+
 ## Libraries Used
 
-- **`ast`**: The Python Abstract Syntax Tree library is the core of this tool. It parses and analyzes both diagram and code files, extracting class definitions, methods, and their relationships in a structured manner.
+- **`ast`**: The Python Abstract Syntax Tree library parses and analyzes both diagram and code files, extracting class definitions, methods, and relationships in a structured manner.
 - **`sys`**: Handles command-line arguments to allow the script to dynamically process specified files during execution.
-- **`pprint`**: Provides clean and human-readable output for debug logs and comparison results.
-- **`json`**: Manages the mapping of diagram files to their corresponding code files, enabling dynamic validation workflows. This is used in conjunction with the pre-commit script to ensure file mapping integrity.
+- **`pprint`**: Provides clean, human-readable output for debug logs and comparison results.
+- **`json`**: Manages the mapping of diagram files to their corresponding code files, enabling seamless integration with the pre-commit script.
+
 ---
 
 ## Key Features
@@ -19,17 +22,32 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 2. **Inheritance Handling**:
    - Propagates methods from parent classes to children for accurate comparison.
 
-3. **Cluster and Nested With Handling**:
-   - Handles nested `with` statements to parse diagrams with hierarchical clusters.
+3. **Cluster and Nested `with` Handling**:
+   - Processes diagrams with hierarchical clusters defined using nested `with` blocks.
 
 4. **Chain of Edges**:
-   - Processes diagrams with chains of edges, e.g., `classA >> Edge(label="method1()") >> classB >> Edge(label="method2()") >> classC`.
+   - Handles chains of relationships like:
+     ```python
+     classA >> Edge(label="method1()") >> classB >> Edge(label="method2()") >> classC
+     ```
 
 5. **Iteration in Diagrams**:
-   - Extracts relationships from diagrams using loops like `for var in [elt1, elt2]`.
+   - Extracts relationships defined using loops, e.g.:
+     ```python
+     services = [service1, service2]
+     for service in services:
+         service >> Edge(label="method()") >> target
+     ```
 
 6. **Assignment Parsing**:
-   - Recognizes assignments in diagrams, e.g., `variable = SomeClass("ClassName")` or `variable = [classVar1, classVar2, ...]`.
+   - Recognizes variables assigned to class definitions or lists of class definitions:
+     ```python
+     variable = SomeClass("ClassName")
+     variable_list = [classVar1, classVar2]
+     ```
+
+7. **Unidirectional Connections**:
+   - All diagram connections must be defined in a single direction (e.g., `>>`).
 
 ---
 
@@ -54,52 +72,41 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 
 ## Diagram Requirements
 
-1. **Method Declarations**:
-   - Methods must be **explicitly** declared as `Edge` connections before inheritance or relationships.
+1. **Explicit Method Declarations**:
+   - All methods **must be declared explicitly before** inheritance or relationships.
    - Example:
      ```python
-     user >> Edge(label="login()", style="dotted") >> user
-     user >> Edge(label="inherits", style="dotted", color="gray") >> parent_user
+     service_parent >> Edge(label="restart_service()", style="dotted") >> service_parent
      ```
 
 2. **Inheritance**:
-   - Use `Edge(label="inherits")` to depict inheritance.
-   - Example:
+   - Use `Edge(label="inherits")` to define inheritance relationships:
      ```python
-     child_class >> Edge(label="inherits") >> parent_class
+     child_class >> Edge(label="inherits", style="dotted") >> parent_class
      ```
 
-3. **Clusters and Chains**:
-   - Supports nested `with` blocks to define hierarchical clusters.
-   - Handles chains of relationships, e.g., `classA >> Edge(label="method1()") >> classB >> Edge(label="method2()") >> classC`.
+3. **Nested Clusters**:
+   - Supports hierarchical relationships using nested `with` blocks:
+     ```python
+     with Cluster("Backend Classes"):
+         with Cluster("Service Classes"):
+             service1 = Server("Service1")
+     ```
 
 4. **Iteration**:
-   - Supports relationships defined using loops:
+   - For loops can simplify the declaration of multiple relationships:
      ```python
      services = [service1, service2, service3]
      for service in services:
-         service >> Edge(label="inherits", style="dotted", color="gray") >> service_parent
+         service >> Edge(label="inherits", style="dotted") >> service_parent
      ```
 
 5. **Assignments**:
-   - Recognizes variables assigned to class definitions, e.g., `variable = SomeClass("ClassName")`.
-
----
-
-## Code Requirements
-
-1. **Class Definitions**:
-   - Classes must be fully defined in the same file (cross-file definitions are not supported).
-
-2. **Inheritance Handling**:
-   - Standard Python inheritance (`class ChildClass(ParentClass):`) must be used.
-
-3. **Method Definitions**:
-   - All methods in the diagram must exist in their respective classes.
-   - Self-referential methods must be implemented.
-
-4. **Connections**:
-   - Connections in the diagram are not compared with connections in the code, as the tool focuses on class and method alignment.
+   - Variables must directly map to classes or class lists:
+     ```python
+     service_parent = Server("Service")
+     services = [service1, service2, service3]
+     ```
 
 ---
 
@@ -108,117 +115,75 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
 1. **File Dependency**:
    - Classes must be defined within the same file; cross-file dependencies are not handled.
 
-2. **Edge Labels**:
-   - Labels must be constant strings. Dynamic variables or references, such as `Edge(label=some_label)`, are not supported.
+2. **Dynamic Method Iteration**:
+   - Iterating over dynamic lists of method names (e.g., `for method in methods_list`) is not supported.
 
-3. **Arrow Direction**:
-   - All arrows in the diagram must be unidirectional (e.g., `classA >> classB`). Bidirectional arrows like `classA >> classB << classC` are not supported.
+3. **Bidirectional Arrows**:
+   - Connections must be unidirectional (e.g., `>>`).
 
-4. **Connection Comparison**:
-   - Only relationships defined in the diagram are extracted, not the connections in the code, so connections cannot be compared just yet.
-
----
-
-## How `diagram_code_auditor.py` Works in Details
-
-### Diagram Parsing `DiagramVisitor(ast.NodeVisitor)`
-
-### **1. `visit_Assign()`**
-Handles assignments to identify and track:
-- Variables assigned to class instances.
-  - Example: `variable = SomeClass("ClassName")`
-- Lists of class variables.
-  - Example: `variable = [classVar1, classVar2, ...]`
-
-Key Helper Methods:
-- **`_process_assignment()`**: Determines the type of assignment and delegates to specific handlers.
-- **`_handle_class_assignment()`**: Processes assignments like `variable = SomeClass("ClassName")` and maps `variable` to `ClassName`.
-- **`_handle_list_assignment()`**: Processes assignments like `variable = [classVar1, classVar2]` and tracks class lists.
+4. **Connection Validation**:
+   - Relationships are only extracted from the diagram, but not compared to code as the connections within the code itself are not extracted.
 
 ---
 
-### **2. `visit_BinOp()`**
-Processes binary operations to detect connections:
-- Example: `classA >> Edge(label="method1()") >> classB`.
+## How `diagram_code_auditor.py` Works in Detail
 
-Key Helper Methods:
-- **`_process_binop()`**: Handles complex connections, extracts methods from `Edge` labels, and identifies participating classes.
-- **`_resolve_right_classes()`**: Resolves the right-hand side of connections to class IDs.
+### **1. Diagram Parsing (`DiagramVisitor`)**
 
----
-
-### **3. `visit_For()`**
-Extracts connections from loops in diagrams:
-- Example:
+#### **`visit_Assign()`**:
+Handles assignments and tracks:
+- Variables assigned to class definitions:
   ```python
-  for service in [service1, service2]:
-      service >> Edge(label="method()") >> target
+  variable = SomeClass("ClassName")
+  ```
+- Lists of class variables:
+  ```python
+  variable = [classVar1, classVar2]
   ```
 
-Key Helper Methods:
-- **`_process_for_loop()`**: Extracts loop variables and elements.
-- **`_get_iteration_elements()`**: Resolves iteration elements for loops using lists or pre-defined variables.
-- **`_process_binop_in_for()`**: Handles `BinOp` inside loops and creates connections.
+#### **`visit_BinOp()`**:
+Processes binary operations representing connections:
+```python
+classA >> Edge(label="method1()") >> classB
+```
+
+#### **`visit_For()`**:
+Extracts relationships from loops, such as:
+```python
+for service in services:
+    service >> Edge(label="inherits") >> parent_service
+```
+
+#### Helper Methods:
+- **`_process_binop()`**: Resolves and validates connections in binary operations.
+- **`_get_iteration_elements()`**: Extracts elements from iterable variables in loops.
 
 ---
 
-### **4. Helper Functions**
-- **`extract_method_from_edge()`**:
-  - Extracts method names from `Edge` labels.
-  - Example: `Edge(label="method()")` → `"method()"`.
-- **`resolve_left()`**:
-  - Recursively resolves the left-hand side of connections to identify class variables.
+### **2. Code Parsing (`CodeVisitor`)**
 
----
-
-### **5. Adding Connections**
-- **`add_to_connections()`**:
-  - Creates connections between classes using extracted methods.
-  - Handles both `>>` (right arrow) and `<<` (left arrow) operators.
-- **`add_class_to_methods()`**:
-  - Maps methods to their respective classes and handles inheritance relationships.
-
----
-
-## Code Parsing `CodeVisitor(ast.NodeVisitor)`
-
-### **1. `visit_ClassDef()`**
+#### **`visit_ClassDef()`**:
 Captures class definitions and their parent classes:
-- Tracks class names, parent classes, and methods.
+```python
+class ChildClass(ParentClass):
+    ...
+```
 
-Key Helper Methods:
-- **`_extract_parents()`**:
-  - Extracts parent classes for inheritance.
+#### **`visit_FunctionDef()`**:
+Extracts methods from classes while excluding `__init__`.
 
----
-
-### **2. `visit_FunctionDef()`**
-Tracks methods within classes, excluding constructors (`__init__`):
-- Example:
-  ```python
-  class MyClass:
-      def my_method(self):
-          pass
-  ```
+#### **`resolve_inheritance()`**:
+Propagates methods from parent classes to child classes.
 
 ---
 
-### **3. Inheritance Resolution**
-Propagates parent class methods to child classes:
-- **`resolve_inheritance()`**:
-  - Ensures that methods inherited from parent classes are included in the child class.
+### **3. Comparison**
 
----
+#### **Class Comparison**:
+Validates whether classes in the diagram exist in the code and vice versa.
 
-### Comparison
-
-1. **Class Comparison `compare_classes()`**:
-   - Matches classes in the code with classes in the diagram.
-   - Flags missing or extra classes.
-
-2. **Method Comparison `compare_methods()`**:
-   - Matches methods within each class.
-   - Flags missing or extra methods.
+#### **Method Comparison**:
+Ensures methods in the diagram are defined in the corresponding code classes.
 
 ---
 
@@ -229,7 +194,7 @@ Propagates parent class methods to child classes:
 ✅ Code and Diagram are in sync!
 ```
 
-### Missing Classes
+### Missing Classes or Methods
 ```text
 ===== Comparison Results =====
 
@@ -237,10 +202,8 @@ Missing Classes in Code:
 {'Service'}
 
 Missing Methods in Code:
-{'Service1': {'store_data()'},
- 'Service2': {'store_data()'},
- 'Service3': {'store_data()'}}
- 
+{'Service1': {'restart_service()'}}
+
 ❌ Discrepancies found! Commit aborted.
 ```
 
@@ -249,7 +212,7 @@ Missing Methods in Code:
 ===== Comparison Results =====
 
 Extra Methods in Code:
-{'Service1': {'restart_service()'}}
+{'Firewall': {'filter_traffic()', 'login()'}}
 
 ❌ Discrepancies found! Commit aborted.
 ```
@@ -258,57 +221,40 @@ Extra Methods in Code:
 
 ## Adding the Pre-Commit Hook
 
+Follow these steps to integrate the tool with `pre-commit`:
+
 1. Save the script to `.git/hooks/pre-commit`:
     ```bash
-   #!/bin/bash
-   
-   # Get a list of staged Python files
-   files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
-   if [ -z "$files" ]; then
-        exit 0
-   fi
-   
-   # Path to the diagram mapping file
-   DIAGRAM_MAPPING="code_diagram_mapping.json"
-   
-   # Run the Python script for each file and its corresponding diagram
-   for file in $files; do
-        # Normalize path to match JSON keys (remove leading './')
+    #!/bin/bash
+    files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
+    if [ -z "$files" ]; then exit 0; fi
+
+    DIAGRAM_MAPPING="code_diagram_mapping.json"
+    for file in $files; do
         normalized_file=$(echo "$file" | sed 's|^\./||')
-        
-        # Fetch corresponding diagram using the mapping
         diagram=$(python3 -c "import json; mapping = json.load(open('$DIAGRAM_MAPPING')); print(mapping.get('$normalized_file', ''))")
-        
         if [ -n "$diagram" ]; then
-            echo "File: $normalized_file"
-            echo "Diagram: $diagram"
-            echo "Checking $normalized_file against $diagram..."
             python3 diagram_code_auditor.py "$normalized_file" "$diagram"
-            status=$?
-            if [ $status -ne 0 ]; then
-                exit 1
-            fi
-        else
-            echo "⚠️ No diagram mapping found for $normalized_file. Skipping."
-            echo
+            if [ $? -ne 0 ]; then exit 1; fi
         fi
     done
-
     exit 0
     ```
-   Then run to add the pre-commit hook:
+
+2. Make the hook executable:
    ```bash
    chmod +x .git/hooks/pre-commit
    ```
 
-2. Add `code_diagram_mapping.json` to the root of the repository:
+3. Add the `code_diagram_mapping.json` file:
    ```json
    {
-     "classes/classes.py": "diagrams/diagram.py",
-     "classes/classes1.py": "diagrams/diagram1.py"
+     "classes/classes.py": "diagrams/diagram.py"
    }
    ```
 
-3. Staged files are automatically checked before committing. 
+4. Staged files will be validated against their diagrams before committing.
 
-Use this tool to ensure consistent documentation and implementation across your project!
+--- 
+
+Use this tool to ensure code and diagrams are always in sync!
