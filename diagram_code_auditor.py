@@ -366,6 +366,7 @@ def analyze_diagram(diagram_content):
     diagram_visitor.visit(tree)
 
     all_classes, class_to_methods, all_connections = diagram_visitor.get_results()
+
     return all_classes, class_to_methods, all_connections
 
 
@@ -410,11 +411,11 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
 
 
 if __name__ == "__main__":
-    code_file_name = "classes_examples/classes.py"
-    diagram_file_names = ["diagram_examples/diagram.py"]
+    # code_file_name = "classes_examples/classes.py"
+    # diagram_file_names = ["diagram_examples/diagram.py"]
 
-    # code_file_name = sys.argv[1]
-    # diagram_file_names = sys.argv[2:]
+    code_file_name = sys.argv[1]
+    diagram_file_names = sys.argv[2:]
 
     # Analyze the code file
     try:
