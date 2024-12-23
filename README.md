@@ -1,37 +1,51 @@
 # Diagram and Code Alignment Tool `diagram-code-auditor`
 
-This tool ensures that Python code and diagrams remain synchronized by validating the consistency of class definitions and methods during the development workflow. It integrates with `pre-commit` to prevent discrepancies between code and diagram files from being committed.
+This tool ensures that  **Python and PHP code**  and diagrams remain synchronized by validating the consistency of class definitions and methods during the development workflow. It integrates with  `pre-commit`  to prevent discrepancies between code and diagram files from being committed.
 
 ---
 
 ## Libraries Used
 
-- **`ast`**: The Python Abstract Syntax Tree library parses and analyzes both diagram and code files, extracting class definitions, methods, and relationships in a structured manner.
-- **`sys`**: Handles command-line arguments to allow the script to dynamically process specified files during execution.
-- **`pprint`**: Provides clean, human-readable output for debug logs and comparison results.
-- **`json`**: Manages the mapping of diagram files to their corresponding code files, enabling seamless integration with the pre-commit script.
+### Python-Specific:
+
+-   **`ast`**: The Python Abstract Syntax Tree library parses and analyzes Python code files, extracting class definitions, methods, and relationships in a structured manner.
+
+### PHP-Specific:
+
+-   **`nikic/PHP-Parser`**: Generates an Abstract Syntax Tree (AST) from PHP code, allowing the tool to extract class definitions, methods, and relationships for comparison.
+-   **`subprocess`**: Executes the PHP script (`php_parser.php`) to generate an AST JSON file for PHP code.
+
+### Shared Libraries:
+
+-   **`sys`**: Handles command-line arguments to allow the script to dynamically process specified files during execution.
+-   **`pprint`**: Provides clean, human-readable output for debug logs and comparison results.
+-   **`json`**: Manages the mapping of diagram files to their corresponding code files, enabling seamless integration with the pre-commit script.
 
 ---
 
 ## Key Features
-
-1. **Class and Method Validation**:
+1. **Language-Specific Parsing**:
+    
+    -   Python: Processes Python  `.py`  files using the  `ast`  library.
+    -   PHP: Parses PHP  `.php`  files using  `nikic/PHP-Parser`  and processes the generated AST JSON file.
+    - 
+2. **Class and Method Validation**:
    - Ensures all classes in the diagram are defined in the code.
    - Verifies that all methods in the diagram exist in their respective code classes.
 
-2. **Inheritance Handling**:
+3. **Inheritance Handling**:
    - Propagates methods from parent classes to children for accurate comparison.
 
-3. **Cluster and Nested `with` Handling**:
+4. **Cluster and Nested `with` Handling**:
    - Processes diagrams with hierarchical clusters defined using nested `with` blocks.
 
-4. **Chain of Edges**:
+5. **Chain of Edges**:
    - Handles chains of relationships like:
      ```python
      classA >> Edge(label="method1()") >> classB >> Edge(label="method2()") >> classC
      ```
 
-5. **Iteration in Diagrams**:
+6. **Iteration in Diagrams**:
    - Extracts relationships defined using loops, e.g.:
      ```python
      services = [service1, service2]
@@ -39,33 +53,47 @@ This tool ensures that Python code and diagrams remain synchronized by validatin
          service >> Edge(label="method()") >> target
      ```
 
-6. **Assignment Parsing**:
+7. **Assignment Parsing**:
    - Recognizes variables assigned to class definitions or lists of class definitions:
      ```python
      variable = SomeClass("ClassName")
      variable_list = [classVar1, classVar2]
      ```
 
-7. **Unidirectional Connections**:
+8. **Unidirectional Connections**:
    - All diagram connections must be defined in a single direction (e.g., `>>`).
 
 ---
 
 ## Workflow
 
-### Pre-Commit Integration
+### Abstract description
+1.  **Determine File Type**:
+    
+    -   Checks the file extension (`.py`  for Python or  `.php`  for PHP).
+2.  **Handle Python Files**:
+    
+    -   Processes  `.py`  files using the  `ast`  library to extract classes and methods.
+3.  **Handle PHP Files**:
+    
+    -   Runs the  `php_parser.php`  script to generate an AST JSON file.
+    -   Parses the AST JSON file to extract PHP classes and methods.
+4.  **Compare Code and Diagram**:
+    
+    -   Validates the extracted classes and methods from both the code and diagram files.
 
+### Pre-Commit Integration
 1. **Diagram Mapping**:
-   - The `code_diagram_mapping.json` file maps code files to their corresponding diagrams:
+   - The  `code_diagram_mapping.json`  file maps  **code files**  (Python or PHP) to their corresponding  **diagrams**:
      ```json
      {
        "classes/classes.py": "diagrams/diagram.py",
-       "classes/classes1.py": "diagrams/diagram1.py"
+       "classes/classes.php": "diagrams/diagram.php"
      }
      ```
 
 2. **Pre-Commit Script**:
-   - The script identifies staged Python files and validates them against their corresponding diagrams.
+   -  Identifies staged Python or PHP files and validates them against their corresponding diagrams.
    - If discrepancies are found, the commit is aborted with detailed output.
 
 ---
@@ -162,19 +190,51 @@ for service in services:
 
 ### **2. Code Parsing (`CodeVisitor`)**
 
-#### **`visit_ClassDef()`**:
-Captures class definitions and their parent classes:
-```python
-class ChildClass(ParentClass):
-    ...
-```
+#### Python Code Parsing (`CodeVisitor`):
 
-#### **`visit_FunctionDef()`**:
-Extracts methods from classes while excluding `__init__`.
+-   **`visit_ClassDef()`**: Captures class definitions and their parent classes:
+    
+    ```python
+    class ChildClass(ParentClass):
+        ...
+    ```
+    
+-   **`visit_FunctionDef()`**: Extracts methods from classes while excluding  `__init__`.
+    
+-   **`resolve_inheritance()`**: Propagates methods from parent classes to child classes.
 
-#### **`resolve_inheritance()`**:
-Propagates methods from parent classes to child classes.
+#### PHP Code Parsing (`parse_json()`):
 
+-   Processes the JSON AST output generated by  `nikic/PHP-Parser`.
+-   Extracts class and method definitions from the parsed PHP code.
+
+### Key Functionality:
+
+1.  **Class Extraction**:
+    
+    -   Captures classes (`Stmt_Class`) and their parent classes (`extends`).
+    -   Inherits methods from parent classes.
+2.  **Method Extraction**:
+    
+    -   Ignores  `__construct()`  and adds method names with  `()`  suffix.
+    -   Aggregates methods under their respective classes.
+    Example:
+
+    ```php
+    class Service1 extends BaseService {
+        public function restartService() {}
+    }
+    ```
+
+    Generated output:
+
+    ```python
+    code_classes = ["Service1", "BaseService"]
+    code_methods = {
+        "BaseService": ["restartService()"],
+        "Service1": ["restartService()"]
+    }
+    ```
 ---
 
 ### **3. Comparison**
@@ -191,7 +251,7 @@ Ensures methods in the diagram are defined in the corresponding code classes.
 
 ### Fully Synchronized Code and Diagram
 ```text
-✅ Code and Diagram are in sync!
+✅ Code [Python or PHP code filename] and Diagram are in sync!
 ```
 
 ### Missing Classes or Methods
@@ -225,20 +285,34 @@ Follow these steps to integrate the tool with `pre-commit`:
 
 1. Save the script to `.git/hooks/pre-commit`:
     ```bash
-    #!/bin/bash
-    files=$(git diff --cached --name-only --diff-filter=ACM | grep '\.py$')
-    if [ -z "$files" ]; then exit 0; fi
+    files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(py|php)$')
 
+    if [ -z "$files" ]; then
+        exit 0
+    fi
     DIAGRAM_MAPPING="code_diagram_mapping.json"
     for file in $files; do
         normalized_file=$(echo "$file" | sed 's|^\./||')
-        diagram=$(python3 -c "import json; mapping = json.load(open('$DIAGRAM_MAPPING')); print(mapping.get('$normalized_file', ''))")
-        if [ -n "$diagram" ]; then
-            python3 diagram_code_auditor.py "$normalized_file" "$diagram"
-            if [ $? -ne 0 ]; then exit 1; fi
+
+    diagram=$(python3 -c "import json; mapping = json.load(open('$DIAGRAM_MAPPING')); print(mapping.get('$normalized_file', ''))")
+
+    if [ -n "$diagram" ]; then
+        echo "File: $normalized_file"
+        echo "Diagram: $diagram"
+        echo "Checking $normalized_file against $diagram..."
+        python3 diagram_code_auditor.py "$normalized_file" "$diagram"
+        status=$?
+        if [ $status -ne 0 ]; then
+            exit 1
         fi
-    done
-    exit 0
+    else
+        echo "⚠️ No diagram mapping found for $normalized_file. Skipping."
+        echo
+    fi
+done
+
+exit 0
+
     ```
 
 2. Make the hook executable:
