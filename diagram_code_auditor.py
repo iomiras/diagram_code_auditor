@@ -368,7 +368,6 @@ def analyze_diagram(diagram_content):
     diagram_visitor.visit(tree)
 
     all_classes, class_to_methods, all_connections = diagram_visitor.get_results()
-
     return all_classes, class_to_methods, all_connections
 
 
@@ -441,6 +440,8 @@ def parse_json(code_tree):
 if __name__ == "__main__":
     php_parser = 'php_parser.php'
 
+    code_file_name = sys.argv[1]
+    diagram_file_names = sys.argv[2:]
 
     # code_file_name = "classes_examples/classes.py"
     # code_file_name = "classes_examples/classes.php"
