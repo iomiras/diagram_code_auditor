@@ -117,6 +117,10 @@ class Service4:
 class Service5:
     def __init__(self, name):
         self.name = name
+    
+    def store_data(self, databases):
+        for db in databases:
+            print(f"{self.name} stores data in {db.name}")
 
 
 class Service6:
