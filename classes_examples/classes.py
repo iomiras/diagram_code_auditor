@@ -121,6 +121,9 @@ class Service5:
     def store_data(self, databases):
         for db in databases:
             print(f"{self.name} stores data in {db.name}")
+    
+    def backup(self):
+        print(f"{self.name} is backing up data")
 
 
 class Service6:
