@@ -481,6 +481,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
         diagram_classes, diagram_methods, all_connections = analyze_diagram(diagram_content)
+        print("Diagram methods:", diagram_methods)
         # fp1 = open('./tmp/diagram_classes.json', 'w+')
         # json.dump(diagram_classes, fp1)
         
