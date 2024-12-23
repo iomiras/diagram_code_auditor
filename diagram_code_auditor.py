@@ -440,9 +440,6 @@ def parse_json(code_tree):
 if __name__ == "__main__":
     php_parser = 'php_parser.php'
 
-    code_file_name = sys.argv[1]
-    diagram_file_names = sys.argv[2:]
-
     # code_file_name = "classes_examples/classes.py"
     # code_file_name = "classes_examples/classes.php"
     # diagram_file_names = ["diagram_examples/diagram.py"]
@@ -481,7 +478,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
         diagram_classes, diagram_methods, all_connections = analyze_diagram(diagram_content)
-        print("Diagram methods:", diagram_methods)
+        pprint("Diagram methods:", diagram_methods)
         # fp1 = open('./tmp/diagram_classes.json', 'w+')
         # json.dump(diagram_classes, fp1)
         
@@ -523,4 +520,4 @@ if __name__ == "__main__":
 
     else:
         print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
-        sys.exit(0)
+        sys.exit(1)
