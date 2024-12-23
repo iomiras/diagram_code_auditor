@@ -290,7 +290,7 @@ class DiagramVisitor(ast.NodeVisitor):
             self.all_class_to_methods[class_name].append(method)
 
     def get_results(self):
-        return self.all_classes, self.all_class_to_methods, self.all_connections
+        return self.all_classes, self.all_class_to_methods, self.all_connections, self.variable_to_class
 
 
 class CodeVisitor(ast.NodeVisitor):
@@ -367,8 +367,8 @@ def analyze_diagram(diagram_content):
     diagram_visitor = DiagramVisitor()
     diagram_visitor.visit(tree)
 
-    all_classes, class_to_methods, all_connections = diagram_visitor.get_results()
-    return all_classes, class_to_methods, all_connections
+    all_classes, class_to_methods, all_connections, variable_to_classes = diagram_visitor.get_results()
+    return all_classes, class_to_methods, all_connections, variable_to_classes
 
 
 def analyze_code(code_content):
@@ -394,21 +394,39 @@ def compare_classes(code_classes, diagram_classes):
     return missing_classes, extra_classes
 
 def compare_methods(code_class_to_methods, diagram_class_to_methods):
+    """
+    Compare methods between classes in the code and the diagram.
+
+    Args:
+        code_class_to_methods (dict): Mapping of classes to methods in the code.
+        diagram_class_to_methods (dict): Mapping of classes to methods in the diagram.
+
+    Returns:
+        tuple: (missing_methods, extra_methods)
+            - missing_methods (dict): Methods present in the diagram but missing in the code.
+            - extra_methods (dict): Methods present in the code but missing in the diagram.
+    """
     missing_methods = {}
     extra_methods = {}
-    for cls, methods in diagram_class_to_methods.items():
-        if cls in code_class_to_methods:
-            missing = set(methods) - set(code_class_to_methods[cls])
-            extra = set(code_class_to_methods[cls]) - set(methods)
-            if missing:
-                missing_methods[cls] = missing
-            if extra:
-                extra_methods[cls] = extra
-        else:
-            # Class in diagram but not in code at all
-            if methods:
-                missing_methods[cls] = set(methods)
+
+    # Iterate through all unique classes across both dictionaries
+    all_classes = set(code_class_to_methods) | set(diagram_class_to_methods)
+
+    for cls in all_classes:
+        code_methods = set(code_class_to_methods.get(cls, []))
+        diagram_methods = set(diagram_class_to_methods.get(cls, []))
+
+        # Identify missing and extra methods
+        missing = diagram_methods - code_methods
+        extra = code_methods - diagram_methods
+
+        if missing:
+            missing_methods[cls] = missing
+        if extra:
+            extra_methods[cls] = extra
+
     return missing_methods, extra_methods
+
 
 
 def parse_json(code_tree):
@@ -440,15 +458,16 @@ def parse_json(code_tree):
 if __name__ == "__main__":
     php_parser = 'php_parser.php'
 
-    # code_file_name = "classes_examples/classes.py"
-    # code_file_name = "classes_examples/classes.php"
-    # diagram_file_names = ["diagram_examples/diagram.py"]
+    # Example file names (override with command-line arguments if provided)
+    code_file_name = "classes_examples/classes.py"
+    code_file_name = "classes_examples/classes.php"
+    diagram_file_names = ["diagram_examples/diagram.py"]
 
+    # Override with command-line arguments
     code_file_name = sys.argv[1]
-    diagram_file_names = sys.argv[2:]
+    diagram_file_name = sys.argv[2:][0]
 
     if code_file_name.split('.')[-1] == 'php':
-        
         subprocess.run(['php', php_parser])
 
         with open('./tmp/ast.json', 'r') as f:
@@ -469,34 +488,24 @@ if __name__ == "__main__":
     aggregated_diagram_methods = {}
 
     # Analyze all diagram files
-    for file_name in diagram_file_names:
-        try:
-            with open(file_name, "r") as f:
-                diagram_content = f.read()
-        except FileNotFoundError:
-            print(f"Error: Diagram file {file_name} not found.")
-            sys.exit(1)
+    try:
+        with open(diagram_file_name, "r") as f:
+            diagram_content = f.read()
+    except FileNotFoundError:
+        print(f"Error: Diagram file {diagram_file_name} not found.")
+        sys.exit(1)
 
-        diagram_classes, diagram_methods, all_connections = analyze_diagram(diagram_content)
-        pprint("Diagram methods:", diagram_methods)
-        # fp1 = open('./tmp/diagram_classes.json', 'w+')
-        # json.dump(diagram_classes, fp1)
-        
-        # fp2 = open('./tmp/all_connections.json', 'w+')
-        # json.dump(all_connections, fp2)
-
-        # fp3 = open('./tmp/diagram_methods.json', 'w+')
-        # json.dump(diagram_methods, fp3)
-        # fp4 = open('./tmp/mydict.json', 'w+')
-        # json.dump({"classes": diagram_classes, "diagram_methods": diagram_methods,"all_connections": all_connections}, fp4)
-        all_diagram_classes.update(diagram_classes)
-        for cls, methods in diagram_methods.items():
-            aggregated_diagram_methods.setdefault(cls, set()).update(methods)
+    # print(analyze_diagram(diagram_content))
+    # pprint("jhaskjfkjsafjk")
+    diagram_classes, diagram_methods, all_connections, variable_to_classes = analyze_diagram(diagram_content)
+    all_diagram_classes.update(diagram_classes)
+    for cls, methods in diagram_methods.items():
+        aggregated_diagram_methods.setdefault(cls, set()).update(methods)
 
     # Compare classes and methods
     missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
     missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
-
+    print(extra_methods)
     # Determine exit code
     if missing_classes or extra_classes or missing_methods or extra_methods:
         print("===== Comparison Results =====")
@@ -515,9 +524,44 @@ if __name__ == "__main__":
         if extra_methods:
             print("\nExtra Methods in Code:")
             pprint(extra_methods)
-        print("\n❌ Discrepancies found! Commit aborted.\n")
-        sys.exit(1)
+
+        if extra_classes or extra_methods:
+            print("\n**************")
+            try:
+                sys.stdout.write("Do you want to rewrite the diagram file? (yes/no): ")
+                sys.stdout.flush()
+                
+                ans = input().strip().lower()
+                
+                if ans not in ["yes", "no", "y", "n"]:
+                    print("Invalid input. Please enter 'yes' or 'no'.")
+                    sys.exit(1)
+                
+                if ans == "no" or ans == "n":
+                    print("\n❌ Commit aborted.\n")
+                    sys.exit(1)
+                
+            except EOFError:
+                print("Unexpected error while reading input. Exiting.")
+                sys.exit(1)
+        
+        print("diagram_file_name", diagram_file_name)
+        with open(diagram_file_name, "a") as f:
+            if extra_methods:
+                for cls, methods in extra_methods.items():
+                    value = [i for i in variable_to_classes if variable_to_classes[i]==cls]
+                    if len(value) == 0:
+                        cls = f'Action("{cls}")'
+                    else:
+                        cls = value[0]
+                    for method in methods:
+                        f.write(f"\n    {cls} >> Edge(label='{method}', color='red') >> {cls}")
+                f.close()                        
+                try:
+                    subprocess.run(['python3', diagram_file_name])
+                except Exception as e:
+                    print(f"Error executing the diagram file: {e}")
 
     else:
         print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
-        sys.exit(1)
+        sys.exit(0)

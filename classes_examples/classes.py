@@ -26,9 +26,6 @@ class MobileApp:
     def update_ui(self):
         print(f"{self.name} UI updated")
 
-    def secured_by(self, firewall):
-        print(f"{self.name} is secured by {firewall.name}")
-
 
 class DesktopApp:
     def __init__(self, name):
@@ -118,10 +115,6 @@ class Service5:
     def __init__(self, name):
         self.name = name
     
-    def store_data(self, databases):
-        for db in databases:
-            print(f"{self.name} stores data in {db.name}")
-    
     def backup(self):
         print(f"{self.name} is backing up data")
 
@@ -129,6 +122,9 @@ class Service5:
 class Service6:
     def __init__(self, name):
         self.name = name
+    
+    def authenticate(self):
+        print(f"{self.name} is authenticating")
 
 
 class RelationalDB:

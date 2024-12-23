@@ -42,10 +42,6 @@ class MobileApp {
     public function update_ui() {
         echo "$this->name UI updated\n";
     }
-
-    public function secured_by($firewall) {
-        echo "$this->name is secured by {$firewall->get_name()}\n";
-    }
 }
 
 class DesktopApp {
