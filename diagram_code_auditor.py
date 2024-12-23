@@ -1,6 +1,8 @@
 import ast
 import sys
 from pprint import pprint
+import json
+import subprocess
 
 def extract_method_from_edge(node, variable_to_value={}):
     """
@@ -366,6 +368,7 @@ def analyze_diagram(diagram_content):
     diagram_visitor.visit(tree)
 
     all_classes, class_to_methods, all_connections = diagram_visitor.get_results()
+
     return all_classes, class_to_methods, all_connections
 
 
@@ -409,22 +412,60 @@ def compare_methods(code_class_to_methods, diagram_class_to_methods):
     return missing_methods, extra_methods
 
 
+def parse_json(code_tree):
+    code_classes = []
+    code_methods = {}
+    y = json.loads(code_tree)
+    x = y[0]['stmts']
+    for i in range(len(x)):
+        if x[i]['nodeType'] == 'Stmt_Class':
+            class_name = x[i]['name']['name']
+            if x[i]['extends']:
+                parent_class = x[i]['extends']['name']
+                if parent_class in code_methods:
+                    code_methods[class_name] = code_methods[parent_class].copy()
+            code_classes.append(class_name)
+            for j in range(len(x[i]['stmts'])):
+                if x[i]['stmts'][j]['nodeType'] == 'Stmt_ClassMethod':
+                    method_name = x[i]['stmts'][j]['name']['name']
+                    if method_name == '__construct':
+                        continue
+                    method_name += '()'
+                    if class_name in code_methods:
+                        code_methods[class_name].append(method_name)
+                    else:
+                        code_methods[class_name] = [method_name]
+
+    return code_classes, code_methods
+
 if __name__ == "__main__":
-    code_file_name = "classes_examples/classes.py"
-    diagram_file_names = ["diagram_examples/diagram.py"]
+    php_parser = 'php_parser.php'
 
-    # code_file_name = sys.argv[1]
-    # diagram_file_names = sys.argv[2:]
 
-    # Analyze the code file
-    try:
-        with open(code_file_name, 'r') as f:
+    # code_file_name = "classes_examples/classes.py"
+    # code_file_name = "classes_examples/classes.php"
+    # diagram_file_names = ["diagram_examples/diagram.py"]
+
+    code_file_name = sys.argv[1]
+    diagram_file_names = sys.argv[2:]
+
+    if code_file_name.split('.')[-1] == 'php':
+        
+        subprocess.run(['php', php_parser])
+
+        with open('./tmp/ast.json', 'r') as f:
             code_file_content = f.read()
-    except FileNotFoundError:
-        print(f"Error: Code file {code_file_name} not found.")
-        sys.exit(1)
+            code_classes, code_methods = parse_json(code_file_content)
 
-    code_classes, code_methods = analyze_code(code_file_content)
+    else:
+        try:
+            with open(code_file_name, 'r') as f:
+                code_file_content = f.read()
+        except FileNotFoundError:
+            print(f"Error: Code file {code_file_name} not found.")
+            sys.exit(1)
+
+        code_classes, code_methods = analyze_code(code_file_content)
 
     all_diagram_classes = set()
     aggregated_diagram_methods = {}
@@ -438,7 +479,17 @@ if __name__ == "__main__":
             print(f"Error: Diagram file {file_name} not found.")
             sys.exit(1)
 
-        diagram_classes, diagram_methods, _ = analyze_diagram(diagram_content)
+        diagram_classes, diagram_methods, all_connections = analyze_diagram(diagram_content)
+        # fp1 = open('./tmp/diagram_classes.json', 'w+')
+        # json.dump(diagram_classes, fp1)
+        
+        # fp2 = open('./tmp/all_connections.json', 'w+')
+        # json.dump(all_connections, fp2)
+
+        # fp3 = open('./tmp/diagram_methods.json', 'w+')
+        # json.dump(diagram_methods, fp3)
+        # fp4 = open('./tmp/mydict.json', 'w+')
+        # json.dump({"classes": diagram_classes, "diagram_methods": diagram_methods,"all_connections": all_connections}, fp4)
         all_diagram_classes.update(diagram_classes)
         for cls, methods in diagram_methods.items():
             aggregated_diagram_methods.setdefault(cls, set()).update(methods)
@@ -469,5 +520,5 @@ if __name__ == "__main__":
         sys.exit(1)
 
     else:
-        print("\n✅ Code and Diagram are in sync!\n")
+        print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
         sys.exit(0)

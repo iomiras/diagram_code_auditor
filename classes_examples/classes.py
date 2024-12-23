@@ -138,6 +138,7 @@ class RelationalDB:
 class NoSQLDB:
     def __init__(self, name):
         self.name = name
+        self.surname = name
 
     def clear_cache(self):
         print(f"{self.name} cache cleared")
