@@ -122,6 +122,7 @@ class Service5:
 class Service6:
     def __init__(self, name):
         self.name = name
+        
 
 
 class RelationalDB:
@@ -138,6 +139,9 @@ class RelationalDB:
         print(f"{self.name} has no store_data method")
 
     def lorem_ipsum_relational_db2(self):
+        print(f"{self.name} has no store_data method")
+    
+    def asap(self):
         print(f"{self.name} has no store_data method")
 
 
