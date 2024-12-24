@@ -141,7 +141,7 @@ class RelationalDB:
     def lorem_ipsum_relational_db2(self):
         print(f"{self.name} has no store_data method")
     
-    def asap(self):
+    def test_rel_db(self):
         print(f"{self.name} has no store_data method")
 
 
