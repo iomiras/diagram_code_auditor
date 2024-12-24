@@ -12,7 +12,7 @@ graph_attr = {
     "splines": "curve",
 }
 
-with Diagram("Enhanced Class Relationships and Methods PHP", direction="TB", show=False, graph_attr=graph_attr):
+with Diagram("Enhanced Class Relationships and Methods Php", direction="TB", show=False, graph_attr=graph_attr):
     # User class
     user = User("User")
 

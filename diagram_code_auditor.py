@@ -74,12 +74,18 @@ def resolve_left(node):
         return [node.id]
     elif isinstance(node, ast.List):
         return [elt.id for elt in node.elts if isinstance(elt, ast.Name)]
+    elif isinstance(node, ast.Call):
+        if isinstance(node.args[0], ast.Constant):
+            return [node.args[0].value]
     elif isinstance(node, ast.BinOp):
         # If the right node is a Name or a List of Names, extract them
         if isinstance(node.right, ast.Name):
             return [node.right.id]
         elif isinstance(node.right, ast.List):
             return [elt.id for elt in node.right.elts if isinstance(elt, ast.Name)]
+        elif isinstance(node, ast.Call):
+            if isinstance(node.args[0], ast.Constant):
+                return [node.args[0].value]
         # Otherwise, recurse left
         return resolve_left(node.left)
     return []
@@ -173,8 +179,9 @@ class DiagramVisitor(ast.NodeVisitor):
             method = extract_method_from_edge(getattr(temp_node, 'right', None), self.variable_to_value)
         else:
             method = None
-
         if method is not None:
+            # print("Method", method)
+            # pprint(ast.dump(node, indent=4))
             left_class_ids = resolve_left(node.left)
             right_class_ids = self._resolve_right_classes(node.right)
             self.add_to_connections(left_class_ids, method, right_class_ids, node.op)
@@ -187,6 +194,9 @@ class DiagramVisitor(ast.NodeVisitor):
             return [node.id]
         elif isinstance(node, ast.List):
             return [elt.id for elt in node.elts if isinstance(elt, ast.Name)]
+        elif isinstance(node, ast.Call):
+            if isinstance(node.args[0], ast.Constant):
+                return [node.args[0].value]
         return []
 
     def visit_For(self, node):
@@ -257,7 +267,7 @@ class DiagramVisitor(ast.NodeVisitor):
         #     if el not in self.variable_to_class:
         #         self.all_classes.append(el)
         #         print("all classes updated", end=" ")
-        #         pprint(self.all_classes)
+        # pprint(self.all_classes)
         #         self.all_class_to_methods[el] = []
 
         
@@ -270,9 +280,20 @@ class DiagramVisitor(ast.NodeVisitor):
         Add connections from left classes to right classes based on the operator.
         For example, A >> Edge(label="method") >> B means A.method connects to B.
         """
+        # print("right_class_ids", end=" ")
+        # pprint(right_class_ids)
+        # print("Method", method)
+        for cls in right_class_ids:
+            if cls not in self.all_class_to_methods and self.variable_to_class.get(cls) not in self.all_class_to_methods:
+                if cls in self.variable_to_class:
+                    self.all_class_to_methods[self.variable_to_class[cls]] = []
+                else:
+                    self.all_class_to_methods[cls] = []
+
         if method is None:
             return
-
+        
+        print(left_class_ids, method, right_class_ids)
         for left_id in left_class_ids:
             if left_id in self.all_classes:
                 left_class = left_id
@@ -567,7 +588,7 @@ if __name__ == "__main__":
             sys.exit(1)
 
         diagram_classes, diagram_methods, all_connections, variable_to_classes = analyze_diagram(diagram_content)
-        print("Diagram Methods:")
+        print("Diagram Methods:", end=" ")
         pprint(diagram_methods)
 
         # Compare classes and methods

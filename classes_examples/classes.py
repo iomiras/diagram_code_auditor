@@ -122,13 +122,6 @@ class Service5:
 class Service6:
     def __init__(self, name):
         self.name = name
-    
-    def store_data(self, databases):
-        for db in databases:
-            print(f"{self.name} stores data in {db.name}")
-    
-    def lorem_ipsum(self):
-        print(f"{self.name} has no store_data method")
 
 
 class RelationalDB:

@@ -12,7 +12,7 @@ graph_attr = {
     "splines": "curve",
 }
 
-with Diagram("Enhanced Class Relationships and Methods PY", direction="TB", show=False, graph_attr=graph_attr):
+with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", show=False, graph_attr=graph_attr):
     # User class
     user = User("User")
 
@@ -101,11 +101,5 @@ with Diagram("Enhanced Class Relationships and Methods PY", direction="TB", show
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
 
     #starts here
-    Action("Service6") >> Edge(label='lorem_ipsum()', color='red') >> Action("Service6")
-    Action("Service6") >> Edge(label='store_data()', color='red') >> Action("Service6")
     relational_db >> Edge(label='lorem_ipsum_relational_db2()', color='red') >> relational_db
     relational_db >> Edge(label='lorem_ipsum_relational_db()', color='red') >> relational_db
-    Action("Service6") >> Edge(label='lorem_ipsum()', color='red') >> Action("Service6")
-    Action("Service6") >> Edge(label='store_data()', color='red') >> Action("Service6")
-    Action("Service6") >> Edge(label='lorem_ipsum()', color='red') >> Action("Service6")
-    Action("Service6") >> Edge(label='store_data()', color='red') >> Action("Service6")
