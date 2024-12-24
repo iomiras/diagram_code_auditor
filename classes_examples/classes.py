@@ -102,6 +102,9 @@ class Service1(Service):
 class Service2(Service):
     def __init__(self):
         super().__init__("Service2")
+    
+    def test_rel_de(self):
+        print(f"{self.name} has no store_data method")
 
 
 class Service3(Service):
@@ -134,9 +137,6 @@ class RelationalDB:
 
     def backup_data(self):
         print(f"{self.name} is backing up data")
-    
-    def test_rel_de(self):
-        print(f"{self.name} has no store_data method")
 
 
 class NoSQLDB:
@@ -146,10 +146,6 @@ class NoSQLDB:
 
     def clear_cache(self):
         print(f"{self.name} cache cleared")
-    
-    def lorem_ipsum_relational_db(self):
-        print(f"{self.name} has no store_data method.")
-
 
 class AuthServer:
     def __init__(self, name):
@@ -160,3 +156,8 @@ class AuthServer:
 
     def queries(self, database):
         print(f"{self.name} queries {database.name}")
+    
+       
+    def lorem_ipsum_auth(self):
+        print(f"{self.name} has no store_data method.")
+
