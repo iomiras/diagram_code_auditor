@@ -167,3 +167,12 @@ class AuthServer:
     def lorem_ipsum_auth(self):
         print(f"{self.name} has no store_data method.")
 
+class Demo:
+    def __init__(self, name):
+        self.name = name
+
+    def demo_method(self):
+        print(f"{self.name} has no store_data method")
+    
+    def lorem_ipsum(self):
+        print(f"{self.name} has no store_data method.")

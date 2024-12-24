@@ -568,20 +568,19 @@ def handle_updates(extra_classes: set, extra_methods: dict, diagram_file: str, v
     
     
     with open(diagram_file, "a") as f:
+        if extra_classes:
+            for cls in extra_classes:
+                user_input = input(f"Add class {cls} to diagram? (yes/no): ").strip().lower()
+                if user_input == 'yes' or user_input == 'y':
+                    f.write(f"\n    {cls} = Action('{cls}')")
         if extra_methods:
             for cls, methods in extra_methods.items():
                 value = [i for i in variable_to_classes if variable_to_classes[i] == cls]
                 cls_var = value[0] if value else f'Action("{cls}")'
                 for method in methods:
                     user_input = input(f"Add method {method} to {cls}? (yes/no): ").strip().lower()
-                    if user_input == 'yes':
+                    if user_input == 'yes' or user_input == 'y':
                         f.write(f"\n    {cls_var} >> Edge(label='{method}', color='red') >> {cls_var}")
-        
-        if extra_classes:
-            for cls in extra_classes:
-                user_input = input(f"Add class {cls} to diagram? (yes/no): ").strip().lower()
-                if user_input == 'yes':
-                    f.write(f"\n    {cls} = Action('{cls}')")
         f.close()
 
     return validate_update(diagram_file)
