@@ -57,8 +57,8 @@ class Firewall:
     def login(self):
         print(f"{self.name} handled login")
     
-    def lorem_ipsum_firewall(self):
-        print(f"{self.name} has no store_data method.")
+    # def lorem_ipsum_firewall(self):
+    #     print(f"{self.name} has no store_data method.")
 
 
 class LoadBalancer:
@@ -128,6 +128,9 @@ class Service5:
 class Service6:
     def __init__(self, name):
         self.name = name
+    
+    def demo_method(self):
+        print(f"{self.name} has no store_data method")
         
 
 

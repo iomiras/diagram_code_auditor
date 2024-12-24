@@ -103,3 +103,4 @@ with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", 
     #starts here
     auth_server >> Edge(label='lorem_ipsum_auth()', color='red') >> auth_server
     service2 >> Edge(label='test_rel_de()', color='red') >> service2
+    # firewall >> Edge(label='lorem_ipsum_firewall()', color='red') >> firewall
