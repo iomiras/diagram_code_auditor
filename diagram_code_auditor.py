@@ -59,6 +59,7 @@ def validate_update(file_path: str) -> bool:
         bool: True if validation passes, False otherwise
     """
     try:
+        print(file_path)
         subprocess.run(['python3', file_path], check=True)
         return True
     except subprocess.CalledProcessError as e:
