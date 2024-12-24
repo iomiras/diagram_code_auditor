@@ -89,6 +89,9 @@ class Service:
 
     def backup(self):
         print(f"{self.name} is backing up data")
+    
+    def kms(self):
+        print(f"{self.name} is using kms")
 
 
 class Service1(Service):
