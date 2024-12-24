@@ -1,4 +1,4 @@
 {
-  "classes_examples/classes.py": "diagram_examples/diagram.py",
-  "classes_examples/classes.php": "diagram_examples/diagram.py"
+  "classes_examples/classes.py": "diagram_examples/diagram_py.py",
+  "classes_examples/classes.php": "diagram_examples/diagram_php.py"
 }

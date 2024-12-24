@@ -140,6 +140,12 @@ class RelationalDB:
 
     def backup_data(self):
         print(f"{self.name} is backing up data")
+    
+    def lorem_ipsum_relational_db(self):
+        print(f"{self.name} has no store_data method")
+
+    def lorem_ipsum_relational_db2(self):
+        print(f"{self.name} has no store_data method")
 
 
 class NoSQLDB:

@@ -253,6 +253,15 @@ class DiagramVisitor(ast.NodeVisitor):
             # Handle cases where node.right is a function call, such as Server(service_str)
             if isinstance(node.right.args[0], ast.Name) and node.right.args[0].id == loop_var:
                 right_class_ids = iteration_elements
+        # for el in right_class_ids:
+        #     if el not in self.variable_to_class:
+        #         self.all_classes.append(el)
+        #         print("all classes updated", end=" ")
+        #         pprint(self.all_classes)
+        #         self.all_class_to_methods[el] = []
+
+        
+        
 
         self.add_to_connections(left_class_ids, method, right_class_ids, node.op)
 
@@ -544,102 +553,75 @@ if __name__ == "__main__":
 
     # Override with command-line arguments
     code_file_name = sys.argv[1]
-    # diagram_file_name = sys.argv[2:][0]
     diagram_file_name = sys.argv[2]
-
 
     code_classes, code_methods = parse_code_file(code_file_name)
 
-    all_diagram_classes = set()
-    aggregated_diagram_methods = {}
+    while True:
+        # Analyze diagram file
+        try:
+            with open(diagram_file_name, "r") as f:
+                diagram_content = f.read()
+        except FileNotFoundError:
+            log_error(f"Error: Diagram file {diagram_file_name} not found.")
+            sys.exit(1)
 
-    # Analyze all diagram files
-    try:
-        with open(diagram_file_name, "r") as f:
-            diagram_content = f.read()
-    except FileNotFoundError:
-        log_error(f"Error: Diagram file {diagram_file_name} not found.")
-        sys.exit(1)
+        diagram_classes, diagram_methods, all_connections, variable_to_classes = analyze_diagram(diagram_content)
+        print("Diagram Methods:")
+        pprint(diagram_methods)
 
-    # print(analyze_diagram(diagram_content))
-    # pprint("jhaskjfkjsafjk")
-    diagram_classes, diagram_methods, all_connections, variable_to_classes = analyze_diagram(diagram_content)
-    all_diagram_classes.update(diagram_classes)
-    for cls, methods in diagram_methods.items():
-        aggregated_diagram_methods.setdefault(cls, set()).update(methods)
+        # Compare classes and methods
+        missing_classes, extra_classes = compare_classes(code_classes, set(diagram_classes))
+        missing_methods, extra_methods = compare_methods(code_methods, diagram_methods)
 
-    # Compare classes and methods
-    missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
-    missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
-
-    if handle_updates(missing_classes, extra_classes, missing_methods, extra_methods, diagram_file_name, variable_to_classes):
-            log_info(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
+        if not (missing_classes or extra_classes or missing_methods or extra_methods):
+            print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
             sys.exit(0)
-    else:
-        log_error("Failed to update diagram file.")
-        sys.exit(1)
-    
-    # # Determine exit code
-    # if missing_classes or extra_classes or missing_methods or extra_methods:
-    #     print("===== Comparison Results =====")
-    #     if missing_classes:
-    #         print("\nMissing Classes in Code:")
-    #         pprint(missing_classes)
 
-    #     if extra_classes:
-    #         print("\nExtra Classes in Code:")
-    #         pprint(extra_classes)
+        print("===== Comparison Results =====")
+        if missing_classes:
+            print("\nMissing Classes in Code:")
+            pprint(missing_classes)
+        if extra_classes:
+            print("\nExtra Classes in Code:")
+            pprint(extra_classes)
+        if missing_methods:
+            print("\nMissing Methods in Code:")
+            pprint(missing_methods)
+        if extra_methods:
+            print("\nExtra Methods in Code:")
+            pprint(extra_methods)
 
-    #     if missing_methods:
-    #         print("\nMissing Methods in Code:")
-    #         pprint(missing_methods)
+        print("\n**************")
+        try:
+            sys.stdout.write("Do you want to rewrite the diagram file? (yes/no): ")
+            sys.stdout.flush()
 
-    #     if extra_methods:
-    #         print("\nExtra Methods in Code:")
-    #         pprint(extra_methods)
+            ans = input().strip().lower()
 
-    #     if extra_classes or extra_methods:
-    #         print("\n**************")
-    #         try:
-    #             sys.stdout.write("Do you want to rewrite the diagram file? (yes/no): ")
-    #             sys.stdout.flush()
-                
-    #             ans = input().strip().lower()
-                
-    #             if ans not in ["yes", "no", "y", "n"]:
-    #                 print("Invalid input. Please enter 'yes' or 'no'.")
-    #                 sys.exit(1)
-                
-    #             if ans == "no" or ans == "n":
-    #                 print("\n❌ Commit aborted.\n")
-    #                 sys.exit(1)
-                
-    #         except EOFError:
-    #             log_error("Unexpected error while reading input. Exiting.")
-    #             sys.exit(1)
-        
-    #     print("diagram_file_name", diagram_file_name)
-    #     with open(diagram_file_name, "a") as f:
-    #         if extra_methods:
-    #             for cls, methods in extra_methods.items():
-    #                 value = [i for i in variable_to_classes if variable_to_classes[i]==cls]
-    #                 if len(value) == 0:
-    #                     cls = f'Action("{cls}")'
-    #                 else:
-    #                     cls = value[0]
-    #                 for method in methods:
-    #                     f.write(f"\n    {cls} >> Edge(label='{method}', color='red') >> {cls}")                    
-    #         if extra_classes:
-    #             for cls in extra_classes:
-    #                 f.write(f"\n    {cls} = Action('{cls}')")
-    #         f.close()
-    #     try:
-    #         subprocess.run(['python3', diagram_file_name])
-    #         sys.exit(0)
-    #     except Exception as e:
-    #         log_error(f"Error executing the diagram file: {e}")
-    #         sys.exit(1)
+            if ans not in ["yes", "no", "y", "n"]:
+                print("Invalid input. Please enter 'yes' or 'no'.")
+                continue
 
-    # else:
-    #     print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
-    #     sys.exit(0)
+            if ans in ["no", "n"]:
+                print("\n❌ Commit aborted.\n")
+                sys.exit(1)
+
+        except EOFError:
+            log_error("Unexpected error while reading input. Exiting.")
+            sys.exit(1)
+
+        print("Updating the diagram file...")
+        with open(diagram_file_name, "a") as f:
+            if extra_methods:
+                for cls, methods in extra_methods.items():
+                    value = [i for i in variable_to_classes if variable_to_classes[i] == cls]
+                    cls_var = value[0] if value else f'Action("{cls}")'
+                    for method in methods:
+                        f.write(f"\n    {cls_var} >> Edge(label='{method}', color='red') >> {cls_var}")
+            if extra_classes:
+                for cls in extra_classes:
+                    f.write(f"\n    {cls} = Action('{cls}')")
+
+        validate_diagram_syntax(diagram_file_name)
+        print("\nRe-running checks...\n")

@@ -12,7 +12,7 @@ graph_attr = {
     "splines": "curve",
 }
 
-with Diagram("Enhanced Class Relationships and Methods", direction="TB", show=False, graph_attr=graph_attr):
+with Diagram("Enhanced Class Relationships and Methods PHP", direction="TB", show=False, graph_attr=graph_attr):
     # User class
     user = User("User")
 
@@ -99,7 +99,3 @@ with Diagram("Enhanced Class Relationships and Methods", direction="TB", show=Fa
     nosql_db >> Edge(label="clear_cache()", style="dotted") >> nosql_db
 
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
-    Action("Service5") >> Edge(label='backup()', color='red') >> Action("Service5")
-    Action("Service6") >> Edge(label='authenticate()', color='red') >> Action("Service6")
-    Action("Legend") >> Edge(label='get_name()', color='red') >> Action("Legend")
-    Legend = Action('Legend')
