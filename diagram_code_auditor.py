@@ -555,12 +555,17 @@ if __name__ == "__main__":
                     else:
                         cls = value[0]
                     for method in methods:
-                        f.write(f"\n    {cls} >> Edge(label='{method}', color='red') >> {cls}")
-                f.close()                        
-                try:
-                    subprocess.run(['python3', diagram_file_name])
-                except Exception as e:
-                    print(f"Error executing the diagram file: {e}")
+                        f.write(f"\n    {cls} >> Edge(label='{method}', color='red') >> {cls}")                    
+            if extra_classes:
+                for cls in extra_classes:
+                    f.write(f"\n    {cls} = Action('{cls}')")
+            f.close()
+        try:
+            subprocess.run(['python3', diagram_file_name])
+            sys.exit(0)
+        except Exception as e:
+            print(f"Error executing the diagram file: {e}")
+            sys.exit(1)
 
     else:
         print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
