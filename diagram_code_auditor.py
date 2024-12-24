@@ -598,74 +598,74 @@ def handle_updates(extra_classes: set, extra_methods: dict, diagram_file: str, v
     return validate_update(diagram_file)
 
 def main():
-    """Main function to run the diagram analyzer."""
-    if len(sys.argv) != 3:
-        log_error("Usage: python script.py <code_file> <diagram_file>")
-        sys.exit(1)
+    php_parser = 'php_parser.php'
+
+    code_file_name = sys.argv[1]
+    diagram_file_name = sys.argv[2]
+    # code_file_name = "classes_examples/classes.py"
+    # code_file_name = "classes_examples/classes.php"
+    # diagram_file_names = ["diagram_examples/diagram.py"]
 
     code_file_name = sys.argv[1]
     diagram_file_name = sys.argv[2]
 
     code_classes, code_methods = parse_code_file(code_file_name)
 
-    while True:
-        try:
-            with open(diagram_file_name, "r") as f:
-                diagram_content = f.read()
-        except FileNotFoundError:
-            log_error(f"Error: Diagram file {diagram_file_name} not found.")
-            sys.exit(1)
+    all_diagram_classes = set()
+    aggregated_diagram_methods = {}
 
-        diagram_classes, diagram_methods, all_connections, variable_to_classes = analyze_diagram(diagram_content)
+    try:
+        with open(file_name, "r") as f:
+            diagram_content = f.read()
+    except FileNotFoundError:
+        print(f"Error: Diagram file {file_name} not found.")
+        sys.exit(1)
 
-        # Compare classes and methods
-        missing_classes, extra_classes = compare_classes(code_classes, set(diagram_classes))
-        missing_methods, extra_methods = compare_methods(code_methods, diagram_methods)
+    diagram_classes, diagram_methods, all_connections = analyze_diagram(diagram_content)
+    print("Diagram methods:", diagram_methods)
+    pprint("Diagram methods:", diagram_methods)
+        # fp1 = open('./tmp/diagram_classes.json', 'w+')
+        # json.dump(diagram_classes, fp1)
 
-        if not (missing_classes or extra_classes or missing_methods or extra_methods):
-            print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
-            sys.exit(0)
+        # fp2 = open('./tmp/all_connections.json', 'w+')
+        # json.dump(all_connections, fp2)
 
-        # Display comparison results
+        # fp3 = open('./tmp/diagram_methods.json', 'w+')
+        # json.dump(diagram_methods, fp3)
+        # fp4 = open('./tmp/mydict.json', 'w+')
+        # json.dump({"classes": diagram_classes, "diagram_methods": diagram_methods,"all_connections": all_connections}, fp4)
+    all_diagram_classes.update(diagram_classes)
+    for cls, methods in diagram_methods.items():
+        aggregated_diagram_methods.setdefault(cls, set()).update(methods)
+
+    # Compare classes and methods
+    missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
+    missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
+
+    # Determine exit code
+    if missing_classes or extra_classes or missing_methods or extra_methods:
         print("===== Comparison Results =====")
         if missing_classes:
             print("\nMissing Classes in Code:")
             pprint(missing_classes)
+
         if extra_classes:
             print("\nExtra Classes in Code:")
             pprint(extra_classes)
+
         if missing_methods:
             print("\nMissing Methods in Code:")
             pprint(missing_methods)
+
         if extra_methods:
             print("\nExtra Methods in Code:")
             pprint(extra_methods)
+        print("\n❌ Discrepancies found! Commit aborted.\n")
+        sys.exit(1)
 
-        print("\n**************")
-        try:
-            sys.stdout.write("Do you want to rewrite the diagram file? (yes/no): ")
-            sys.stdout.flush()
-
-            ans = input().strip().lower()
-
-            if ans not in ["yes", "no", "y", "n"]:
-                print("Invalid input. Please enter 'yes' or 'no'.")
-                continue
-
-            if ans in ["no", "n"]:
-                print("\n❌ Commit aborted.\n")
-                sys.exit(1)
-
-        except EOFError:
-            log_error("Unexpected error while reading input. Exiting.")
-            sys.exit(1)
-
-        print("Updating the diagram file...")
-        if handle_updates(extra_classes, extra_methods, diagram_file_name, variable_to_classes):
-            print("\nRe-running checks...\n")
-        else:
-            print("\n❌ Update failed. Please check the errors above.\n")
-            sys.exit(1)
+    else:
+        print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
+        sys.exit(0)
 
 if __name__ == "__main__":
     main()
