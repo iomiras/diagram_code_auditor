@@ -56,6 +56,9 @@ class Firewall:
 
     def login(self):
         print(f"{self.name} handled login")
+    
+    def lorem_ipsum_firewall(self):
+        print(f"{self.name} has no store_data method.")
 
 
 class LoadBalancer:
@@ -89,9 +92,6 @@ class Service:
 
     def backup(self):
         print(f"{self.name} is backing up data")
-    
-    def kms(self):
-        print(f"{self.name} is using kms")
 
 
 class Service1(Service):

@@ -49,7 +49,7 @@ with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", 
             additional_services = ["Service4", "Service5", "Service6"]
             connection_label = "creates()"
             for service_str in additional_services:
-                service1 >> Edge(label=connection_label, color="red") >> Server(service_str)
+                service1 >> Edge(label=connection_label, color="pink") >> Server(service_str)
 
         load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
 
@@ -101,3 +101,5 @@ with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", 
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
 
     #starts here
+    auth_server >> Edge(label='lorem_ipsum_auth()', color='red') >> auth_server
+    service2 >> Edge(label='test_rel_de()', color='red') >> service2
