@@ -100,3 +100,4 @@ with Diagram("Enhanced Class Relationships and Methods Php", direction="TB", sho
 
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
     Legend = Action('Legend')
+    firewall >> Edge(label='firewall_method()', color='red') >> firewall

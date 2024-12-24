@@ -101,5 +101,3 @@ with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", 
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
 
     #starts here
-    relational_db >> Edge(label='lorem_ipsum_relational_db2()', color='red') >> relational_db
-    relational_db >> Edge(label='lorem_ipsum_relational_db()', color='red') >> relational_db
