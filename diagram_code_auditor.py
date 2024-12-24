@@ -573,6 +573,7 @@ def handle_updates(extra_classes: set, extra_methods: dict, diagram_file: str, v
                 user_input = input(f"Add class {cls} to diagram? (yes/no): ").strip().lower()
                 if user_input == 'yes' or user_input == 'y':
                     f.write(f"\n    {cls} = Action('{cls}')")
+                    variable_to_classes[cls] = cls
         if extra_methods:
             for cls, methods in extra_methods.items():
                 value = [i for i in variable_to_classes if variable_to_classes[i] == cls]

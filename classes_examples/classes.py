@@ -175,4 +175,4 @@ class Demo:
         print(f"{self.name} has no store_data method")
     
     def lorem_ipsum(self):
-        print(f"{self.name} has no store_data method.")
+        print(f"{self.name} has no store_data methods.")
