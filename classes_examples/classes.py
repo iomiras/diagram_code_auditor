@@ -148,7 +148,7 @@ class NoSQLDB:
         print(f"{self.name} cache cleared")
     
     def lorem_ipsum_relational_db(self):
-        print(f"{self.name} has no store_data method.g")
+        print(f"{self.name} has no store_data method.")
 
 
 class AuthServer:
