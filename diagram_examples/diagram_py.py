@@ -105,3 +105,6 @@ with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", 
     service2 >> Edge(label='test_rel_de()', color='red') >> service2
     # firewall >> Edge(label='lorem_ipsum_firewall()', color='red') >> firewall
     # Action("Service6") >> Edge(label='demo_method()', color='red') >> Action("Service6")
+    Demo = Action('Demo')
+    Demo >> Edge(label='demo_method()', color='red') >> Demo
+    Demo >> Edge(label='lorem_ipsum()', color='red') >> Demo
