@@ -59,7 +59,7 @@ def parse_json(code_tree: str) -> tuple:
     code_classes = []
     code_methods = {}
     parsed_json = json.loads(code_tree)
-    if len(parsed_json) == 0:
+    if len(parsed_json) == 1:
         statements = parsed_json[0]['stmts']
     else:
         statements = parsed_json
@@ -89,7 +89,7 @@ def parse_json(code_tree: str) -> tuple:
                     else:
                         code_methods[class_name] = [method_name]
 
-    return code_classes, code_methods
+    return code_classes, code_methods, ""
 
 
 def parse_code_file(file_path: str) -> tuple:
@@ -126,7 +126,10 @@ def main():
 
     # Process the given code and diagram file pair
     try:
-        code_classes, code_methods = parse_code_file(code_file_name)
+        
+        code_classes, code_methods, *_ = parse_code_file(code_file_name)
+        # pprint(code_classes)
+        # pprint(code_methods)
     except FileNotFoundError:
         log_error(f"Error: Code file {code_file_name} not found.")
         discrepancies_found = True
@@ -160,18 +163,22 @@ def main():
         if missing_classes:
             log_error(f"Missing Classes in Code {code_file_name}:")
             pprint(missing_classes)
+            print()
 
         if extra_classes:
             log_error(f"Extra Classes in Code {code_file_name}:")
             pprint(extra_classes)
+            print()
 
         if missing_methods:
             log_error(f"Missing Methods in Code {code_file_name}:")
             pprint(missing_methods)
+            print()
 
         if extra_methods:
             log_error(f"Extra Methods in Code {code_file_name}:")
             pprint(extra_methods)
+            print()
 
     # Exit based on discrepancies
     if discrepancies_found:

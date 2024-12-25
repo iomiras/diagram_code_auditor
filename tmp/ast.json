@@ -6,8 +6,8 @@
             "startTokenPos": 2,
             "startFilePos": 7,
             "endLine": 239,
-            "endTokenPos": 1243,
-            "endFilePos": 4734,
+            "endTokenPos": 1279,
+            "endFilePos": 4707,
             "kind": 1
         },
         "name": {
@@ -6509,107 +6509,280 @@
                 "implements": []
             },
             {
-                "nodeType": "Stmt_Nop",
+                "nodeType": "Stmt_Class",
                 "attributes": {
-                    "startLine": 239,
+                    "startLine": 229,
+                    "startTokenPos": 1227,
+                    "startFilePos": 4528,
                     "endLine": 239,
-                    "startFilePos": 4735,
-                    "endFilePos": 4734,
-                    "startTokenPos": 1244,
-                    "endTokenPos": 1243,
-                    "comments": [
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/ class Legent {",
-                            "line": 229,
-                            "filePos": 4528,
-                            "tokenPos": 1227,
-                            "endLine": 229,
-                            "endFilePos": 4544,
-                            "endTokenPos": 1227
-                        },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/     private $name;",
-                            "line": 230,
-                            "filePos": 4546,
-                            "tokenPos": 1229,
+                    "endTokenPos": 1279,
+                    "endFilePos": 4707
+                },
+                "name": {
+                    "nodeType": "Identifier",
+                    "attributes": {
+                        "startLine": 229,
+                        "startTokenPos": 1229,
+                        "startFilePos": 4534,
+                        "endLine": 229,
+                        "endTokenPos": 1229,
+                        "endFilePos": 4539
+                    },
+                    "name": "Legent"
+                },
+                "stmts": [
+                    {
+                        "nodeType": "Stmt_Property",
+                        "attributes": {
+                            "startLine": 230,
+                            "startTokenPos": 1233,
+                            "startFilePos": 4547,
                             "endLine": 230,
-                            "endFilePos": 4566,
-                            "endTokenPos": 1229
+                            "endTokenPos": 1236,
+                            "endFilePos": 4560
                         },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/     public function __construct($name) {",
-                            "line": 232,
-                            "filePos": 4569,
-                            "tokenPos": 1231,
-                            "endLine": 232,
-                            "endFilePos": 4611,
-                            "endTokenPos": 1231
-                        },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/         $this->name = $name;",
-                            "line": 233,
-                            "filePos": 4613,
-                            "tokenPos": 1233,
-                            "endLine": 233,
-                            "endFilePos": 4643,
-                            "endTokenPos": 1233
-                        },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/     }",
-                            "line": 234,
-                            "filePos": 4645,
-                            "tokenPos": 1235,
+                        "flags": 4,
+                        "props": [
+                            {
+                                "nodeType": "PropertyItem",
+                                "attributes": {
+                                    "startLine": 230,
+                                    "startTokenPos": 1235,
+                                    "startFilePos": 4555,
+                                    "endLine": 230,
+                                    "endTokenPos": 1235,
+                                    "endFilePos": 4559
+                                },
+                                "name": {
+                                    "nodeType": "VarLikeIdentifier",
+                                    "attributes": {
+                                        "startLine": 230,
+                                        "startTokenPos": 1235,
+                                        "startFilePos": 4555,
+                                        "endLine": 230,
+                                        "endTokenPos": 1235,
+                                        "endFilePos": 4559
+                                    },
+                                    "name": "name"
+                                },
+                                "default": null
+                            }
+                        ],
+                        "type": null,
+                        "attrGroups": [],
+                        "hooks": []
+                    },
+                    {
+                        "nodeType": "Stmt_ClassMethod",
+                        "attributes": {
+                            "startLine": 232,
+                            "startTokenPos": 1238,
+                            "startFilePos": 4567,
                             "endLine": 234,
-                            "endFilePos": 4652,
-                            "endTokenPos": 1235
+                            "endTokenPos": 1258,
+                            "endFilePos": 4637
                         },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/     public function get_name() {",
-                            "line": 236,
-                            "filePos": 4655,
-                            "tokenPos": 1237,
-                            "endLine": 236,
-                            "endFilePos": 4689,
-                            "endTokenPos": 1237
+                        "flags": 1,
+                        "byRef": false,
+                        "name": {
+                            "nodeType": "Identifier",
+                            "attributes": {
+                                "startLine": 232,
+                                "startTokenPos": 1242,
+                                "startFilePos": 4583,
+                                "endLine": 232,
+                                "endTokenPos": 1242,
+                                "endFilePos": 4593
+                            },
+                            "name": "__construct"
                         },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/         return $this->name;",
-                            "line": 237,
-                            "filePos": 4691,
-                            "tokenPos": 1239,
-                            "endLine": 237,
-                            "endFilePos": 4720,
-                            "endTokenPos": 1239
-                        },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/     }",
-                            "line": 238,
-                            "filePos": 4722,
-                            "tokenPos": 1241,
+                        "params": [
+                            {
+                                "nodeType": "Param",
+                                "attributes": {
+                                    "startLine": 232,
+                                    "startTokenPos": 1244,
+                                    "startFilePos": 4595,
+                                    "endLine": 232,
+                                    "endTokenPos": 1244,
+                                    "endFilePos": 4599
+                                },
+                                "type": null,
+                                "byRef": false,
+                                "variadic": false,
+                                "var": {
+                                    "nodeType": "Expr_Variable",
+                                    "attributes": {
+                                        "startLine": 232,
+                                        "startTokenPos": 1244,
+                                        "startFilePos": 4595,
+                                        "endLine": 232,
+                                        "endTokenPos": 1244,
+                                        "endFilePos": 4599
+                                    },
+                                    "name": "name"
+                                },
+                                "default": null,
+                                "flags": 0,
+                                "attrGroups": [],
+                                "hooks": []
+                            }
+                        ],
+                        "returnType": null,
+                        "stmts": [
+                            {
+                                "nodeType": "Stmt_Expression",
+                                "attributes": {
+                                    "startLine": 233,
+                                    "startTokenPos": 1249,
+                                    "startFilePos": 4612,
+                                    "endLine": 233,
+                                    "endTokenPos": 1256,
+                                    "endFilePos": 4631
+                                },
+                                "expr": {
+                                    "nodeType": "Expr_Assign",
+                                    "attributes": {
+                                        "startLine": 233,
+                                        "startTokenPos": 1249,
+                                        "startFilePos": 4612,
+                                        "endLine": 233,
+                                        "endTokenPos": 1255,
+                                        "endFilePos": 4630
+                                    },
+                                    "var": {
+                                        "nodeType": "Expr_PropertyFetch",
+                                        "attributes": {
+                                            "startLine": 233,
+                                            "startTokenPos": 1249,
+                                            "startFilePos": 4612,
+                                            "endLine": 233,
+                                            "endTokenPos": 1251,
+                                            "endFilePos": 4622
+                                        },
+                                        "var": {
+                                            "nodeType": "Expr_Variable",
+                                            "attributes": {
+                                                "startLine": 233,
+                                                "startTokenPos": 1249,
+                                                "startFilePos": 4612,
+                                                "endLine": 233,
+                                                "endTokenPos": 1249,
+                                                "endFilePos": 4616
+                                            },
+                                            "name": "this"
+                                        },
+                                        "name": {
+                                            "nodeType": "Identifier",
+                                            "attributes": {
+                                                "startLine": 233,
+                                                "startTokenPos": 1251,
+                                                "startFilePos": 4619,
+                                                "endLine": 233,
+                                                "endTokenPos": 1251,
+                                                "endFilePos": 4622
+                                            },
+                                            "name": "name"
+                                        }
+                                    },
+                                    "expr": {
+                                        "nodeType": "Expr_Variable",
+                                        "attributes": {
+                                            "startLine": 233,
+                                            "startTokenPos": 1255,
+                                            "startFilePos": 4626,
+                                            "endLine": 233,
+                                            "endTokenPos": 1255,
+                                            "endFilePos": 4630
+                                        },
+                                        "name": "name"
+                                    }
+                                }
+                            }
+                        ],
+                        "attrGroups": []
+                    },
+                    {
+                        "nodeType": "Stmt_ClassMethod",
+                        "attributes": {
+                            "startLine": 236,
+                            "startTokenPos": 1260,
+                            "startFilePos": 4644,
                             "endLine": 238,
-                            "endFilePos": 4729,
-                            "endTokenPos": 1241
+                            "endTokenPos": 1277,
+                            "endFilePos": 4705
                         },
-                        {
-                            "nodeType": "Comment",
-                            "text": "\/\/ }",
-                            "line": 239,
-                            "filePos": 4731,
-                            "tokenPos": 1243,
-                            "endLine": 239,
-                            "endFilePos": 4734,
-                            "endTokenPos": 1243
-                        }
-                    ]
-                }
+                        "flags": 1,
+                        "byRef": false,
+                        "name": {
+                            "nodeType": "Identifier",
+                            "attributes": {
+                                "startLine": 236,
+                                "startTokenPos": 1264,
+                                "startFilePos": 4660,
+                                "endLine": 236,
+                                "endTokenPos": 1264,
+                                "endFilePos": 4667
+                            },
+                            "name": "get_name"
+                        },
+                        "params": [],
+                        "returnType": null,
+                        "stmts": [
+                            {
+                                "nodeType": "Stmt_Return",
+                                "attributes": {
+                                    "startLine": 237,
+                                    "startTokenPos": 1270,
+                                    "startFilePos": 4681,
+                                    "endLine": 237,
+                                    "endTokenPos": 1275,
+                                    "endFilePos": 4699
+                                },
+                                "expr": {
+                                    "nodeType": "Expr_PropertyFetch",
+                                    "attributes": {
+                                        "startLine": 237,
+                                        "startTokenPos": 1272,
+                                        "startFilePos": 4688,
+                                        "endLine": 237,
+                                        "endTokenPos": 1274,
+                                        "endFilePos": 4698
+                                    },
+                                    "var": {
+                                        "nodeType": "Expr_Variable",
+                                        "attributes": {
+                                            "startLine": 237,
+                                            "startTokenPos": 1272,
+                                            "startFilePos": 4688,
+                                            "endLine": 237,
+                                            "endTokenPos": 1272,
+                                            "endFilePos": 4692
+                                        },
+                                        "name": "this"
+                                    },
+                                    "name": {
+                                        "nodeType": "Identifier",
+                                        "attributes": {
+                                            "startLine": 237,
+                                            "startTokenPos": 1274,
+                                            "startFilePos": 4695,
+                                            "endLine": 237,
+                                            "endTokenPos": 1274,
+                                            "endFilePos": 4698
+                                        },
+                                        "name": "name"
+                                    }
+                                }
+                            }
+                        ],
+                        "attrGroups": []
+                    }
+                ],
+                "attrGroups": [],
+                "flags": 0,
+                "extends": null,
+                "implements": []
             }
         ]
     }
