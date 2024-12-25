@@ -9,6 +9,7 @@ class CodeVisitor(ast.NodeVisitor):
         self.current_class = None
         self.class_to_methods = {}
         self.class_to_parents = {}
+        self.class_to_attributes = {}
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
         """Visit class definitions to extract class information."""
@@ -35,6 +36,19 @@ class CodeVisitor(ast.NodeVisitor):
         """Visit function definitions to extract method information."""
         if self.current_class and node.name != "__init__":
             self.class_to_methods[self.current_class].append(node.name + "()")
+            # for expr in node.body:
+            #     if isinstance(expr, ast.Expr):
+            #         print(ast.dump(expr, indent=4))
+            #         print("-----------------")
+        else:
+            for assign in node.body:
+                if isinstance(assign, ast.Assign):
+                    for target in assign.targets:
+                        if isinstance(target, ast.Attribute):
+                            if self.current_class in self.class_to_attributes:
+                                self.class_to_attributes[self.current_class].append(target.attr)
+                            else:
+                                self.class_to_attributes[self.current_class] = [target.attr]
         self.generic_visit(node)
 
     def resolve_inheritance(self) -> None:
@@ -55,7 +69,7 @@ class CodeVisitor(ast.NodeVisitor):
     def get_results(self) -> tuple:
         """Get the analysis results after resolving inheritance."""
         self.resolve_inheritance()
-        return self.classes, self.class_to_methods
+        return self.classes, self.class_to_methods, self.class_to_attributes
 
 def analyze_code(code_content: str) -> tuple:
     """

@@ -59,7 +59,10 @@ def parse_json(code_tree: str) -> tuple:
     code_classes = []
     code_methods = {}
     parsed_json = json.loads(code_tree)
-    statements = parsed_json[0]['stmts']
+    if len(parsed_json) == 0:
+        statements = parsed_json[0]['stmts']
+    else:
+        statements = parsed_json
     
     for stmt in statements:
         if stmt['nodeType'] == 'Stmt_Class':
@@ -106,8 +109,9 @@ def parse_code_file(file_path: str) -> tuple:
             content = f.read()
         return analyze_code(content)
     elif file_path.endswith('.php'):
-        subprocess.run(['php', php_parser])
-        with open('./tmp/ast.json', 'r') as f:
+        json_output = './tmp/ast.json'
+        subprocess.run(['php', php_parser, file_path, json_output])
+        with open(json_output, 'r') as f:
             content = f.read()
         return parse_json(content)
     else:
