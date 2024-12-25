@@ -4,7 +4,7 @@ import json
 import glob
 import subprocess
 from pprint import pprint
-from logging_utils import log_error, log_info
+from logging_utils import log_error
 from code_parser import analyze_code
 from diagram_parser import analyze_diagram
 
