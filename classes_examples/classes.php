@@ -222,7 +222,7 @@ class AuthServer {
     }
 
     public function queries($database) {
-        echo "$this->name queries {$database->get_name()}\n";
+        echo "$this->name queries {$database->get_name()}\n.";
     }
 }
 
