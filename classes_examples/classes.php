@@ -225,3 +225,15 @@ class AuthServer {
         echo "$this->name queries {$database->get_name()}\n";
     }
 }
+
+// class Legent {
+//     private $name;
+
+//     public function __construct($name) {
+//         $this->name = $name;
+//     }
+
+//     public function get_name() {
+//         return $this->name;
+//     }
+// }
