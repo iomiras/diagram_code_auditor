@@ -168,8 +168,6 @@ def main():
         if extra_methods:
             log_error(f"Extra Methods in Code {code_file_name}:")
             pprint(extra_methods)
-    else:
-        log_info(f"✅ Code {code_file_name} and its Diagram are in sync!")
 
     # Exit based on discrepancies
     if discrepancies_found:
