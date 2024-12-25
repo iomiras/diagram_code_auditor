@@ -99,5 +99,3 @@ with Diagram("Enhanced Class Relationships and Methods Php", direction="TB", sho
     nosql_db >> Edge(label="clear_cache()", style="dotted") >> nosql_db
 
     auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
-    Legend = Action('Legend')
-    firewall >> Edge(label='firewall_method()', color='red') >> firewall

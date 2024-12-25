@@ -86,10 +86,6 @@ class Firewall {
     public function login() {
         echo "$this->name handled login\n";
     }
-
-    public function firewall_method() {
-        echo "$this->name firewall method\n";
-    }
 }
 
 class LoadBalancer {
