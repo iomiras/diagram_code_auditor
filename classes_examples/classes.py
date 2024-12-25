@@ -128,7 +128,7 @@ class Service5:
 class Service6:
     def __init__(self, name):
         self.name = name
-        self.name += "test"
+        self.name += "testing"
     
     # def demo_method(self):
     #     print(f"{self.name} has no store_data method.")

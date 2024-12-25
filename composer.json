@@ -1,22 +1,4 @@
 {
-    "require-dev": {
-        "phpat/phpat": "^0.10.20",
-        "phpstan/extension-installer": "^1.4",
-        "phpstan/phpstan": "^1.12"
-    },
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "": "classes_examples/"
-        },
-        "files": [
-            "DiagramCodeAuditor.php"
-        ]
-    },
     "require": {
         "nikic/php-parser": "^5.3"
     }
