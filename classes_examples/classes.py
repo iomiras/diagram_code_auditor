@@ -130,8 +130,8 @@ class Service6:
         self.name = name
         self.name += "testing"
     
-    # def demo_method(self):
-    #     print(f"{self.name} has no store_data method.")
+    def demo_method(self):
+        print(f"{self.name} has no store_data method.")
         
 
 
