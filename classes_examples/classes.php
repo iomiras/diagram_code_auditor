@@ -225,11 +225,3 @@ class AuthServer {
         echo "$this->name queries {$database->get_name()}\n";
     }
 }
-
-class Legend {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-}

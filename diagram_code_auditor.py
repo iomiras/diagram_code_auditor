@@ -1,10 +1,10 @@
 import ast
 import sys
 import json
-import shutil
+import glob
 import subprocess
 from pprint import pprint
-from logging_utils import log_error, log_warning, log_info
+from logging_utils import log_error, log_info
 from code_parser import analyze_code
 from diagram_parser import analyze_diagram
 
@@ -116,61 +116,64 @@ def parse_code_file(file_path: str) -> tuple:
 
 
 def main():
+    code_file_names = glob.glob(sys.argv[1])  # Use glob to support multiple files (e.g., "*.py")
+    diagram_file_names = glob.glob(sys.argv[2])  # Use glob for diagrams as well
+    discrepancies_found = False
 
-    code_file_name = sys.argv[1]
-    diagram_file_name = sys.argv[2]
-    # code_file_name = "classes_examples/classes.py"
-    # code_file_name = "classes_examples/classes.php"
-    # diagram_file_names = ["diagram_examples/diagram.py"]
+    for code_file_name, diagram_file_name in zip(code_file_names, diagram_file_names):
+        
+        code_classes, code_methods = parse_code_file(code_file_name)
 
-    code_file_name = sys.argv[1]
-    diagram_file_name = sys.argv[2]
+        all_diagram_classes = set()
+        aggregated_diagram_methods = {}
 
-    code_classes, code_methods = parse_code_file(code_file_name)
+        try:
+            with open(diagram_file_name, "r") as f:
+                diagram_content = f.read()
+        except FileNotFoundError:
+            log_error(f"Error: Diagram file {diagram_file_name} not found.")
+            discrepancies_found = True
+            continue
 
-    all_diagram_classes = set()
-    aggregated_diagram_methods = {}
+        diagram_classes, diagram_methods, all_connections, var_to_class = analyze_diagram(diagram_content)
+        all_diagram_classes.update(diagram_classes)
+        for cls, methods in diagram_methods.items():
+            aggregated_diagram_methods.setdefault(cls, set()).update(methods)
 
-    try:
-        with open(diagram_file_name, "r") as f:
-            diagram_content = f.read()
-    except FileNotFoundError:
-        log_error(f"Error: Diagram file {diagram_file_name} not found.")
+        # Compare classes and methods
+        missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
+        missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
+
+        # Show results for each file and track discrepancies
+        if missing_classes or extra_classes or missing_methods or extra_methods:
+            discrepancies_found = True
+            print("\n===== Comparison Results =====")
+            if missing_classes:
+                log_error(f"Missing Classes in Code {code_file_name}:")
+                pprint(missing_classes)
+
+            if extra_classes:
+                log_error(f"Extra Classes in Code {code_file_name}:")
+                pprint(extra_classes)
+
+            if missing_methods:
+                log_error(f"Missing Methods in Code {code_file_name}:")
+                pprint(missing_methods)
+
+            if extra_methods:
+                log_error(f"Extra Methods in Code {code_file_name}:")
+                pprint(extra_methods)
+        else:
+            log_info(f"✅ Code {code_file_name} and its Diagram are in sync!")
+
+    # Abort commit if discrepancies are found
+    if discrepancies_found:
+        print("\n\n❌ Discrepancies found across files! Commit aborted.\n")
         sys.exit(1)
-
-    diagram_classes, diagram_methods, all_connections, var_to_class = analyze_diagram(diagram_content)
-    all_diagram_classes.update(diagram_classes)
-    for cls, methods in diagram_methods.items():
-        aggregated_diagram_methods.setdefault(cls, set()).update(methods)
-
-    # Compare classes and methods
-    missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
-    missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
-
-    # Determine exit code
-    if missing_classes or extra_classes or missing_methods or extra_methods:
-        print("===== Comparison Results =====")
-        if missing_classes:
-            log_warning(f"\nMissing Classes in Code {code_file_name}:")
-            pprint(missing_classes)
-
-        if extra_classes:
-            log_warning(f"\nExtra Classes in Code {code_file_name}:")
-            pprint(extra_classes)
-
-        if missing_methods:
-            log_warning(f"\nMissing Methods in Code {code_file_name}:")
-            pprint(missing_methods)
-
-        if extra_methods:
-            log_warning(f"\nExtra Methods in Code {code_file_name}:")
-            pprint(extra_methods)
-        log_error("\n❌ Discrepancies found! Commit aborted.\n")
-        # sys.exit(1)
-
     else:
-        print(f"\n✅ Code {code_file_name} and its Diagram are in sync!\n")
-        sys.exit(1)
+        print("\n\n✅ All files are in sync! Proceeding with commit.\n")
+        sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

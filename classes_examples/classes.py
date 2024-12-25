@@ -106,8 +106,8 @@ class Service2(Service):
     def __init__(self):
         super().__init__("Service2")
     
-    def test_rel_de(self):
-        print(f"{self.name} has no store_data method")
+    # def test_rel_de(self):
+    #     print(f"{self.name} has no store_data method")
 
 
 class Service3(Service):
@@ -129,8 +129,8 @@ class Service6:
     def __init__(self, name):
         self.name = name
     
-    def demo_method(self):
-        print(f"{self.name} has no store_data method")
+    # def demo_method(self):
+    #     print(f"{self.name} has no store_data method.")
         
 
 
@@ -163,5 +163,5 @@ class AuthServer:
     def queries(self, database):
         print(f"{self.name} queries {database.name}")
        
-    def lorem_ipsum_auth(self):
-        print(f"{self.name} has no store_data method.")
+    # def lorem_ipsum_auth(self):
+    #     print(f"{self.name} has no store_data method.")
