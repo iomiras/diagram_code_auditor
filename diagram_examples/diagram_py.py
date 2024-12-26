@@ -1,103 +1,70 @@
-from diagrams.programming.flowchart import Action
+from diagrams.c4 import Container
 from diagrams import Diagram, Cluster, Edge
-from diagrams.generic.network import Firewall
-from diagrams.generic.device import Mobile, Tablet
-from diagrams.onprem.client import User
-from diagrams.generic.compute import Rack
-from diagrams.generic.database import SQL
-from diagrams.generic.storage import Storage
-from diagrams.onprem.compute import Server
 
 graph_attr = {
-    "splines": "curve",
+    "splines": "polyline",
 }
 
-with Diagram("Enhanced Class Relationships and Methods Python", direction="TB", show=False, graph_attr=graph_attr):
-    # User class
-    user = User("User")
+with Diagram("Class Relationships and Methods Python", direction="TB", show=False, graph_attr=graph_attr):
+    
+    with Cluster("Person Classes"):
+        # Person class
+        person = Container("Person")
 
-    # Frontend Cluster: Classes representing frontend interfaces
-    with Cluster("Frontend Classes"):
-        mobile_app = Mobile("MobileApp")
-        desktop_app = Tablet("DesktopApp")
+        # Customer and Employee derived classes
+        customer = Container("Customer")
+        employee = Container("Employee")
+    
+    # Explicitly listing methods for Person
+    person_method = "introduce()"
+    person >> Edge(label=person_method, style="dashed", color="blue") >> person
+    person >> Edge(label="tell_name()", style="dashed", color="blue") >> person
 
-    # Backend Cluster: Core processing classes
-    with Cluster("Backend Classes"):
-        load_balancer = Rack("LoadBalancer")
+    # Order Class
+    order = Container("Order")
 
-        with Cluster("Service Classes"):
-            # Parent class (Service)
-            service_parent = Server("Service")
+    # Explicitly listing methods for Customer
+    # customer_methods = [, ]
+    customer >> Edge(label="view_order_history()", style="dashed", color="blue") >> customer >> Edge(label="place_order()", style="solid", color="red") >> order
 
-            # Parent methods
-            service_parent >> Edge(label="restart_service()", style="dotted") >> service_parent
-            service_parent >> Edge(label="store_data()", style="dotted") >> service_parent
-            service_parent >> Edge(label="backup()", style="dotted") >> service_parent
+    # customer >> Edge(label="place_order()", style="solid", color="red") >> order
+    customer >> Edge(label="cancel_order()", style="solid", color="red") >> order
 
-            # Child classes inheriting from Service
-            service1 = Server("Service1")
-            service2 = Server("Service2")
-            service3 = Server("Service3")
+    customer >> Edge(label="places()", style="solid", color="red") >> order
 
-            # Inheritance relationships using a for loop
-            services = [service1, service2, service3]
-            inherit = "inherits"
-            for service in services:
-                service >> Edge(label=inherit, style="dotted", color="gray") >> service_parent
+    people = [customer, employee]
 
-            # Additional services created by Service1
-            additional_services = ["Service4", "Service5", "Service6"]
-            connection_label = "creates()"
-            for service_str in additional_services:
-                service1 >> Edge(label=connection_label, color="pink") >> Server(service_str)
+    for _person in people:
+        _person >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
+    # customer >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
+    # employee >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
 
-        load_balancer >> Edge(label="balance()") >> [service1, service2, service3]
+    product = Container("Product")
 
-    # Database Classes
-    with Cluster("Database Classes"):
-        relational_db = SQL("RelationalDB")
-        nosql_db = Storage("NoSQLDB")
+    # Inventory Class
+    inventory = Container("Inventory")
 
-    # Security Layer: Security-related classes
-    with Cluster("Security Classes"):
-        firewall = Firewall("Firewall")
-        auth_server = Server("AuthServer")
+    # Relationships between classes
+    employee >> Edge(label="update_inventory()", style="solid", color="red") >> inventory
 
-    # Class Relationships and Methods
-    user >> Edge(label="access_via()", color="blue") >> [mobile_app, desktop_app]
-    [mobile_app, desktop_app] >> Edge(label="secured_by()", color="red") >> firewall
-    firewall >> Edge(label="routes_to()", color="green") >> load_balancer
-    load_balancer >> Edge(label="authenticates_via()", color="purple") >> auth_server
+    # Explicitly listing methods for Employee
+    employee_method = "update_inventory()"
+    employee >> Edge(label=employee_method, style="dashed", color="blue") >> employee
 
-    # Explicitly listing methods for firewall
-    firewall >> Edge(label="filter_traffic()", style="dotted") >> firewall
-    firewall >> Edge(label="monitor_logs()", style="dotted") >> firewall
-    firewall >> Edge(label="login()", style="dotted") >> firewall
+    employee >> Edge(label="process_order()", style="solid", color="red") >> order
 
-    # Explicitly listing methods for load_balancer
-    load_balancer >> Edge(label="check_health()", style="dotted") >> load_balancer
-    load_balancer >> Edge(label="restart()", style="dotted") >> load_balancer
+    # Explicitly listing methods for Product
+    product_method = "update_price()"
+    # for method in product_methods:
+    product >> Edge(label=product_method, style="dashed", color="blue") >> product
 
-    # Connections between services and databases
-    service1 >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
-    service2 >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
-    service3 >> Edge(label="store_data()", color="orange") >> [relational_db, nosql_db]
+    # Explicitly listing methods for Inventory
+    inventory >> Edge(label="check_stock()", style="solid", color="red") >> product
+    inventory >> Edge(label="add_product()", style="solid", color="red") >> product
+    
+    # inventory >> Edge(label="add_product()", style="solid", color="red") >> product
 
-    auth_server >> Edge(label="queries()", color="brown") >> relational_db
-    relational_db >> Edge(label="replicates_to()", color="darkgreen") >> nosql_db
-
-    # Standalone methods for classes
-    user >> Edge(label="login()", style="dotted") >> user
-    user >> Edge(label="logout()", style="dotted") >> user
-    user >> Edge(label="profile_view()", style="dotted") >> user
-    user >> Edge(label="profile_update()", style="dotted") >> user
-
-    mobile_app >> Edge(label="update_ui()", style="dotted") >> mobile_app
-    desktop_app >> Edge(label="render_view()", style="dotted") >> desktop_app
-
-    relational_db >> Edge(label="backup_data()", style="dotted") >> relational_db
-    nosql_db >> Edge(label="clear_cache()", style="dotted") >> nosql_db
-
-    auth_server >> Edge(label="validate_token()", style="dotted") >> auth_server
-
-    #starts here
+    # Explicitly listing methods for Order
+    # for method in order_methods:
+    order >> Edge(label="calculate_total()", style="dashed", color="blue") >> order
+    order >> Edge(label="apply_discount()", style="dashed", color="blue") >> order

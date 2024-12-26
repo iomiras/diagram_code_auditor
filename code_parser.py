@@ -89,4 +89,5 @@ def analyze_code(code_content: str) -> tuple:
 
     code_visitor = CodeVisitor()
     code_visitor.visit(tree)
+    # print(code_visitor.get_results())
     return code_visitor.get_results()

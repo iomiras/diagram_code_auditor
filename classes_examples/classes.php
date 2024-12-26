@@ -1,239 +1,87 @@
 <?php
 
-namespace classes_examples;
+// Base class for vehicles
+abstract class Vehicle {
+    protected $make;
+    protected $model;
+    protected $year;
 
-class User {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
+    public function __construct($make, $model, $year) {
+        $this->make = $make;
+        $this->model = $model;
+        $this->year = $year;
     }
 
-    public function login() {
-        echo "$this->name logged in\n";
-    }
-
-    public function logout() {
-        echo "$this->name logged out\n";
-    }
-
-    public function profile_view() {
-        echo "$this->name viewed profile\n";
-    }
-
-    public function profile_update() {
-        echo "$this->name updated profile\n";
-    }
-
-    public function access_via($devices) {
-        foreach ($devices as $device) {
-            echo "$this->name accesses via {$device->get_name()}\n";
-        }
+    public function getDescription() {
+        return "{$this->year} {$this->make} {$this->model}";
     }
 }
 
-class MobileApp {
-    private $name;
+// Derived class: Car
+class Car extends Vehicle {
+    private $doorCount;
 
-    public function __construct($name) {
-        $this->name = $name;
+    public function __construct($make, $model, $year, $doorCount) {
+        parent::__construct($make, $model, $year);
+        $this->doorCount = $doorCount;
     }
 
-    public function update_ui() {
-        echo "$this->name UI updated\n";
-    }
-
-    public function secured_by($firewall) {
-        echo "$this->name is secured by {$firewall->get_name()}\n";
+    public function getDescription() {
+        return "{$this->year} {$this->make} {$this->model} with {$this->doorCount} doors.";
     }
 }
 
-class DesktopApp {
-    private $name;
+// Derived class: Motorcycle
+class Motorcycle extends Vehicle {
+    private $type;
 
-    public function __construct($name) {
-        $this->name = $name;
+    public function __construct($make, $model, $year, $type) {
+        parent::__construct($make, $model, $year);
+        $this->type = $type;
     }
 
-    public function secured_by($firewall) {
-        echo "$this->name is secured by {$firewall->get_name()}\n";
-    }
-
-    public function render_view() {
-        echo "$this->name rendered view\n";
+    public function getDescription() {
+        return "{$this->year} {$this->make} {$this->model} ({$this->type} motorcycle).";
     }
 }
 
-class Firewall {
-    private $name;
+// Intertwined class: Garage
+class Garage {
+    private $vehicles = [];
 
-    public function __construct($name) {
-        $this->name = $name;
+    public function addVehicle(Vehicle $vehicle) {
+        $this->vehicles[] = $vehicle;
     }
 
-    public function routes_to($server) {
-        echo "$this->name routes to {$server->get_name()}\n";
-    }
-
-    public function filter_traffic() {
-        echo "$this->name is filtering traffic\n";
-    }
-
-    public function monitor_logs() {
-        echo "$this->name is monitoring logs\n";
-    }
-
-    public function login() {
-        echo "$this->name handled login\n";
-    }
-}
-
-class LoadBalancer {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function authenticates_via($authServer) {
-        echo "$this->name authenticates via {$authServer->get_name()}\n";
-    }
-
-    public function check_health() {
-        echo "$this->name is checking health\n";
-    }
-
-    public function restart() {
-        echo "$this->name is restarting\n";
-    }
-
-    public function balance($services) {
-        foreach ($services as $service) {
-            echo "$this->name balances {$service->get_name()}\n";
-        }
-    }
-}
-
-class Service {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function restart_service() {
-        echo "$this->name is restarting\n";
-    }
-
-    public function store_data($databases) {
-        foreach ($databases as $db) {
-            echo "$this->name stores data in {$db->get_name()}\n";
+    public function listVehicles() {
+        foreach ($this->vehicles as $vehicle) {
+            echo $vehicle->getDescription() . PHP_EOL;
         }
     }
 
-    public function backup() {
-        echo "$this->name is backing up data\n";
+    public function reportMaintenance() {
+        echo "The following vehicles are done for maintenance:" . PHP_EOL;
+    }
+
+    public function stores($vehicle) {
+        $this->vehicles[] = $vehicle;
     }
 }
 
-class Service1 extends Service {
-    public function __construct() {
-        parent::__construct("Service1");
+// Another intertwined class: Maintenance
+class Maintenance {
+    private $garage;
+
+    public function __construct(Garage $garage) {
+        $this->garage = $garage;
     }
 
-    public function creates($server) {
-        echo "$this->name creates new {$server->get_name()}\n";
+    public function performMaintenance() {
+        echo "Performing maintenance on all vehicles in the garage:" . PHP_EOL;
+        $this->garage->listVehicles();
     }
-}
 
-class Service2 extends Service {
-    public function __construct() {
-        parent::__construct("Service2");
-    }
-}
-
-class Service3 extends Service {
-    public function __construct() {
-        parent::__construct("Service3");
+    public function operatesIn($garage) {
+        $this->garage = $garage;
     }
 }
-
-class Service4 {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-}
-
-class Service5 {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-}
-
-class Service6 {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-}
-
-class RelationalDB {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function replicates_to($nosqldb) {
-        echo "$this->name replicates to {$nosqldb->get_name()}\n";
-    }
-
-    public function backup_data() {
-        echo "$this->name is backing up data\n";
-    }
-}
-
-class NoSQLDB {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function clear_cache() {
-        echo "$this->name cache cleared\n";
-    }
-}
-
-class AuthServer {
-    private $name;
-
-    public function __construct($name) {
-        $this->name = $name;
-    }
-
-    public function validate_token() {
-        echo "$this->name is validating tokens\n";
-    }
-
-    public function queries($database) {
-        echo "$this->name queries all {$database->get_name()}\n.";
-    }
-}
-
-// class Legent {
-//     private $name;
-
-//     public function __construct($name) {
-//         $this->name = $name;
-//     }
-
-//     public function get_name() {
-//         return $this->name;
-//     }
-// }

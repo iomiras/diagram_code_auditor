@@ -47,6 +47,12 @@ class ConnectionFinder(ast.NodeVisitor):
         Save the class name context (e.g. 'Library'), then visit methods.
         """
         self.current_class = node.name
+        if len(node.bases) > 0:
+            for base in node.bases:
+                if isinstance(base, ast.Name):
+                    self.known_classes.add(base.id)
+                    self.current_method = 'inherits'
+                    self._add_to_connections([base.id])
         self.generic_visit(node)
         self.current_class = None
 
@@ -167,7 +173,7 @@ class ConnectionFinder(ast.NodeVisitor):
         if len(candidate_classes) != 0 and [self.current_class, f"{self.current_method}()", candidate_classes] not in self.connections:
             return self.connections.append([
                 self.current_class,
-                f"{self.current_method}()",
+                self.current_method + '()' if self.current_method != 'inherits' else self.current_method,
                 candidate_classes
             ])
 

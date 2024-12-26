@@ -88,7 +88,6 @@ def parse_json(code_tree: str) -> tuple:
                         code_methods[class_name].append(method_name)
                     else:
                         code_methods[class_name] = [method_name]
-
     return code_classes, code_methods, ""
 
 

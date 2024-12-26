@@ -1,168 +1,80 @@
-class User:
-    def __init__(self, name):
+class Person:
+    def __init__(self, name, email):
         self.name = name
+        self.email = email
 
-    def login(self):
-        print(f"{self.name} logged in")
-
-    def logout(self):
-        print(f"{self.name} logged out")
-
-    def profile_view(self):
-        print(f"{self.name} viewed profile")
-
-    def profile_update(self):
-        print(f"{self.name} updated profile")
-
-    def access_via(self, devices):
-        for device in devices:
-            print(f"{self.name} accesses via {device.name}")
+    def introduce(self):
+        print(f"My name is {self.name}, and you can reach me at {self.email}.")
 
 
-class MobileApp:
-    def __init__(self, name):
+class Customer(Person):
+    def __init__(self, name, email, customer_id):
+        super().__init__(name, email)
+        self.customer_id = customer_id
+
+    def place_order(self, order):
+        print(f"Customer {self.name} placed order {order.order_id}.")
+
+    def cancel_order(self, order):
+        print(f"Customer {self.name} canceled order {order.order_id}.")
+
+    def view_order_history(self):
+        print(f"Customer {self.name} is viewing order history.")
+
+
+class Employee(Person):
+    def __init__(self, name, email, employee_id):
+        super().__init__(name, email)
+        self.employee_id = employee_id
+
+    def process_order(self, order):
+        print(f"Employee {self.name} is processing order {order.order_id}.")
+
+    def update_inventory(self, inventory, product, quantity):
+        inventory.add_product(product, quantity)
+        print(f"Employee {self.name} updated inventory for {product.name}.")
+
+
+class Product:
+    def __init__(self, product_id, name, price):
+        self.product_id = product_id
         self.name = name
+        self.price = price
 
-    def update_ui(self):
-        print(f"{self.name} UI updated")
-    
-    def secured_by(self, firewall):
-        print(f"{self.name} is secured by {firewall.name}")
-
-
-class DesktopApp:
-    def __init__(self, name):
-        self.name = name
-
-    def secured_by(self, firewall):
-        print(f"{self.name} is secured by {firewall.name}")
-
-    def render_view(self):
-        print(f"{self.name} rendered view")
+    def update_price(self, new_price):
+        print(f"Price for {self.name} updated from {self.price} to {new_price}.")
+        self.price = new_price
 
 
-class Firewall:
-    def __init__(self, name):
-        self.name = name
-
-    def routes_to(self, server):
-        print(f"{self.name} routes to {server.name}")
-
-    def filter_traffic(self):
-        print(f"{self.name} is filtering traffic")
-
-    def monitor_logs(self):
-        print(f"{self.name} is monitoring logs")
-
-    def login(self):
-        print(f"{self.name} handled login")
-    
-    # def lorem_ipsum_firewall(self):
-    #     print(f"{self.name} has no store_data method.")
-
-
-class LoadBalancer:
-    def __init__(self, name):
-        self.name = name
-
-    def authenticates_via(self, auth_server):
-        print(f"{self.name} authenticates via {auth_server.name}")
-
-    def check_health(self):
-        print(f"{self.name} is checking health")
-
-    def restart(self):
-        print(f"{self.name} is restarting")
-
-    def balance(self, services):
-        for service in services:
-            print(f"{self.name} balances {service.name}")
-
-
-class Service:
-    def __init__(self, name):
-        self.name = name
-
-    def restart_service(self):
-        print(f"{self.name} is restarting")
-
-    def store_data(self, databases):
-        for db in databases:
-            print(f"{self.name} stores data in {db.name}")
-
-    def backup(self):
-        print(f"{self.name} is backing up data")
-
-
-class Service1(Service):
+class Inventory:
     def __init__(self):
-        super().__init__("Service1")
+        self.products = {}
 
-    def creates(self, server):
-        print(f"{self.name} creates new {server.name}")
+    def add_product(self, product, quantity):
+        if product.product_id in self.products:
+            self.products[product.product_id]["quantity"] += quantity
+        else:
+            self.products[product.product_id] = {"product": product, "quantity": quantity}
+        print(f"Added {quantity} units of {product.name} to inventory.")
 
-
-class Service2(Service):
-    def __init__(self):
-        super().__init__("Service2")
-    
-    # def test_rel_de(self):
-    #     print(f"{self.name} has no store_data method")
-
-
-class Service3(Service):
-    def __init__(self):
-        super().__init__("Service3")
+    def check_stock(self, product):
+        if product.product_id in self.products:
+            print(f"Stock for {product.name}: {self.products[product.product_id]['quantity']}")
+            return self.products[product.product_id]["quantity"]
+        print(f"{product.name} is out of stock.")
+        return 0
 
 
-class Service4:
-    def __init__(self, name):
-        self.name = name
+class Order:
+    def __init__(self, order_id, customer, products):
+        self.order_id = order_id
+        self.customer = customer
+        self.products = products
 
+    def calculate_total(self):
+        total = sum(product.price for product in self.products)
+        print(f"Total for order {self.order_id}: {total}")
+        return total
 
-class Service5:
-    def __init__(self, name):
-        self.name = name
-
-
-class Service6:
-    def __init__(self, name):
-        self.name = name
-        self.name += "testing"
-    
-    # def demo_method(self):
-    #     print(f"{self.name} has no store_data method.")
-        
-
-
-class RelationalDB:
-    def __init__(self, name):
-        self.name = name
-
-    def replicates_to(self, nosqldb):
-        print(f"{self.name} replicates to {nosqldb.name}")
-
-    def backup_data(self):
-        print(f"{self.name} is backing up data")
-
-
-class NoSQLDB:
-    def __init__(self, name):
-        self.name = name
-        self.surname = name
-
-    def clear_cache(self):
-        print(f"{self.name} cache cleared")
-
-class AuthServer:
-    def __init__(self, name):
-        self.name = name
-
-    def validate_token(self):
-        print(f"{self.name} is validating tokens")
-
-    def queries(self, database):
-        print(f"{self.name} queries {database.name}")
-       
-    # def lorem_ipsum_auth(self):
-    #     print(f"{self.name} has no store_data method.")
+    def apply_discount(self, discount):
+        print(f"Order {self.order_id} received a discount of {discount}%.")
