@@ -80,7 +80,7 @@ def main():
 
         classes, class_to_methods, class_to_attributes = analyze_code(content)
         connections = extract_connection_triples(content, classes, class_to_methods, class_to_attributes)
-        pprint(connections)
+        # pprint(connections)
         write_diagram(diagram_path, diagram_path, classes, class_to_methods, connections)
     elif file_path.endswith('.php'):
         print("Sorry, PHP files are not supported yet.")
