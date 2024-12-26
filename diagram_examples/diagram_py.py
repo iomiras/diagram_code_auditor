@@ -30,7 +30,7 @@ with Diagram("Class Relationships and Methods Python", direction="TB", show=Fals
     # customer >> Edge(label="place_order()", style="solid", color="red") >> order
     customer >> Edge(label="cancel_order()", style="solid", color="red") >> order
 
-    customer >> Edge(label="places()", style="solid", color="red") >> order
+    # customer >> Edge(label="places()", style="solid", color="red") >> order
 
     people = [customer, employee]
 

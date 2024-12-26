@@ -28,7 +28,7 @@ def write_diagram(file_path, diagram_name, classes, class_to_methods, connection
         f.write("from diagrams.c4 import Container\n")
 
         f.write(f"graph_attr = {graph_attr}\n\n")
-        f.write(f"with Diagram(\"{' '.join(diagram_name.split('/')[-1].split('_'))}\", filename= \"./{file_path}.png\", direction=\"LR\", show=False, graph_attr=graph_attr):\n")
+        f.write(f"with Diagram(\"{' '.join(diagram_name.split('/')[-1].split('_'))}\", filename= \"./{file_path}\", direction=\"LR\", show=False, graph_attr=graph_attr):\n")
 
         # Define classes as variables
         for cls in classes:
