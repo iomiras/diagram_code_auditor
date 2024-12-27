@@ -22,7 +22,7 @@ class Customer(Person):
         print(f"Customer {self.name} canceled order {order.order_id}.")
 
     def view_order_history(self):
-        print(f"Customer {self.name} is viewing order history.")
+        print(f"Customer {self.name} is viewing order history,")
 
 
 class Employee(Person):

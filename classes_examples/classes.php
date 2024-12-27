@@ -13,7 +13,7 @@ abstract class Vehicle {
     }
 
     public function getDescription() {
-        return "{$this->year} {$this->make} {$this->model}";
+        return "{$this->year} {$this->make} {$this->model}.";
     }
 }
 

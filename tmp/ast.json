@@ -6,8 +6,8 @@
             "startTokenPos": 4,
             "startFilePos": 34,
             "endLine": 18,
-            "endTokenPos": 108,
-            "endFilePos": 382,
+            "endTokenPos": 109,
+            "endFilePos": 383,
             "comments": [
                 {
                     "nodeType": "Comment",
@@ -492,8 +492,8 @@
                     "startTokenPos": 73,
                     "startFilePos": 280,
                     "endLine": 17,
-                    "endTokenPos": 106,
-                    "endFilePos": 380
+                    "endTokenPos": 107,
+                    "endFilePos": 381
                 },
                 "flags": 1,
                 "byRef": false,
@@ -519,8 +519,8 @@
                             "startTokenPos": 83,
                             "startFilePos": 323,
                             "endLine": 16,
-                            "endTokenPos": 104,
-                            "endFilePos": 374
+                            "endTokenPos": 105,
+                            "endFilePos": 375
                         },
                         "expr": {
                             "nodeType": "Scalar_InterpolatedString",
@@ -529,8 +529,8 @@
                                 "startTokenPos": 85,
                                 "startFilePos": 330,
                                 "endLine": 16,
-                                "endTokenPos": 103,
-                                "endFilePos": 373,
+                                "endTokenPos": 104,
+                                "endFilePos": 374,
                                 "kind": 2
                             },
                             "parts": [
@@ -664,6 +664,19 @@
                                         },
                                         "name": "model"
                                     }
+                                },
+                                {
+                                    "nodeType": "InterpolatedStringPart",
+                                    "attributes": {
+                                        "startLine": 16,
+                                        "startTokenPos": 103,
+                                        "startFilePos": 373,
+                                        "endLine": 16,
+                                        "endTokenPos": 103,
+                                        "endFilePos": 373,
+                                        "rawValue": "."
+                                    },
+                                    "value": "."
                                 }
                             ]
                         }
@@ -681,21 +694,21 @@
         "nodeType": "Stmt_Class",
         "attributes": {
             "startLine": 21,
-            "startTokenPos": 112,
-            "startFilePos": 407,
+            "startTokenPos": 113,
+            "startFilePos": 408,
             "endLine": 32,
-            "endTokenPos": 214,
-            "endFilePos": 762,
+            "endTokenPos": 215,
+            "endFilePos": 763,
             "comments": [
                 {
                     "nodeType": "Comment",
                     "text": "\/\/ Derived class: Car",
                     "line": 20,
-                    "filePos": 385,
-                    "tokenPos": 110,
+                    "filePos": 386,
+                    "tokenPos": 111,
                     "endLine": 20,
-                    "endFilePos": 405,
-                    "endTokenPos": 110
+                    "endFilePos": 406,
+                    "endTokenPos": 111
                 }
             ]
         },
@@ -703,11 +716,11 @@
             "nodeType": "Identifier",
             "attributes": {
                 "startLine": 21,
-                "startTokenPos": 114,
-                "startFilePos": 413,
+                "startTokenPos": 115,
+                "startFilePos": 414,
                 "endLine": 21,
-                "endTokenPos": 114,
-                "endFilePos": 415
+                "endTokenPos": 115,
+                "endFilePos": 416
             },
             "name": "Car"
         },
@@ -716,11 +729,11 @@
                 "nodeType": "Stmt_Property",
                 "attributes": {
                     "startLine": 22,
-                    "startTokenPos": 122,
-                    "startFilePos": 439,
+                    "startTokenPos": 123,
+                    "startFilePos": 440,
                     "endLine": 22,
-                    "endTokenPos": 125,
-                    "endFilePos": 457
+                    "endTokenPos": 126,
+                    "endFilePos": 458
                 },
                 "flags": 4,
                 "props": [
@@ -728,21 +741,21 @@
                         "nodeType": "PropertyItem",
                         "attributes": {
                             "startLine": 22,
-                            "startTokenPos": 124,
-                            "startFilePos": 447,
+                            "startTokenPos": 125,
+                            "startFilePos": 448,
                             "endLine": 22,
-                            "endTokenPos": 124,
-                            "endFilePos": 456
+                            "endTokenPos": 125,
+                            "endFilePos": 457
                         },
                         "name": {
                             "nodeType": "VarLikeIdentifier",
                             "attributes": {
                                 "startLine": 22,
-                                "startTokenPos": 124,
-                                "startFilePos": 447,
+                                "startTokenPos": 125,
+                                "startFilePos": 448,
                                 "endLine": 22,
-                                "endTokenPos": 124,
-                                "endFilePos": 456
+                                "endTokenPos": 125,
+                                "endFilePos": 457
                             },
                             "name": "doorCount"
                         },
@@ -757,11 +770,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 24,
-                    "startTokenPos": 127,
-                    "startFilePos": 464,
+                    "startTokenPos": 128,
+                    "startFilePos": 465,
                     "endLine": 27,
-                    "endTokenPos": 170,
-                    "endFilePos": 622
+                    "endTokenPos": 171,
+                    "endFilePos": 623
                 },
                 "flags": 1,
                 "byRef": false,
@@ -769,11 +782,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 24,
-                        "startTokenPos": 131,
-                        "startFilePos": 480,
+                        "startTokenPos": 132,
+                        "startFilePos": 481,
                         "endLine": 24,
-                        "endTokenPos": 131,
-                        "endFilePos": 490
+                        "endTokenPos": 132,
+                        "endFilePos": 491
                     },
                     "name": "__construct"
                 },
@@ -782,11 +795,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 24,
-                            "startTokenPos": 133,
-                            "startFilePos": 492,
+                            "startTokenPos": 134,
+                            "startFilePos": 493,
                             "endLine": 24,
-                            "endTokenPos": 133,
-                            "endFilePos": 496
+                            "endTokenPos": 134,
+                            "endFilePos": 497
                         },
                         "type": null,
                         "byRef": false,
@@ -795,11 +808,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 24,
-                                "startTokenPos": 133,
-                                "startFilePos": 492,
+                                "startTokenPos": 134,
+                                "startFilePos": 493,
                                 "endLine": 24,
-                                "endTokenPos": 133,
-                                "endFilePos": 496
+                                "endTokenPos": 134,
+                                "endFilePos": 497
                             },
                             "name": "make"
                         },
@@ -812,11 +825,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 24,
-                            "startTokenPos": 136,
-                            "startFilePos": 499,
+                            "startTokenPos": 137,
+                            "startFilePos": 500,
                             "endLine": 24,
-                            "endTokenPos": 136,
-                            "endFilePos": 504
+                            "endTokenPos": 137,
+                            "endFilePos": 505
                         },
                         "type": null,
                         "byRef": false,
@@ -825,11 +838,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 24,
-                                "startTokenPos": 136,
-                                "startFilePos": 499,
+                                "startTokenPos": 137,
+                                "startFilePos": 500,
                                 "endLine": 24,
-                                "endTokenPos": 136,
-                                "endFilePos": 504
+                                "endTokenPos": 137,
+                                "endFilePos": 505
                             },
                             "name": "model"
                         },
@@ -842,11 +855,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 24,
-                            "startTokenPos": 139,
-                            "startFilePos": 507,
+                            "startTokenPos": 140,
+                            "startFilePos": 508,
                             "endLine": 24,
-                            "endTokenPos": 139,
-                            "endFilePos": 511
+                            "endTokenPos": 140,
+                            "endFilePos": 512
                         },
                         "type": null,
                         "byRef": false,
@@ -855,11 +868,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 24,
-                                "startTokenPos": 139,
-                                "startFilePos": 507,
+                                "startTokenPos": 140,
+                                "startFilePos": 508,
                                 "endLine": 24,
-                                "endTokenPos": 139,
-                                "endFilePos": 511
+                                "endTokenPos": 140,
+                                "endFilePos": 512
                             },
                             "name": "year"
                         },
@@ -872,11 +885,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 24,
-                            "startTokenPos": 142,
-                            "startFilePos": 514,
+                            "startTokenPos": 143,
+                            "startFilePos": 515,
                             "endLine": 24,
-                            "endTokenPos": 142,
-                            "endFilePos": 523
+                            "endTokenPos": 143,
+                            "endFilePos": 524
                         },
                         "type": null,
                         "byRef": false,
@@ -885,11 +898,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 24,
-                                "startTokenPos": 142,
-                                "startFilePos": 514,
+                                "startTokenPos": 143,
+                                "startFilePos": 515,
                                 "endLine": 24,
-                                "endTokenPos": 142,
-                                "endFilePos": 523
+                                "endTokenPos": 143,
+                                "endFilePos": 524
                             },
                             "name": "doorCount"
                         },
@@ -905,31 +918,31 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 25,
-                            "startTokenPos": 147,
-                            "startFilePos": 536,
+                            "startTokenPos": 148,
+                            "startFilePos": 537,
                             "endLine": 25,
-                            "endTokenPos": 159,
-                            "endFilePos": 577
+                            "endTokenPos": 160,
+                            "endFilePos": 578
                         },
                         "expr": {
                             "nodeType": "Expr_StaticCall",
                             "attributes": {
                                 "startLine": 25,
-                                "startTokenPos": 147,
-                                "startFilePos": 536,
+                                "startTokenPos": 148,
+                                "startFilePos": 537,
                                 "endLine": 25,
-                                "endTokenPos": 158,
-                                "endFilePos": 576
+                                "endTokenPos": 159,
+                                "endFilePos": 577
                             },
                             "class": {
                                 "nodeType": "Name",
                                 "attributes": {
                                     "startLine": 25,
-                                    "startTokenPos": 147,
-                                    "startFilePos": 536,
+                                    "startTokenPos": 148,
+                                    "startFilePos": 537,
                                     "endLine": 25,
-                                    "endTokenPos": 147,
-                                    "endFilePos": 541
+                                    "endTokenPos": 148,
+                                    "endFilePos": 542
                                 },
                                 "name": "parent"
                             },
@@ -937,11 +950,11 @@
                                 "nodeType": "Identifier",
                                 "attributes": {
                                     "startLine": 25,
-                                    "startTokenPos": 149,
-                                    "startFilePos": 544,
+                                    "startTokenPos": 150,
+                                    "startFilePos": 545,
                                     "endLine": 25,
-                                    "endTokenPos": 149,
-                                    "endFilePos": 554
+                                    "endTokenPos": 150,
+                                    "endFilePos": 555
                                 },
                                 "name": "__construct"
                             },
@@ -950,22 +963,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 25,
-                                        "startTokenPos": 151,
-                                        "startFilePos": 556,
+                                        "startTokenPos": 152,
+                                        "startFilePos": 557,
                                         "endLine": 25,
-                                        "endTokenPos": 151,
-                                        "endFilePos": 560
+                                        "endTokenPos": 152,
+                                        "endFilePos": 561
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 25,
-                                            "startTokenPos": 151,
-                                            "startFilePos": 556,
+                                            "startTokenPos": 152,
+                                            "startFilePos": 557,
                                             "endLine": 25,
-                                            "endTokenPos": 151,
-                                            "endFilePos": 560
+                                            "endTokenPos": 152,
+                                            "endFilePos": 561
                                         },
                                         "name": "make"
                                     },
@@ -976,22 +989,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 25,
-                                        "startTokenPos": 154,
-                                        "startFilePos": 563,
+                                        "startTokenPos": 155,
+                                        "startFilePos": 564,
                                         "endLine": 25,
-                                        "endTokenPos": 154,
-                                        "endFilePos": 568
+                                        "endTokenPos": 155,
+                                        "endFilePos": 569
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 25,
-                                            "startTokenPos": 154,
-                                            "startFilePos": 563,
+                                            "startTokenPos": 155,
+                                            "startFilePos": 564,
                                             "endLine": 25,
-                                            "endTokenPos": 154,
-                                            "endFilePos": 568
+                                            "endTokenPos": 155,
+                                            "endFilePos": 569
                                         },
                                         "name": "model"
                                     },
@@ -1002,22 +1015,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 25,
-                                        "startTokenPos": 157,
-                                        "startFilePos": 571,
+                                        "startTokenPos": 158,
+                                        "startFilePos": 572,
                                         "endLine": 25,
-                                        "endTokenPos": 157,
-                                        "endFilePos": 575
+                                        "endTokenPos": 158,
+                                        "endFilePos": 576
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 25,
-                                            "startTokenPos": 157,
-                                            "startFilePos": 571,
+                                            "startTokenPos": 158,
+                                            "startFilePos": 572,
                                             "endLine": 25,
-                                            "endTokenPos": 157,
-                                            "endFilePos": 575
+                                            "endTokenPos": 158,
+                                            "endFilePos": 576
                                         },
                                         "name": "year"
                                     },
@@ -1031,41 +1044,41 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 26,
-                            "startTokenPos": 161,
-                            "startFilePos": 587,
+                            "startTokenPos": 162,
+                            "startFilePos": 588,
                             "endLine": 26,
-                            "endTokenPos": 168,
-                            "endFilePos": 616
+                            "endTokenPos": 169,
+                            "endFilePos": 617
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 26,
-                                "startTokenPos": 161,
-                                "startFilePos": 587,
+                                "startTokenPos": 162,
+                                "startFilePos": 588,
                                 "endLine": 26,
-                                "endTokenPos": 167,
-                                "endFilePos": 615
+                                "endTokenPos": 168,
+                                "endFilePos": 616
                             },
                             "var": {
                                 "nodeType": "Expr_PropertyFetch",
                                 "attributes": {
                                     "startLine": 26,
-                                    "startTokenPos": 161,
-                                    "startFilePos": 587,
+                                    "startTokenPos": 162,
+                                    "startFilePos": 588,
                                     "endLine": 26,
-                                    "endTokenPos": 163,
-                                    "endFilePos": 602
+                                    "endTokenPos": 164,
+                                    "endFilePos": 603
                                 },
                                 "var": {
                                     "nodeType": "Expr_Variable",
                                     "attributes": {
                                         "startLine": 26,
-                                        "startTokenPos": 161,
-                                        "startFilePos": 587,
+                                        "startTokenPos": 162,
+                                        "startFilePos": 588,
                                         "endLine": 26,
-                                        "endTokenPos": 161,
-                                        "endFilePos": 591
+                                        "endTokenPos": 162,
+                                        "endFilePos": 592
                                     },
                                     "name": "this"
                                 },
@@ -1073,11 +1086,11 @@
                                     "nodeType": "Identifier",
                                     "attributes": {
                                         "startLine": 26,
-                                        "startTokenPos": 163,
-                                        "startFilePos": 594,
+                                        "startTokenPos": 164,
+                                        "startFilePos": 595,
                                         "endLine": 26,
-                                        "endTokenPos": 163,
-                                        "endFilePos": 602
+                                        "endTokenPos": 164,
+                                        "endFilePos": 603
                                     },
                                     "name": "doorCount"
                                 }
@@ -1086,11 +1099,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 26,
-                                    "startTokenPos": 167,
-                                    "startFilePos": 606,
+                                    "startTokenPos": 168,
+                                    "startFilePos": 607,
                                     "endLine": 26,
-                                    "endTokenPos": 167,
-                                    "endFilePos": 615
+                                    "endTokenPos": 168,
+                                    "endFilePos": 616
                                 },
                                 "name": "doorCount"
                             }
@@ -1103,11 +1116,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 29,
-                    "startTokenPos": 172,
-                    "startFilePos": 629,
+                    "startTokenPos": 173,
+                    "startFilePos": 630,
                     "endLine": 31,
-                    "endTokenPos": 212,
-                    "endFilePos": 760
+                    "endTokenPos": 213,
+                    "endFilePos": 761
                 },
                 "flags": 1,
                 "byRef": false,
@@ -1115,11 +1128,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 29,
-                        "startTokenPos": 176,
-                        "startFilePos": 645,
+                        "startTokenPos": 177,
+                        "startFilePos": 646,
                         "endLine": 29,
-                        "endTokenPos": 176,
-                        "endFilePos": 658
+                        "endTokenPos": 177,
+                        "endFilePos": 659
                     },
                     "name": "getDescription"
                 },
@@ -1130,21 +1143,21 @@
                         "nodeType": "Stmt_Return",
                         "attributes": {
                             "startLine": 30,
-                            "startTokenPos": 182,
-                            "startFilePos": 672,
+                            "startTokenPos": 183,
+                            "startFilePos": 673,
                             "endLine": 30,
-                            "endTokenPos": 210,
-                            "endFilePos": 754
+                            "endTokenPos": 211,
+                            "endFilePos": 755
                         },
                         "expr": {
                             "nodeType": "Scalar_InterpolatedString",
                             "attributes": {
                                 "startLine": 30,
-                                "startTokenPos": 184,
-                                "startFilePos": 679,
+                                "startTokenPos": 185,
+                                "startFilePos": 680,
                                 "endLine": 30,
-                                "endTokenPos": 209,
-                                "endFilePos": 753,
+                                "endTokenPos": 210,
+                                "endFilePos": 754,
                                 "kind": 2
                             },
                             "parts": [
@@ -1152,21 +1165,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 186,
-                                        "startFilePos": 681,
+                                        "startTokenPos": 187,
+                                        "startFilePos": 682,
                                         "endLine": 30,
-                                        "endTokenPos": 188,
-                                        "endFilePos": 691
+                                        "endTokenPos": 189,
+                                        "endFilePos": 692
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 186,
-                                            "startFilePos": 681,
+                                            "startTokenPos": 187,
+                                            "startFilePos": 682,
                                             "endLine": 30,
-                                            "endTokenPos": 186,
-                                            "endFilePos": 685
+                                            "endTokenPos": 187,
+                                            "endFilePos": 686
                                         },
                                         "name": "this"
                                     },
@@ -1174,11 +1187,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 188,
-                                            "startFilePos": 688,
+                                            "startTokenPos": 189,
+                                            "startFilePos": 689,
                                             "endLine": 30,
-                                            "endTokenPos": 188,
-                                            "endFilePos": 691
+                                            "endTokenPos": 189,
+                                            "endFilePos": 692
                                         },
                                         "name": "year"
                                     }
@@ -1187,11 +1200,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 190,
-                                        "startFilePos": 693,
+                                        "startTokenPos": 191,
+                                        "startFilePos": 694,
                                         "endLine": 30,
-                                        "endTokenPos": 190,
-                                        "endFilePos": 693,
+                                        "endTokenPos": 191,
+                                        "endFilePos": 694,
                                         "rawValue": " "
                                     },
                                     "value": " "
@@ -1200,21 +1213,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 192,
-                                        "startFilePos": 695,
+                                        "startTokenPos": 193,
+                                        "startFilePos": 696,
                                         "endLine": 30,
-                                        "endTokenPos": 194,
-                                        "endFilePos": 705
+                                        "endTokenPos": 195,
+                                        "endFilePos": 706
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 192,
-                                            "startFilePos": 695,
+                                            "startTokenPos": 193,
+                                            "startFilePos": 696,
                                             "endLine": 30,
-                                            "endTokenPos": 192,
-                                            "endFilePos": 699
+                                            "endTokenPos": 193,
+                                            "endFilePos": 700
                                         },
                                         "name": "this"
                                     },
@@ -1222,11 +1235,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 194,
-                                            "startFilePos": 702,
+                                            "startTokenPos": 195,
+                                            "startFilePos": 703,
                                             "endLine": 30,
-                                            "endTokenPos": 194,
-                                            "endFilePos": 705
+                                            "endTokenPos": 195,
+                                            "endFilePos": 706
                                         },
                                         "name": "make"
                                     }
@@ -1235,11 +1248,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 196,
-                                        "startFilePos": 707,
+                                        "startTokenPos": 197,
+                                        "startFilePos": 708,
                                         "endLine": 30,
-                                        "endTokenPos": 196,
-                                        "endFilePos": 707,
+                                        "endTokenPos": 197,
+                                        "endFilePos": 708,
                                         "rawValue": " "
                                     },
                                     "value": " "
@@ -1248,21 +1261,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 198,
-                                        "startFilePos": 709,
+                                        "startTokenPos": 199,
+                                        "startFilePos": 710,
                                         "endLine": 30,
-                                        "endTokenPos": 200,
-                                        "endFilePos": 720
+                                        "endTokenPos": 201,
+                                        "endFilePos": 721
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 198,
-                                            "startFilePos": 709,
+                                            "startTokenPos": 199,
+                                            "startFilePos": 710,
                                             "endLine": 30,
-                                            "endTokenPos": 198,
-                                            "endFilePos": 713
+                                            "endTokenPos": 199,
+                                            "endFilePos": 714
                                         },
                                         "name": "this"
                                     },
@@ -1270,11 +1283,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 200,
-                                            "startFilePos": 716,
+                                            "startTokenPos": 201,
+                                            "startFilePos": 717,
                                             "endLine": 30,
-                                            "endTokenPos": 200,
-                                            "endFilePos": 720
+                                            "endTokenPos": 201,
+                                            "endFilePos": 721
                                         },
                                         "name": "model"
                                     }
@@ -1283,11 +1296,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 202,
-                                        "startFilePos": 722,
+                                        "startTokenPos": 203,
+                                        "startFilePos": 723,
                                         "endLine": 30,
-                                        "endTokenPos": 202,
-                                        "endFilePos": 727,
+                                        "endTokenPos": 203,
+                                        "endFilePos": 728,
                                         "rawValue": " with "
                                     },
                                     "value": " with "
@@ -1296,21 +1309,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 204,
-                                        "startFilePos": 729,
+                                        "startTokenPos": 205,
+                                        "startFilePos": 730,
                                         "endLine": 30,
-                                        "endTokenPos": 206,
-                                        "endFilePos": 744
+                                        "endTokenPos": 207,
+                                        "endFilePos": 745
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 204,
-                                            "startFilePos": 729,
+                                            "startTokenPos": 205,
+                                            "startFilePos": 730,
                                             "endLine": 30,
-                                            "endTokenPos": 204,
-                                            "endFilePos": 733
+                                            "endTokenPos": 205,
+                                            "endFilePos": 734
                                         },
                                         "name": "this"
                                     },
@@ -1318,11 +1331,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 30,
-                                            "startTokenPos": 206,
-                                            "startFilePos": 736,
+                                            "startTokenPos": 207,
+                                            "startFilePos": 737,
                                             "endLine": 30,
-                                            "endTokenPos": 206,
-                                            "endFilePos": 744
+                                            "endTokenPos": 207,
+                                            "endFilePos": 745
                                         },
                                         "name": "doorCount"
                                     }
@@ -1331,11 +1344,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 30,
-                                        "startTokenPos": 208,
-                                        "startFilePos": 746,
+                                        "startTokenPos": 209,
+                                        "startFilePos": 747,
                                         "endLine": 30,
-                                        "endTokenPos": 208,
-                                        "endFilePos": 752,
+                                        "endTokenPos": 209,
+                                        "endFilePos": 753,
                                         "rawValue": " doors."
                                     },
                                     "value": " doors."
@@ -1353,11 +1366,11 @@
             "nodeType": "Name",
             "attributes": {
                 "startLine": 21,
-                "startTokenPos": 118,
-                "startFilePos": 425,
+                "startTokenPos": 119,
+                "startFilePos": 426,
                 "endLine": 21,
-                "endTokenPos": 118,
-                "endFilePos": 431
+                "endTokenPos": 119,
+                "endFilePos": 432
             },
             "name": "Vehicle"
         },
@@ -1367,21 +1380,21 @@
         "nodeType": "Stmt_Class",
         "attributes": {
             "startLine": 35,
-            "startTokenPos": 218,
-            "startFilePos": 794,
+            "startTokenPos": 219,
+            "startFilePos": 795,
             "endLine": 46,
-            "endTokenPos": 320,
-            "endFilePos": 1133,
+            "endTokenPos": 321,
+            "endFilePos": 1134,
             "comments": [
                 {
                     "nodeType": "Comment",
                     "text": "\/\/ Derived class: Motorcycle",
                     "line": 34,
-                    "filePos": 765,
-                    "tokenPos": 216,
+                    "filePos": 766,
+                    "tokenPos": 217,
                     "endLine": 34,
-                    "endFilePos": 792,
-                    "endTokenPos": 216
+                    "endFilePos": 793,
+                    "endTokenPos": 217
                 }
             ]
         },
@@ -1389,11 +1402,11 @@
             "nodeType": "Identifier",
             "attributes": {
                 "startLine": 35,
-                "startTokenPos": 220,
-                "startFilePos": 800,
+                "startTokenPos": 221,
+                "startFilePos": 801,
                 "endLine": 35,
-                "endTokenPos": 220,
-                "endFilePos": 809
+                "endTokenPos": 221,
+                "endFilePos": 810
             },
             "name": "Motorcycle"
         },
@@ -1402,11 +1415,11 @@
                 "nodeType": "Stmt_Property",
                 "attributes": {
                     "startLine": 36,
-                    "startTokenPos": 228,
-                    "startFilePos": 833,
+                    "startTokenPos": 229,
+                    "startFilePos": 834,
                     "endLine": 36,
-                    "endTokenPos": 231,
-                    "endFilePos": 846
+                    "endTokenPos": 232,
+                    "endFilePos": 847
                 },
                 "flags": 4,
                 "props": [
@@ -1414,21 +1427,21 @@
                         "nodeType": "PropertyItem",
                         "attributes": {
                             "startLine": 36,
-                            "startTokenPos": 230,
-                            "startFilePos": 841,
+                            "startTokenPos": 231,
+                            "startFilePos": 842,
                             "endLine": 36,
-                            "endTokenPos": 230,
-                            "endFilePos": 845
+                            "endTokenPos": 231,
+                            "endFilePos": 846
                         },
                         "name": {
                             "nodeType": "VarLikeIdentifier",
                             "attributes": {
                                 "startLine": 36,
-                                "startTokenPos": 230,
-                                "startFilePos": 841,
+                                "startTokenPos": 231,
+                                "startFilePos": 842,
                                 "endLine": 36,
-                                "endTokenPos": 230,
-                                "endFilePos": 845
+                                "endTokenPos": 231,
+                                "endFilePos": 846
                             },
                             "name": "type"
                         },
@@ -1443,11 +1456,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 38,
-                    "startTokenPos": 233,
-                    "startFilePos": 853,
+                    "startTokenPos": 234,
+                    "startFilePos": 854,
                     "endLine": 41,
-                    "endTokenPos": 276,
-                    "endFilePos": 996
+                    "endTokenPos": 277,
+                    "endFilePos": 997
                 },
                 "flags": 1,
                 "byRef": false,
@@ -1455,11 +1468,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 38,
-                        "startTokenPos": 237,
-                        "startFilePos": 869,
+                        "startTokenPos": 238,
+                        "startFilePos": 870,
                         "endLine": 38,
-                        "endTokenPos": 237,
-                        "endFilePos": 879
+                        "endTokenPos": 238,
+                        "endFilePos": 880
                     },
                     "name": "__construct"
                 },
@@ -1468,11 +1481,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 38,
-                            "startTokenPos": 239,
-                            "startFilePos": 881,
+                            "startTokenPos": 240,
+                            "startFilePos": 882,
                             "endLine": 38,
-                            "endTokenPos": 239,
-                            "endFilePos": 885
+                            "endTokenPos": 240,
+                            "endFilePos": 886
                         },
                         "type": null,
                         "byRef": false,
@@ -1481,11 +1494,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 38,
-                                "startTokenPos": 239,
-                                "startFilePos": 881,
+                                "startTokenPos": 240,
+                                "startFilePos": 882,
                                 "endLine": 38,
-                                "endTokenPos": 239,
-                                "endFilePos": 885
+                                "endTokenPos": 240,
+                                "endFilePos": 886
                             },
                             "name": "make"
                         },
@@ -1498,11 +1511,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 38,
-                            "startTokenPos": 242,
-                            "startFilePos": 888,
+                            "startTokenPos": 243,
+                            "startFilePos": 889,
                             "endLine": 38,
-                            "endTokenPos": 242,
-                            "endFilePos": 893
+                            "endTokenPos": 243,
+                            "endFilePos": 894
                         },
                         "type": null,
                         "byRef": false,
@@ -1511,11 +1524,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 38,
-                                "startTokenPos": 242,
-                                "startFilePos": 888,
+                                "startTokenPos": 243,
+                                "startFilePos": 889,
                                 "endLine": 38,
-                                "endTokenPos": 242,
-                                "endFilePos": 893
+                                "endTokenPos": 243,
+                                "endFilePos": 894
                             },
                             "name": "model"
                         },
@@ -1528,11 +1541,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 38,
-                            "startTokenPos": 245,
-                            "startFilePos": 896,
+                            "startTokenPos": 246,
+                            "startFilePos": 897,
                             "endLine": 38,
-                            "endTokenPos": 245,
-                            "endFilePos": 900
+                            "endTokenPos": 246,
+                            "endFilePos": 901
                         },
                         "type": null,
                         "byRef": false,
@@ -1541,11 +1554,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 38,
-                                "startTokenPos": 245,
-                                "startFilePos": 896,
+                                "startTokenPos": 246,
+                                "startFilePos": 897,
                                 "endLine": 38,
-                                "endTokenPos": 245,
-                                "endFilePos": 900
+                                "endTokenPos": 246,
+                                "endFilePos": 901
                             },
                             "name": "year"
                         },
@@ -1558,11 +1571,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 38,
-                            "startTokenPos": 248,
-                            "startFilePos": 903,
+                            "startTokenPos": 249,
+                            "startFilePos": 904,
                             "endLine": 38,
-                            "endTokenPos": 248,
-                            "endFilePos": 907
+                            "endTokenPos": 249,
+                            "endFilePos": 908
                         },
                         "type": null,
                         "byRef": false,
@@ -1571,11 +1584,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 38,
-                                "startTokenPos": 248,
-                                "startFilePos": 903,
+                                "startTokenPos": 249,
+                                "startFilePos": 904,
                                 "endLine": 38,
-                                "endTokenPos": 248,
-                                "endFilePos": 907
+                                "endTokenPos": 249,
+                                "endFilePos": 908
                             },
                             "name": "type"
                         },
@@ -1591,31 +1604,31 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 39,
-                            "startTokenPos": 253,
-                            "startFilePos": 920,
+                            "startTokenPos": 254,
+                            "startFilePos": 921,
                             "endLine": 39,
-                            "endTokenPos": 265,
-                            "endFilePos": 961
+                            "endTokenPos": 266,
+                            "endFilePos": 962
                         },
                         "expr": {
                             "nodeType": "Expr_StaticCall",
                             "attributes": {
                                 "startLine": 39,
-                                "startTokenPos": 253,
-                                "startFilePos": 920,
+                                "startTokenPos": 254,
+                                "startFilePos": 921,
                                 "endLine": 39,
-                                "endTokenPos": 264,
-                                "endFilePos": 960
+                                "endTokenPos": 265,
+                                "endFilePos": 961
                             },
                             "class": {
                                 "nodeType": "Name",
                                 "attributes": {
                                     "startLine": 39,
-                                    "startTokenPos": 253,
-                                    "startFilePos": 920,
+                                    "startTokenPos": 254,
+                                    "startFilePos": 921,
                                     "endLine": 39,
-                                    "endTokenPos": 253,
-                                    "endFilePos": 925
+                                    "endTokenPos": 254,
+                                    "endFilePos": 926
                                 },
                                 "name": "parent"
                             },
@@ -1623,11 +1636,11 @@
                                 "nodeType": "Identifier",
                                 "attributes": {
                                     "startLine": 39,
-                                    "startTokenPos": 255,
-                                    "startFilePos": 928,
+                                    "startTokenPos": 256,
+                                    "startFilePos": 929,
                                     "endLine": 39,
-                                    "endTokenPos": 255,
-                                    "endFilePos": 938
+                                    "endTokenPos": 256,
+                                    "endFilePos": 939
                                 },
                                 "name": "__construct"
                             },
@@ -1636,22 +1649,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 39,
-                                        "startTokenPos": 257,
-                                        "startFilePos": 940,
+                                        "startTokenPos": 258,
+                                        "startFilePos": 941,
                                         "endLine": 39,
-                                        "endTokenPos": 257,
-                                        "endFilePos": 944
+                                        "endTokenPos": 258,
+                                        "endFilePos": 945
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 39,
-                                            "startTokenPos": 257,
-                                            "startFilePos": 940,
+                                            "startTokenPos": 258,
+                                            "startFilePos": 941,
                                             "endLine": 39,
-                                            "endTokenPos": 257,
-                                            "endFilePos": 944
+                                            "endTokenPos": 258,
+                                            "endFilePos": 945
                                         },
                                         "name": "make"
                                     },
@@ -1662,22 +1675,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 39,
-                                        "startTokenPos": 260,
-                                        "startFilePos": 947,
+                                        "startTokenPos": 261,
+                                        "startFilePos": 948,
                                         "endLine": 39,
-                                        "endTokenPos": 260,
-                                        "endFilePos": 952
+                                        "endTokenPos": 261,
+                                        "endFilePos": 953
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 39,
-                                            "startTokenPos": 260,
-                                            "startFilePos": 947,
+                                            "startTokenPos": 261,
+                                            "startFilePos": 948,
                                             "endLine": 39,
-                                            "endTokenPos": 260,
-                                            "endFilePos": 952
+                                            "endTokenPos": 261,
+                                            "endFilePos": 953
                                         },
                                         "name": "model"
                                     },
@@ -1688,22 +1701,22 @@
                                     "nodeType": "Arg",
                                     "attributes": {
                                         "startLine": 39,
-                                        "startTokenPos": 263,
-                                        "startFilePos": 955,
+                                        "startTokenPos": 264,
+                                        "startFilePos": 956,
                                         "endLine": 39,
-                                        "endTokenPos": 263,
-                                        "endFilePos": 959
+                                        "endTokenPos": 264,
+                                        "endFilePos": 960
                                     },
                                     "name": null,
                                     "value": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 39,
-                                            "startTokenPos": 263,
-                                            "startFilePos": 955,
+                                            "startTokenPos": 264,
+                                            "startFilePos": 956,
                                             "endLine": 39,
-                                            "endTokenPos": 263,
-                                            "endFilePos": 959
+                                            "endTokenPos": 264,
+                                            "endFilePos": 960
                                         },
                                         "name": "year"
                                     },
@@ -1717,41 +1730,41 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 40,
-                            "startTokenPos": 267,
-                            "startFilePos": 971,
+                            "startTokenPos": 268,
+                            "startFilePos": 972,
                             "endLine": 40,
-                            "endTokenPos": 274,
-                            "endFilePos": 990
+                            "endTokenPos": 275,
+                            "endFilePos": 991
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 40,
-                                "startTokenPos": 267,
-                                "startFilePos": 971,
+                                "startTokenPos": 268,
+                                "startFilePos": 972,
                                 "endLine": 40,
-                                "endTokenPos": 273,
-                                "endFilePos": 989
+                                "endTokenPos": 274,
+                                "endFilePos": 990
                             },
                             "var": {
                                 "nodeType": "Expr_PropertyFetch",
                                 "attributes": {
                                     "startLine": 40,
-                                    "startTokenPos": 267,
-                                    "startFilePos": 971,
+                                    "startTokenPos": 268,
+                                    "startFilePos": 972,
                                     "endLine": 40,
-                                    "endTokenPos": 269,
-                                    "endFilePos": 981
+                                    "endTokenPos": 270,
+                                    "endFilePos": 982
                                 },
                                 "var": {
                                     "nodeType": "Expr_Variable",
                                     "attributes": {
                                         "startLine": 40,
-                                        "startTokenPos": 267,
-                                        "startFilePos": 971,
+                                        "startTokenPos": 268,
+                                        "startFilePos": 972,
                                         "endLine": 40,
-                                        "endTokenPos": 267,
-                                        "endFilePos": 975
+                                        "endTokenPos": 268,
+                                        "endFilePos": 976
                                     },
                                     "name": "this"
                                 },
@@ -1759,11 +1772,11 @@
                                     "nodeType": "Identifier",
                                     "attributes": {
                                         "startLine": 40,
-                                        "startTokenPos": 269,
-                                        "startFilePos": 978,
+                                        "startTokenPos": 270,
+                                        "startFilePos": 979,
                                         "endLine": 40,
-                                        "endTokenPos": 269,
-                                        "endFilePos": 981
+                                        "endTokenPos": 270,
+                                        "endFilePos": 982
                                     },
                                     "name": "type"
                                 }
@@ -1772,11 +1785,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 40,
-                                    "startTokenPos": 273,
-                                    "startFilePos": 985,
+                                    "startTokenPos": 274,
+                                    "startFilePos": 986,
                                     "endLine": 40,
-                                    "endTokenPos": 273,
-                                    "endFilePos": 989
+                                    "endTokenPos": 274,
+                                    "endFilePos": 990
                                 },
                                 "name": "type"
                             }
@@ -1789,11 +1802,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 43,
-                    "startTokenPos": 278,
-                    "startFilePos": 1003,
+                    "startTokenPos": 279,
+                    "startFilePos": 1004,
                     "endLine": 45,
-                    "endTokenPos": 318,
-                    "endFilePos": 1131
+                    "endTokenPos": 319,
+                    "endFilePos": 1132
                 },
                 "flags": 1,
                 "byRef": false,
@@ -1801,11 +1814,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 43,
-                        "startTokenPos": 282,
-                        "startFilePos": 1019,
+                        "startTokenPos": 283,
+                        "startFilePos": 1020,
                         "endLine": 43,
-                        "endTokenPos": 282,
-                        "endFilePos": 1032
+                        "endTokenPos": 283,
+                        "endFilePos": 1033
                     },
                     "name": "getDescription"
                 },
@@ -1816,21 +1829,21 @@
                         "nodeType": "Stmt_Return",
                         "attributes": {
                             "startLine": 44,
-                            "startTokenPos": 288,
-                            "startFilePos": 1046,
+                            "startTokenPos": 289,
+                            "startFilePos": 1047,
                             "endLine": 44,
-                            "endTokenPos": 316,
-                            "endFilePos": 1125
+                            "endTokenPos": 317,
+                            "endFilePos": 1126
                         },
                         "expr": {
                             "nodeType": "Scalar_InterpolatedString",
                             "attributes": {
                                 "startLine": 44,
-                                "startTokenPos": 290,
-                                "startFilePos": 1053,
+                                "startTokenPos": 291,
+                                "startFilePos": 1054,
                                 "endLine": 44,
-                                "endTokenPos": 315,
-                                "endFilePos": 1124,
+                                "endTokenPos": 316,
+                                "endFilePos": 1125,
                                 "kind": 2
                             },
                             "parts": [
@@ -1838,21 +1851,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 292,
-                                        "startFilePos": 1055,
+                                        "startTokenPos": 293,
+                                        "startFilePos": 1056,
                                         "endLine": 44,
-                                        "endTokenPos": 294,
-                                        "endFilePos": 1065
+                                        "endTokenPos": 295,
+                                        "endFilePos": 1066
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 292,
-                                            "startFilePos": 1055,
+                                            "startTokenPos": 293,
+                                            "startFilePos": 1056,
                                             "endLine": 44,
-                                            "endTokenPos": 292,
-                                            "endFilePos": 1059
+                                            "endTokenPos": 293,
+                                            "endFilePos": 1060
                                         },
                                         "name": "this"
                                     },
@@ -1860,11 +1873,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 294,
-                                            "startFilePos": 1062,
+                                            "startTokenPos": 295,
+                                            "startFilePos": 1063,
                                             "endLine": 44,
-                                            "endTokenPos": 294,
-                                            "endFilePos": 1065
+                                            "endTokenPos": 295,
+                                            "endFilePos": 1066
                                         },
                                         "name": "year"
                                     }
@@ -1873,11 +1886,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 296,
-                                        "startFilePos": 1067,
+                                        "startTokenPos": 297,
+                                        "startFilePos": 1068,
                                         "endLine": 44,
-                                        "endTokenPos": 296,
-                                        "endFilePos": 1067,
+                                        "endTokenPos": 297,
+                                        "endFilePos": 1068,
                                         "rawValue": " "
                                     },
                                     "value": " "
@@ -1886,21 +1899,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 298,
-                                        "startFilePos": 1069,
+                                        "startTokenPos": 299,
+                                        "startFilePos": 1070,
                                         "endLine": 44,
-                                        "endTokenPos": 300,
-                                        "endFilePos": 1079
+                                        "endTokenPos": 301,
+                                        "endFilePos": 1080
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 298,
-                                            "startFilePos": 1069,
+                                            "startTokenPos": 299,
+                                            "startFilePos": 1070,
                                             "endLine": 44,
-                                            "endTokenPos": 298,
-                                            "endFilePos": 1073
+                                            "endTokenPos": 299,
+                                            "endFilePos": 1074
                                         },
                                         "name": "this"
                                     },
@@ -1908,11 +1921,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 300,
-                                            "startFilePos": 1076,
+                                            "startTokenPos": 301,
+                                            "startFilePos": 1077,
                                             "endLine": 44,
-                                            "endTokenPos": 300,
-                                            "endFilePos": 1079
+                                            "endTokenPos": 301,
+                                            "endFilePos": 1080
                                         },
                                         "name": "make"
                                     }
@@ -1921,11 +1934,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 302,
-                                        "startFilePos": 1081,
+                                        "startTokenPos": 303,
+                                        "startFilePos": 1082,
                                         "endLine": 44,
-                                        "endTokenPos": 302,
-                                        "endFilePos": 1081,
+                                        "endTokenPos": 303,
+                                        "endFilePos": 1082,
                                         "rawValue": " "
                                     },
                                     "value": " "
@@ -1934,21 +1947,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 304,
-                                        "startFilePos": 1083,
+                                        "startTokenPos": 305,
+                                        "startFilePos": 1084,
                                         "endLine": 44,
-                                        "endTokenPos": 306,
-                                        "endFilePos": 1094
+                                        "endTokenPos": 307,
+                                        "endFilePos": 1095
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 304,
-                                            "startFilePos": 1083,
+                                            "startTokenPos": 305,
+                                            "startFilePos": 1084,
                                             "endLine": 44,
-                                            "endTokenPos": 304,
-                                            "endFilePos": 1087
+                                            "endTokenPos": 305,
+                                            "endFilePos": 1088
                                         },
                                         "name": "this"
                                     },
@@ -1956,11 +1969,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 306,
-                                            "startFilePos": 1090,
+                                            "startTokenPos": 307,
+                                            "startFilePos": 1091,
                                             "endLine": 44,
-                                            "endTokenPos": 306,
-                                            "endFilePos": 1094
+                                            "endTokenPos": 307,
+                                            "endFilePos": 1095
                                         },
                                         "name": "model"
                                     }
@@ -1969,11 +1982,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 308,
-                                        "startFilePos": 1096,
+                                        "startTokenPos": 309,
+                                        "startFilePos": 1097,
                                         "endLine": 44,
-                                        "endTokenPos": 308,
-                                        "endFilePos": 1097,
+                                        "endTokenPos": 309,
+                                        "endFilePos": 1098,
                                         "rawValue": " ("
                                     },
                                     "value": " ("
@@ -1982,21 +1995,21 @@
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 310,
-                                        "startFilePos": 1099,
+                                        "startTokenPos": 311,
+                                        "startFilePos": 1100,
                                         "endLine": 44,
-                                        "endTokenPos": 312,
-                                        "endFilePos": 1109
+                                        "endTokenPos": 313,
+                                        "endFilePos": 1110
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 310,
-                                            "startFilePos": 1099,
+                                            "startTokenPos": 311,
+                                            "startFilePos": 1100,
                                             "endLine": 44,
-                                            "endTokenPos": 310,
-                                            "endFilePos": 1103
+                                            "endTokenPos": 311,
+                                            "endFilePos": 1104
                                         },
                                         "name": "this"
                                     },
@@ -2004,11 +2017,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 44,
-                                            "startTokenPos": 312,
-                                            "startFilePos": 1106,
+                                            "startTokenPos": 313,
+                                            "startFilePos": 1107,
                                             "endLine": 44,
-                                            "endTokenPos": 312,
-                                            "endFilePos": 1109
+                                            "endTokenPos": 313,
+                                            "endFilePos": 1110
                                         },
                                         "name": "type"
                                     }
@@ -2017,11 +2030,11 @@
                                     "nodeType": "InterpolatedStringPart",
                                     "attributes": {
                                         "startLine": 44,
-                                        "startTokenPos": 314,
-                                        "startFilePos": 1111,
+                                        "startTokenPos": 315,
+                                        "startFilePos": 1112,
                                         "endLine": 44,
-                                        "endTokenPos": 314,
-                                        "endFilePos": 1123,
+                                        "endTokenPos": 315,
+                                        "endFilePos": 1124,
                                         "rawValue": " motorcycle)."
                                     },
                                     "value": " motorcycle)."
@@ -2039,11 +2052,11 @@
             "nodeType": "Name",
             "attributes": {
                 "startLine": 35,
-                "startTokenPos": 224,
-                "startFilePos": 819,
+                "startTokenPos": 225,
+                "startFilePos": 820,
                 "endLine": 35,
-                "endTokenPos": 224,
-                "endFilePos": 825
+                "endTokenPos": 225,
+                "endFilePos": 826
             },
             "name": "Vehicle"
         },
@@ -2053,21 +2066,21 @@
         "nodeType": "Stmt_Class",
         "attributes": {
             "startLine": 49,
-            "startTokenPos": 324,
-            "startFilePos": 1165,
+            "startTokenPos": 325,
+            "startFilePos": 1166,
             "endLine": 69,
-            "endTokenPos": 452,
-            "endFilePos": 1669,
+            "endTokenPos": 453,
+            "endFilePos": 1670,
             "comments": [
                 {
                     "nodeType": "Comment",
                     "text": "\/\/ Intertwined class: Garage",
                     "line": 48,
-                    "filePos": 1136,
-                    "tokenPos": 322,
+                    "filePos": 1137,
+                    "tokenPos": 323,
                     "endLine": 48,
-                    "endFilePos": 1163,
-                    "endTokenPos": 322
+                    "endFilePos": 1164,
+                    "endTokenPos": 323
                 }
             ]
         },
@@ -2075,11 +2088,11 @@
             "nodeType": "Identifier",
             "attributes": {
                 "startLine": 49,
-                "startTokenPos": 326,
-                "startFilePos": 1171,
+                "startTokenPos": 327,
+                "startFilePos": 1172,
                 "endLine": 49,
-                "endTokenPos": 326,
-                "endFilePos": 1176
+                "endTokenPos": 327,
+                "endFilePos": 1177
             },
             "name": "Garage"
         },
@@ -2088,11 +2101,11 @@
                 "nodeType": "Stmt_Property",
                 "attributes": {
                     "startLine": 50,
-                    "startTokenPos": 330,
-                    "startFilePos": 1184,
+                    "startTokenPos": 331,
+                    "startFilePos": 1185,
                     "endLine": 50,
-                    "endTokenPos": 338,
-                    "endFilePos": 1206
+                    "endTokenPos": 339,
+                    "endFilePos": 1207
                 },
                 "flags": 4,
                 "props": [
@@ -2100,21 +2113,21 @@
                         "nodeType": "PropertyItem",
                         "attributes": {
                             "startLine": 50,
-                            "startTokenPos": 332,
-                            "startFilePos": 1192,
+                            "startTokenPos": 333,
+                            "startFilePos": 1193,
                             "endLine": 50,
-                            "endTokenPos": 337,
-                            "endFilePos": 1205
+                            "endTokenPos": 338,
+                            "endFilePos": 1206
                         },
                         "name": {
                             "nodeType": "VarLikeIdentifier",
                             "attributes": {
                                 "startLine": 50,
-                                "startTokenPos": 332,
-                                "startFilePos": 1192,
+                                "startTokenPos": 333,
+                                "startFilePos": 1193,
                                 "endLine": 50,
-                                "endTokenPos": 332,
-                                "endFilePos": 1200
+                                "endTokenPos": 333,
+                                "endFilePos": 1201
                             },
                             "name": "vehicles"
                         },
@@ -2122,11 +2135,11 @@
                             "nodeType": "Expr_Array",
                             "attributes": {
                                 "startLine": 50,
-                                "startTokenPos": 336,
-                                "startFilePos": 1204,
+                                "startTokenPos": 337,
+                                "startFilePos": 1205,
                                 "endLine": 50,
-                                "endTokenPos": 337,
-                                "endFilePos": 1205,
+                                "endTokenPos": 338,
+                                "endFilePos": 1206,
                                 "kind": 2
                             },
                             "items": []
@@ -2141,11 +2154,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 52,
-                    "startTokenPos": 340,
-                    "startFilePos": 1213,
+                    "startTokenPos": 341,
+                    "startFilePos": 1214,
                     "endLine": 54,
-                    "endTokenPos": 364,
-                    "endFilePos": 1302
+                    "endTokenPos": 365,
+                    "endFilePos": 1303
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2153,11 +2166,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 52,
-                        "startTokenPos": 344,
-                        "startFilePos": 1229,
+                        "startTokenPos": 345,
+                        "startFilePos": 1230,
                         "endLine": 52,
-                        "endTokenPos": 344,
-                        "endFilePos": 1238
+                        "endTokenPos": 345,
+                        "endFilePos": 1239
                     },
                     "name": "addVehicle"
                 },
@@ -2166,21 +2179,21 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 52,
-                            "startTokenPos": 346,
-                            "startFilePos": 1240,
+                            "startTokenPos": 347,
+                            "startFilePos": 1241,
                             "endLine": 52,
-                            "endTokenPos": 348,
-                            "endFilePos": 1255
+                            "endTokenPos": 349,
+                            "endFilePos": 1256
                         },
                         "type": {
                             "nodeType": "Name",
                             "attributes": {
                                 "startLine": 52,
-                                "startTokenPos": 346,
-                                "startFilePos": 1240,
+                                "startTokenPos": 347,
+                                "startFilePos": 1241,
                                 "endLine": 52,
-                                "endTokenPos": 346,
-                                "endFilePos": 1246
+                                "endTokenPos": 347,
+                                "endFilePos": 1247
                             },
                             "name": "Vehicle"
                         },
@@ -2190,11 +2203,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 52,
-                                "startTokenPos": 348,
-                                "startFilePos": 1248,
+                                "startTokenPos": 349,
+                                "startFilePos": 1249,
                                 "endLine": 52,
-                                "endTokenPos": 348,
-                                "endFilePos": 1255
+                                "endTokenPos": 349,
+                                "endFilePos": 1256
                             },
                             "name": "vehicle"
                         },
@@ -2210,51 +2223,51 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 53,
-                            "startTokenPos": 353,
-                            "startFilePos": 1268,
+                            "startTokenPos": 354,
+                            "startFilePos": 1269,
                             "endLine": 53,
-                            "endTokenPos": 362,
-                            "endFilePos": 1296
+                            "endTokenPos": 363,
+                            "endFilePos": 1297
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 53,
-                                "startTokenPos": 353,
-                                "startFilePos": 1268,
+                                "startTokenPos": 354,
+                                "startFilePos": 1269,
                                 "endLine": 53,
-                                "endTokenPos": 361,
-                                "endFilePos": 1295
+                                "endTokenPos": 362,
+                                "endFilePos": 1296
                             },
                             "var": {
                                 "nodeType": "Expr_ArrayDimFetch",
                                 "attributes": {
                                     "startLine": 53,
-                                    "startTokenPos": 353,
-                                    "startFilePos": 1268,
+                                    "startTokenPos": 354,
+                                    "startFilePos": 1269,
                                     "endLine": 53,
-                                    "endTokenPos": 357,
-                                    "endFilePos": 1284
+                                    "endTokenPos": 358,
+                                    "endFilePos": 1285
                                 },
                                 "var": {
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 53,
-                                        "startTokenPos": 353,
-                                        "startFilePos": 1268,
+                                        "startTokenPos": 354,
+                                        "startFilePos": 1269,
                                         "endLine": 53,
-                                        "endTokenPos": 355,
-                                        "endFilePos": 1282
+                                        "endTokenPos": 356,
+                                        "endFilePos": 1283
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 53,
-                                            "startTokenPos": 353,
-                                            "startFilePos": 1268,
+                                            "startTokenPos": 354,
+                                            "startFilePos": 1269,
                                             "endLine": 53,
-                                            "endTokenPos": 353,
-                                            "endFilePos": 1272
+                                            "endTokenPos": 354,
+                                            "endFilePos": 1273
                                         },
                                         "name": "this"
                                     },
@@ -2262,11 +2275,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 53,
-                                            "startTokenPos": 355,
-                                            "startFilePos": 1275,
+                                            "startTokenPos": 356,
+                                            "startFilePos": 1276,
                                             "endLine": 53,
-                                            "endTokenPos": 355,
-                                            "endFilePos": 1282
+                                            "endTokenPos": 356,
+                                            "endFilePos": 1283
                                         },
                                         "name": "vehicles"
                                     }
@@ -2277,11 +2290,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 53,
-                                    "startTokenPos": 361,
-                                    "startFilePos": 1288,
+                                    "startTokenPos": 362,
+                                    "startFilePos": 1289,
                                     "endLine": 53,
-                                    "endTokenPos": 361,
-                                    "endFilePos": 1295
+                                    "endTokenPos": 362,
+                                    "endFilePos": 1296
                                 },
                                 "name": "vehicle"
                             }
@@ -2294,11 +2307,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 56,
-                    "startTokenPos": 366,
-                    "startFilePos": 1309,
+                    "startTokenPos": 367,
+                    "startFilePos": 1310,
                     "endLine": 60,
-                    "endTokenPos": 405,
-                    "endFilePos": 1459
+                    "endTokenPos": 406,
+                    "endFilePos": 1460
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2306,11 +2319,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 56,
-                        "startTokenPos": 370,
-                        "startFilePos": 1325,
+                        "startTokenPos": 371,
+                        "startFilePos": 1326,
                         "endLine": 56,
-                        "endTokenPos": 370,
-                        "endFilePos": 1336
+                        "endTokenPos": 371,
+                        "endFilePos": 1337
                     },
                     "name": "listVehicles"
                 },
@@ -2321,31 +2334,31 @@
                         "nodeType": "Stmt_Foreach",
                         "attributes": {
                             "startLine": 57,
-                            "startTokenPos": 376,
-                            "startFilePos": 1350,
+                            "startTokenPos": 377,
+                            "startFilePos": 1351,
                             "endLine": 59,
-                            "endTokenPos": 403,
-                            "endFilePos": 1453
+                            "endTokenPos": 404,
+                            "endFilePos": 1454
                         },
                         "expr": {
                             "nodeType": "Expr_PropertyFetch",
                             "attributes": {
                                 "startLine": 57,
-                                "startTokenPos": 379,
-                                "startFilePos": 1359,
+                                "startTokenPos": 380,
+                                "startFilePos": 1360,
                                 "endLine": 57,
-                                "endTokenPos": 381,
-                                "endFilePos": 1373
+                                "endTokenPos": 382,
+                                "endFilePos": 1374
                             },
                             "var": {
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 57,
-                                    "startTokenPos": 379,
-                                    "startFilePos": 1359,
+                                    "startTokenPos": 380,
+                                    "startFilePos": 1360,
                                     "endLine": 57,
-                                    "endTokenPos": 379,
-                                    "endFilePos": 1363
+                                    "endTokenPos": 380,
+                                    "endFilePos": 1364
                                 },
                                 "name": "this"
                             },
@@ -2353,11 +2366,11 @@
                                 "nodeType": "Identifier",
                                 "attributes": {
                                     "startLine": 57,
-                                    "startTokenPos": 381,
-                                    "startFilePos": 1366,
+                                    "startTokenPos": 382,
+                                    "startFilePos": 1367,
                                     "endLine": 57,
-                                    "endTokenPos": 381,
-                                    "endFilePos": 1373
+                                    "endTokenPos": 382,
+                                    "endFilePos": 1374
                                 },
                                 "name": "vehicles"
                             }
@@ -2368,11 +2381,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 57,
-                                "startTokenPos": 385,
-                                "startFilePos": 1378,
+                                "startTokenPos": 386,
+                                "startFilePos": 1379,
                                 "endLine": 57,
-                                "endTokenPos": 385,
-                                "endFilePos": 1385
+                                "endTokenPos": 386,
+                                "endFilePos": 1386
                             },
                             "name": "vehicle"
                         },
@@ -2381,42 +2394,42 @@
                                 "nodeType": "Stmt_Echo",
                                 "attributes": {
                                     "startLine": 58,
-                                    "startTokenPos": 390,
-                                    "startFilePos": 1402,
+                                    "startTokenPos": 391,
+                                    "startFilePos": 1403,
                                     "endLine": 58,
-                                    "endTokenPos": 401,
-                                    "endFilePos": 1443
+                                    "endTokenPos": 402,
+                                    "endFilePos": 1444
                                 },
                                 "exprs": [
                                     {
                                         "nodeType": "Expr_BinaryOp_Concat",
                                         "attributes": {
                                             "startLine": 58,
-                                            "startTokenPos": 392,
-                                            "startFilePos": 1407,
+                                            "startTokenPos": 393,
+                                            "startFilePos": 1408,
                                             "endLine": 58,
-                                            "endTokenPos": 400,
-                                            "endFilePos": 1442
+                                            "endTokenPos": 401,
+                                            "endFilePos": 1443
                                         },
                                         "left": {
                                             "nodeType": "Expr_MethodCall",
                                             "attributes": {
                                                 "startLine": 58,
-                                                "startTokenPos": 392,
-                                                "startFilePos": 1407,
+                                                "startTokenPos": 393,
+                                                "startFilePos": 1408,
                                                 "endLine": 58,
-                                                "endTokenPos": 396,
-                                                "endFilePos": 1432
+                                                "endTokenPos": 397,
+                                                "endFilePos": 1433
                                             },
                                             "var": {
                                                 "nodeType": "Expr_Variable",
                                                 "attributes": {
                                                     "startLine": 58,
-                                                    "startTokenPos": 392,
-                                                    "startFilePos": 1407,
+                                                    "startTokenPos": 393,
+                                                    "startFilePos": 1408,
                                                     "endLine": 58,
-                                                    "endTokenPos": 392,
-                                                    "endFilePos": 1414
+                                                    "endTokenPos": 393,
+                                                    "endFilePos": 1415
                                                 },
                                                 "name": "vehicle"
                                             },
@@ -2424,11 +2437,11 @@
                                                 "nodeType": "Identifier",
                                                 "attributes": {
                                                     "startLine": 58,
-                                                    "startTokenPos": 394,
-                                                    "startFilePos": 1417,
+                                                    "startTokenPos": 395,
+                                                    "startFilePos": 1418,
                                                     "endLine": 58,
-                                                    "endTokenPos": 394,
-                                                    "endFilePos": 1430
+                                                    "endTokenPos": 395,
+                                                    "endFilePos": 1431
                                                 },
                                                 "name": "getDescription"
                                             },
@@ -2438,21 +2451,21 @@
                                             "nodeType": "Expr_ConstFetch",
                                             "attributes": {
                                                 "startLine": 58,
-                                                "startTokenPos": 400,
-                                                "startFilePos": 1436,
+                                                "startTokenPos": 401,
+                                                "startFilePos": 1437,
                                                 "endLine": 58,
-                                                "endTokenPos": 400,
-                                                "endFilePos": 1442
+                                                "endTokenPos": 401,
+                                                "endFilePos": 1443
                                             },
                                             "name": {
                                                 "nodeType": "Name",
                                                 "attributes": {
                                                     "startLine": 58,
-                                                    "startTokenPos": 400,
-                                                    "startFilePos": 1436,
+                                                    "startTokenPos": 401,
+                                                    "startFilePos": 1437,
                                                     "endLine": 58,
-                                                    "endTokenPos": 400,
-                                                    "endFilePos": 1442
+                                                    "endTokenPos": 401,
+                                                    "endFilePos": 1443
                                                 },
                                                 "name": "PHP_EOL"
                                             }
@@ -2469,11 +2482,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 62,
-                    "startTokenPos": 407,
-                    "startFilePos": 1466,
+                    "startTokenPos": 408,
+                    "startFilePos": 1467,
                     "endLine": 64,
-                    "endTokenPos": 426,
-                    "endFilePos": 1583
+                    "endTokenPos": 427,
+                    "endFilePos": 1584
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2481,11 +2494,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 62,
-                        "startTokenPos": 411,
-                        "startFilePos": 1482,
+                        "startTokenPos": 412,
+                        "startFilePos": 1483,
                         "endLine": 62,
-                        "endTokenPos": 411,
-                        "endFilePos": 1498
+                        "endTokenPos": 412,
+                        "endFilePos": 1499
                     },
                     "name": "reportMaintenance"
                 },
@@ -2496,32 +2509,32 @@
                         "nodeType": "Stmt_Echo",
                         "attributes": {
                             "startLine": 63,
-                            "startTokenPos": 417,
-                            "startFilePos": 1512,
+                            "startTokenPos": 418,
+                            "startFilePos": 1513,
                             "endLine": 63,
-                            "endTokenPos": 424,
-                            "endFilePos": 1577
+                            "endTokenPos": 425,
+                            "endFilePos": 1578
                         },
                         "exprs": [
                             {
                                 "nodeType": "Expr_BinaryOp_Concat",
                                 "attributes": {
                                     "startLine": 63,
-                                    "startTokenPos": 419,
-                                    "startFilePos": 1517,
+                                    "startTokenPos": 420,
+                                    "startFilePos": 1518,
                                     "endLine": 63,
-                                    "endTokenPos": 423,
-                                    "endFilePos": 1576
+                                    "endTokenPos": 424,
+                                    "endFilePos": 1577
                                 },
                                 "left": {
                                     "nodeType": "Scalar_String",
                                     "attributes": {
                                         "startLine": 63,
-                                        "startTokenPos": 419,
-                                        "startFilePos": 1517,
+                                        "startTokenPos": 420,
+                                        "startFilePos": 1518,
                                         "endLine": 63,
-                                        "endTokenPos": 419,
-                                        "endFilePos": 1566,
+                                        "endTokenPos": 420,
+                                        "endFilePos": 1567,
                                         "kind": 2,
                                         "rawValue": "\"The following vehicles are done for maintenance:\""
                                     },
@@ -2531,21 +2544,21 @@
                                     "nodeType": "Expr_ConstFetch",
                                     "attributes": {
                                         "startLine": 63,
-                                        "startTokenPos": 423,
-                                        "startFilePos": 1570,
+                                        "startTokenPos": 424,
+                                        "startFilePos": 1571,
                                         "endLine": 63,
-                                        "endTokenPos": 423,
-                                        "endFilePos": 1576
+                                        "endTokenPos": 424,
+                                        "endFilePos": 1577
                                     },
                                     "name": {
                                         "nodeType": "Name",
                                         "attributes": {
                                             "startLine": 63,
-                                            "startTokenPos": 423,
-                                            "startFilePos": 1570,
+                                            "startTokenPos": 424,
+                                            "startFilePos": 1571,
                                             "endLine": 63,
-                                            "endTokenPos": 423,
-                                            "endFilePos": 1576
+                                            "endTokenPos": 424,
+                                            "endFilePos": 1577
                                         },
                                         "name": "PHP_EOL"
                                     }
@@ -2560,11 +2573,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 66,
-                    "startTokenPos": 428,
-                    "startFilePos": 1590,
+                    "startTokenPos": 429,
+                    "startFilePos": 1591,
                     "endLine": 68,
-                    "endTokenPos": 450,
-                    "endFilePos": 1667
+                    "endTokenPos": 451,
+                    "endFilePos": 1668
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2572,11 +2585,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 66,
-                        "startTokenPos": 432,
-                        "startFilePos": 1606,
+                        "startTokenPos": 433,
+                        "startFilePos": 1607,
                         "endLine": 66,
-                        "endTokenPos": 432,
-                        "endFilePos": 1611
+                        "endTokenPos": 433,
+                        "endFilePos": 1612
                     },
                     "name": "stores"
                 },
@@ -2585,11 +2598,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 66,
-                            "startTokenPos": 434,
-                            "startFilePos": 1613,
+                            "startTokenPos": 435,
+                            "startFilePos": 1614,
                             "endLine": 66,
-                            "endTokenPos": 434,
-                            "endFilePos": 1620
+                            "endTokenPos": 435,
+                            "endFilePos": 1621
                         },
                         "type": null,
                         "byRef": false,
@@ -2598,11 +2611,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 66,
-                                "startTokenPos": 434,
-                                "startFilePos": 1613,
+                                "startTokenPos": 435,
+                                "startFilePos": 1614,
                                 "endLine": 66,
-                                "endTokenPos": 434,
-                                "endFilePos": 1620
+                                "endTokenPos": 435,
+                                "endFilePos": 1621
                             },
                             "name": "vehicle"
                         },
@@ -2618,51 +2631,51 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 67,
-                            "startTokenPos": 439,
-                            "startFilePos": 1633,
+                            "startTokenPos": 440,
+                            "startFilePos": 1634,
                             "endLine": 67,
-                            "endTokenPos": 448,
-                            "endFilePos": 1661
+                            "endTokenPos": 449,
+                            "endFilePos": 1662
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 67,
-                                "startTokenPos": 439,
-                                "startFilePos": 1633,
+                                "startTokenPos": 440,
+                                "startFilePos": 1634,
                                 "endLine": 67,
-                                "endTokenPos": 447,
-                                "endFilePos": 1660
+                                "endTokenPos": 448,
+                                "endFilePos": 1661
                             },
                             "var": {
                                 "nodeType": "Expr_ArrayDimFetch",
                                 "attributes": {
                                     "startLine": 67,
-                                    "startTokenPos": 439,
-                                    "startFilePos": 1633,
+                                    "startTokenPos": 440,
+                                    "startFilePos": 1634,
                                     "endLine": 67,
-                                    "endTokenPos": 443,
-                                    "endFilePos": 1649
+                                    "endTokenPos": 444,
+                                    "endFilePos": 1650
                                 },
                                 "var": {
                                     "nodeType": "Expr_PropertyFetch",
                                     "attributes": {
                                         "startLine": 67,
-                                        "startTokenPos": 439,
-                                        "startFilePos": 1633,
+                                        "startTokenPos": 440,
+                                        "startFilePos": 1634,
                                         "endLine": 67,
-                                        "endTokenPos": 441,
-                                        "endFilePos": 1647
+                                        "endTokenPos": 442,
+                                        "endFilePos": 1648
                                     },
                                     "var": {
                                         "nodeType": "Expr_Variable",
                                         "attributes": {
                                             "startLine": 67,
-                                            "startTokenPos": 439,
-                                            "startFilePos": 1633,
+                                            "startTokenPos": 440,
+                                            "startFilePos": 1634,
                                             "endLine": 67,
-                                            "endTokenPos": 439,
-                                            "endFilePos": 1637
+                                            "endTokenPos": 440,
+                                            "endFilePos": 1638
                                         },
                                         "name": "this"
                                     },
@@ -2670,11 +2683,11 @@
                                         "nodeType": "Identifier",
                                         "attributes": {
                                             "startLine": 67,
-                                            "startTokenPos": 441,
-                                            "startFilePos": 1640,
+                                            "startTokenPos": 442,
+                                            "startFilePos": 1641,
                                             "endLine": 67,
-                                            "endTokenPos": 441,
-                                            "endFilePos": 1647
+                                            "endTokenPos": 442,
+                                            "endFilePos": 1648
                                         },
                                         "name": "vehicles"
                                     }
@@ -2685,11 +2698,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 67,
-                                    "startTokenPos": 447,
-                                    "startFilePos": 1653,
+                                    "startTokenPos": 448,
+                                    "startFilePos": 1654,
                                     "endLine": 67,
-                                    "endTokenPos": 447,
-                                    "endFilePos": 1660
+                                    "endTokenPos": 448,
+                                    "endFilePos": 1661
                                 },
                                 "name": "vehicle"
                             }
@@ -2708,21 +2721,21 @@
         "nodeType": "Stmt_Class",
         "attributes": {
             "startLine": 72,
-            "startTokenPos": 456,
-            "startFilePos": 1714,
+            "startTokenPos": 457,
+            "startFilePos": 1715,
             "endLine": 87,
-            "endTokenPos": 543,
-            "endFilePos": 2096,
+            "endTokenPos": 544,
+            "endFilePos": 2097,
             "comments": [
                 {
                     "nodeType": "Comment",
                     "text": "\/\/ Another intertwined class: Maintenance",
                     "line": 71,
-                    "filePos": 1672,
-                    "tokenPos": 454,
+                    "filePos": 1673,
+                    "tokenPos": 455,
                     "endLine": 71,
-                    "endFilePos": 1712,
-                    "endTokenPos": 454
+                    "endFilePos": 1713,
+                    "endTokenPos": 455
                 }
             ]
         },
@@ -2730,11 +2743,11 @@
             "nodeType": "Identifier",
             "attributes": {
                 "startLine": 72,
-                "startTokenPos": 458,
-                "startFilePos": 1720,
+                "startTokenPos": 459,
+                "startFilePos": 1721,
                 "endLine": 72,
-                "endTokenPos": 458,
-                "endFilePos": 1730
+                "endTokenPos": 459,
+                "endFilePos": 1731
             },
             "name": "Maintenance"
         },
@@ -2743,11 +2756,11 @@
                 "nodeType": "Stmt_Property",
                 "attributes": {
                     "startLine": 73,
-                    "startTokenPos": 462,
-                    "startFilePos": 1738,
+                    "startTokenPos": 463,
+                    "startFilePos": 1739,
                     "endLine": 73,
-                    "endTokenPos": 465,
-                    "endFilePos": 1753
+                    "endTokenPos": 466,
+                    "endFilePos": 1754
                 },
                 "flags": 4,
                 "props": [
@@ -2755,21 +2768,21 @@
                         "nodeType": "PropertyItem",
                         "attributes": {
                             "startLine": 73,
-                            "startTokenPos": 464,
-                            "startFilePos": 1746,
+                            "startTokenPos": 465,
+                            "startFilePos": 1747,
                             "endLine": 73,
-                            "endTokenPos": 464,
-                            "endFilePos": 1752
+                            "endTokenPos": 465,
+                            "endFilePos": 1753
                         },
                         "name": {
                             "nodeType": "VarLikeIdentifier",
                             "attributes": {
                                 "startLine": 73,
-                                "startTokenPos": 464,
-                                "startFilePos": 1746,
+                                "startTokenPos": 465,
+                                "startFilePos": 1747,
                                 "endLine": 73,
-                                "endTokenPos": 464,
-                                "endFilePos": 1752
+                                "endTokenPos": 465,
+                                "endFilePos": 1753
                             },
                             "name": "garage"
                         },
@@ -2784,11 +2797,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 75,
-                    "startTokenPos": 467,
-                    "startFilePos": 1760,
+                    "startTokenPos": 468,
+                    "startFilePos": 1761,
                     "endLine": 77,
-                    "endTokenPos": 489,
-                    "endFilePos": 1843
+                    "endTokenPos": 490,
+                    "endFilePos": 1844
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2796,11 +2809,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 75,
-                        "startTokenPos": 471,
-                        "startFilePos": 1776,
+                        "startTokenPos": 472,
+                        "startFilePos": 1777,
                         "endLine": 75,
-                        "endTokenPos": 471,
-                        "endFilePos": 1786
+                        "endTokenPos": 472,
+                        "endFilePos": 1787
                     },
                     "name": "__construct"
                 },
@@ -2809,21 +2822,21 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 75,
-                            "startTokenPos": 473,
-                            "startFilePos": 1788,
+                            "startTokenPos": 474,
+                            "startFilePos": 1789,
                             "endLine": 75,
-                            "endTokenPos": 475,
-                            "endFilePos": 1801
+                            "endTokenPos": 476,
+                            "endFilePos": 1802
                         },
                         "type": {
                             "nodeType": "Name",
                             "attributes": {
                                 "startLine": 75,
-                                "startTokenPos": 473,
-                                "startFilePos": 1788,
+                                "startTokenPos": 474,
+                                "startFilePos": 1789,
                                 "endLine": 75,
-                                "endTokenPos": 473,
-                                "endFilePos": 1793
+                                "endTokenPos": 474,
+                                "endFilePos": 1794
                             },
                             "name": "Garage"
                         },
@@ -2833,11 +2846,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 75,
-                                "startTokenPos": 475,
-                                "startFilePos": 1795,
+                                "startTokenPos": 476,
+                                "startFilePos": 1796,
                                 "endLine": 75,
-                                "endTokenPos": 475,
-                                "endFilePos": 1801
+                                "endTokenPos": 476,
+                                "endFilePos": 1802
                             },
                             "name": "garage"
                         },
@@ -2853,41 +2866,41 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 76,
-                            "startTokenPos": 480,
-                            "startFilePos": 1814,
+                            "startTokenPos": 481,
+                            "startFilePos": 1815,
                             "endLine": 76,
-                            "endTokenPos": 487,
-                            "endFilePos": 1837
+                            "endTokenPos": 488,
+                            "endFilePos": 1838
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 76,
-                                "startTokenPos": 480,
-                                "startFilePos": 1814,
+                                "startTokenPos": 481,
+                                "startFilePos": 1815,
                                 "endLine": 76,
-                                "endTokenPos": 486,
-                                "endFilePos": 1836
+                                "endTokenPos": 487,
+                                "endFilePos": 1837
                             },
                             "var": {
                                 "nodeType": "Expr_PropertyFetch",
                                 "attributes": {
                                     "startLine": 76,
-                                    "startTokenPos": 480,
-                                    "startFilePos": 1814,
+                                    "startTokenPos": 481,
+                                    "startFilePos": 1815,
                                     "endLine": 76,
-                                    "endTokenPos": 482,
-                                    "endFilePos": 1826
+                                    "endTokenPos": 483,
+                                    "endFilePos": 1827
                                 },
                                 "var": {
                                     "nodeType": "Expr_Variable",
                                     "attributes": {
                                         "startLine": 76,
-                                        "startTokenPos": 480,
-                                        "startFilePos": 1814,
+                                        "startTokenPos": 481,
+                                        "startFilePos": 1815,
                                         "endLine": 76,
-                                        "endTokenPos": 480,
-                                        "endFilePos": 1818
+                                        "endTokenPos": 481,
+                                        "endFilePos": 1819
                                     },
                                     "name": "this"
                                 },
@@ -2895,11 +2908,11 @@
                                     "nodeType": "Identifier",
                                     "attributes": {
                                         "startLine": 76,
-                                        "startTokenPos": 482,
-                                        "startFilePos": 1821,
+                                        "startTokenPos": 483,
+                                        "startFilePos": 1822,
                                         "endLine": 76,
-                                        "endTokenPos": 482,
-                                        "endFilePos": 1826
+                                        "endTokenPos": 483,
+                                        "endFilePos": 1827
                                     },
                                     "name": "garage"
                                 }
@@ -2908,11 +2921,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 76,
-                                    "startTokenPos": 486,
-                                    "startFilePos": 1830,
+                                    "startTokenPos": 487,
+                                    "startFilePos": 1831,
                                     "endLine": 76,
-                                    "endTokenPos": 486,
-                                    "endFilePos": 1836
+                                    "endTokenPos": 487,
+                                    "endFilePos": 1837
                                 },
                                 "name": "garage"
                             }
@@ -2925,11 +2938,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 79,
-                    "startTokenPos": 491,
-                    "startFilePos": 1850,
+                    "startTokenPos": 492,
+                    "startFilePos": 1851,
                     "endLine": 82,
-                    "endTokenPos": 519,
-                    "endFilePos": 2012
+                    "endTokenPos": 520,
+                    "endFilePos": 2013
                 },
                 "flags": 1,
                 "byRef": false,
@@ -2937,11 +2950,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 79,
-                        "startTokenPos": 495,
-                        "startFilePos": 1866,
+                        "startTokenPos": 496,
+                        "startFilePos": 1867,
                         "endLine": 79,
-                        "endTokenPos": 495,
-                        "endFilePos": 1883
+                        "endTokenPos": 496,
+                        "endFilePos": 1884
                     },
                     "name": "performMaintenance"
                 },
@@ -2952,32 +2965,32 @@
                         "nodeType": "Stmt_Echo",
                         "attributes": {
                             "startLine": 80,
-                            "startTokenPos": 501,
-                            "startFilePos": 1897,
+                            "startTokenPos": 502,
+                            "startFilePos": 1898,
                             "endLine": 80,
-                            "endTokenPos": 508,
-                            "endFilePos": 1967
+                            "endTokenPos": 509,
+                            "endFilePos": 1968
                         },
                         "exprs": [
                             {
                                 "nodeType": "Expr_BinaryOp_Concat",
                                 "attributes": {
                                     "startLine": 80,
-                                    "startTokenPos": 503,
-                                    "startFilePos": 1902,
+                                    "startTokenPos": 504,
+                                    "startFilePos": 1903,
                                     "endLine": 80,
-                                    "endTokenPos": 507,
-                                    "endFilePos": 1966
+                                    "endTokenPos": 508,
+                                    "endFilePos": 1967
                                 },
                                 "left": {
                                     "nodeType": "Scalar_String",
                                     "attributes": {
                                         "startLine": 80,
-                                        "startTokenPos": 503,
-                                        "startFilePos": 1902,
+                                        "startTokenPos": 504,
+                                        "startFilePos": 1903,
                                         "endLine": 80,
-                                        "endTokenPos": 503,
-                                        "endFilePos": 1956,
+                                        "endTokenPos": 504,
+                                        "endFilePos": 1957,
                                         "kind": 2,
                                         "rawValue": "\"Performing maintenance on all vehicles in the garage:\""
                                     },
@@ -2987,21 +3000,21 @@
                                     "nodeType": "Expr_ConstFetch",
                                     "attributes": {
                                         "startLine": 80,
-                                        "startTokenPos": 507,
-                                        "startFilePos": 1960,
+                                        "startTokenPos": 508,
+                                        "startFilePos": 1961,
                                         "endLine": 80,
-                                        "endTokenPos": 507,
-                                        "endFilePos": 1966
+                                        "endTokenPos": 508,
+                                        "endFilePos": 1967
                                     },
                                     "name": {
                                         "nodeType": "Name",
                                         "attributes": {
                                             "startLine": 80,
-                                            "startTokenPos": 507,
-                                            "startFilePos": 1960,
+                                            "startTokenPos": 508,
+                                            "startFilePos": 1961,
                                             "endLine": 80,
-                                            "endTokenPos": 507,
-                                            "endFilePos": 1966
+                                            "endTokenPos": 508,
+                                            "endFilePos": 1967
                                         },
                                         "name": "PHP_EOL"
                                     }
@@ -3013,41 +3026,41 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 81,
-                            "startTokenPos": 510,
-                            "startFilePos": 1977,
+                            "startTokenPos": 511,
+                            "startFilePos": 1978,
                             "endLine": 81,
-                            "endTokenPos": 517,
-                            "endFilePos": 2006
+                            "endTokenPos": 518,
+                            "endFilePos": 2007
                         },
                         "expr": {
                             "nodeType": "Expr_MethodCall",
                             "attributes": {
                                 "startLine": 81,
-                                "startTokenPos": 510,
-                                "startFilePos": 1977,
+                                "startTokenPos": 511,
+                                "startFilePos": 1978,
                                 "endLine": 81,
-                                "endTokenPos": 516,
-                                "endFilePos": 2005
+                                "endTokenPos": 517,
+                                "endFilePos": 2006
                             },
                             "var": {
                                 "nodeType": "Expr_PropertyFetch",
                                 "attributes": {
                                     "startLine": 81,
-                                    "startTokenPos": 510,
-                                    "startFilePos": 1977,
+                                    "startTokenPos": 511,
+                                    "startFilePos": 1978,
                                     "endLine": 81,
-                                    "endTokenPos": 512,
-                                    "endFilePos": 1989
+                                    "endTokenPos": 513,
+                                    "endFilePos": 1990
                                 },
                                 "var": {
                                     "nodeType": "Expr_Variable",
                                     "attributes": {
                                         "startLine": 81,
-                                        "startTokenPos": 510,
-                                        "startFilePos": 1977,
+                                        "startTokenPos": 511,
+                                        "startFilePos": 1978,
                                         "endLine": 81,
-                                        "endTokenPos": 510,
-                                        "endFilePos": 1981
+                                        "endTokenPos": 511,
+                                        "endFilePos": 1982
                                     },
                                     "name": "this"
                                 },
@@ -3055,11 +3068,11 @@
                                     "nodeType": "Identifier",
                                     "attributes": {
                                         "startLine": 81,
-                                        "startTokenPos": 512,
-                                        "startFilePos": 1984,
+                                        "startTokenPos": 513,
+                                        "startFilePos": 1985,
                                         "endLine": 81,
-                                        "endTokenPos": 512,
-                                        "endFilePos": 1989
+                                        "endTokenPos": 513,
+                                        "endFilePos": 1990
                                     },
                                     "name": "garage"
                                 }
@@ -3068,11 +3081,11 @@
                                 "nodeType": "Identifier",
                                 "attributes": {
                                     "startLine": 81,
-                                    "startTokenPos": 514,
-                                    "startFilePos": 1992,
+                                    "startTokenPos": 515,
+                                    "startFilePos": 1993,
                                     "endLine": 81,
-                                    "endTokenPos": 514,
-                                    "endFilePos": 2003
+                                    "endTokenPos": 515,
+                                    "endFilePos": 2004
                                 },
                                 "name": "listVehicles"
                             },
@@ -3086,11 +3099,11 @@
                 "nodeType": "Stmt_ClassMethod",
                 "attributes": {
                     "startLine": 84,
-                    "startTokenPos": 521,
-                    "startFilePos": 2019,
+                    "startTokenPos": 522,
+                    "startFilePos": 2020,
                     "endLine": 86,
-                    "endTokenPos": 541,
-                    "endFilePos": 2094
+                    "endTokenPos": 542,
+                    "endFilePos": 2095
                 },
                 "flags": 1,
                 "byRef": false,
@@ -3098,11 +3111,11 @@
                     "nodeType": "Identifier",
                     "attributes": {
                         "startLine": 84,
-                        "startTokenPos": 525,
-                        "startFilePos": 2035,
+                        "startTokenPos": 526,
+                        "startFilePos": 2036,
                         "endLine": 84,
-                        "endTokenPos": 525,
-                        "endFilePos": 2044
+                        "endTokenPos": 526,
+                        "endFilePos": 2045
                     },
                     "name": "operatesIn"
                 },
@@ -3111,11 +3124,11 @@
                         "nodeType": "Param",
                         "attributes": {
                             "startLine": 84,
-                            "startTokenPos": 527,
-                            "startFilePos": 2046,
+                            "startTokenPos": 528,
+                            "startFilePos": 2047,
                             "endLine": 84,
-                            "endTokenPos": 527,
-                            "endFilePos": 2052
+                            "endTokenPos": 528,
+                            "endFilePos": 2053
                         },
                         "type": null,
                         "byRef": false,
@@ -3124,11 +3137,11 @@
                             "nodeType": "Expr_Variable",
                             "attributes": {
                                 "startLine": 84,
-                                "startTokenPos": 527,
-                                "startFilePos": 2046,
+                                "startTokenPos": 528,
+                                "startFilePos": 2047,
                                 "endLine": 84,
-                                "endTokenPos": 527,
-                                "endFilePos": 2052
+                                "endTokenPos": 528,
+                                "endFilePos": 2053
                             },
                             "name": "garage"
                         },
@@ -3144,41 +3157,41 @@
                         "nodeType": "Stmt_Expression",
                         "attributes": {
                             "startLine": 85,
-                            "startTokenPos": 532,
-                            "startFilePos": 2065,
+                            "startTokenPos": 533,
+                            "startFilePos": 2066,
                             "endLine": 85,
-                            "endTokenPos": 539,
-                            "endFilePos": 2088
+                            "endTokenPos": 540,
+                            "endFilePos": 2089
                         },
                         "expr": {
                             "nodeType": "Expr_Assign",
                             "attributes": {
                                 "startLine": 85,
-                                "startTokenPos": 532,
-                                "startFilePos": 2065,
+                                "startTokenPos": 533,
+                                "startFilePos": 2066,
                                 "endLine": 85,
-                                "endTokenPos": 538,
-                                "endFilePos": 2087
+                                "endTokenPos": 539,
+                                "endFilePos": 2088
                             },
                             "var": {
                                 "nodeType": "Expr_PropertyFetch",
                                 "attributes": {
                                     "startLine": 85,
-                                    "startTokenPos": 532,
-                                    "startFilePos": 2065,
+                                    "startTokenPos": 533,
+                                    "startFilePos": 2066,
                                     "endLine": 85,
-                                    "endTokenPos": 534,
-                                    "endFilePos": 2077
+                                    "endTokenPos": 535,
+                                    "endFilePos": 2078
                                 },
                                 "var": {
                                     "nodeType": "Expr_Variable",
                                     "attributes": {
                                         "startLine": 85,
-                                        "startTokenPos": 532,
-                                        "startFilePos": 2065,
+                                        "startTokenPos": 533,
+                                        "startFilePos": 2066,
                                         "endLine": 85,
-                                        "endTokenPos": 532,
-                                        "endFilePos": 2069
+                                        "endTokenPos": 533,
+                                        "endFilePos": 2070
                                     },
                                     "name": "this"
                                 },
@@ -3186,11 +3199,11 @@
                                     "nodeType": "Identifier",
                                     "attributes": {
                                         "startLine": 85,
-                                        "startTokenPos": 534,
-                                        "startFilePos": 2072,
+                                        "startTokenPos": 535,
+                                        "startFilePos": 2073,
                                         "endLine": 85,
-                                        "endTokenPos": 534,
-                                        "endFilePos": 2077
+                                        "endTokenPos": 535,
+                                        "endFilePos": 2078
                                     },
                                     "name": "garage"
                                 }
@@ -3199,11 +3212,11 @@
                                 "nodeType": "Expr_Variable",
                                 "attributes": {
                                     "startLine": 85,
-                                    "startTokenPos": 538,
-                                    "startFilePos": 2081,
+                                    "startTokenPos": 539,
+                                    "startFilePos": 2082,
                                     "endLine": 85,
-                                    "endTokenPos": 538,
-                                    "endFilePos": 2087
+                                    "endTokenPos": 539,
+                                    "endFilePos": 2088
                                 },
                                 "name": "garage"
                             }

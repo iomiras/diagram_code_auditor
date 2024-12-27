@@ -14,18 +14,22 @@ with Diagram("Class Relationships and Methods Python", direction="TB", show=Fals
         # Customer and Employee derived classes
         customer = Container("Customer")
         employee = Container("Employee")
+
+        people = [customer, employee]
     
     # Explicitly listing methods for Person
     person_method = "introduce()"
     person >> Edge(label=person_method, style="dashed", color="blue") >> person
     person >> Edge(label="tell_name()", style="dashed", color="blue") >> person
 
+    for _person in people:
+        _person >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
+
     # Order Class
     order = Container("Order")
 
-    # Explicitly listing methods for Customer
-    # customer_methods = [, ]
     customer >> Edge(label="view_order_history()", style="dashed", color="blue") >> customer >> Edge(label="place_order()", style="solid", color="red") >> order
+    # customer >> Edge(label="place_order()", style="solid", color="red") >> order
 
     # customer >> Edge(label="place_order()", style="solid", color="red") >> order
     customer >> Edge(label="cancel_order()", style="solid", color="red") >> order
@@ -34,8 +38,8 @@ with Diagram("Class Relationships and Methods Python", direction="TB", show=Fals
 
     people = [customer, employee]
 
-    for _person in people:
-        _person >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
+    # for _person in people:
+    #     _person >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
     # customer >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
     # employee >> Edge(label="inherits", style="dashed", color="darkgreen") >> person
 
