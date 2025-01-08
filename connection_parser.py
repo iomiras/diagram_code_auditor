@@ -60,11 +60,6 @@ class ConnectionFinder(ast.NodeVisitor):
         """
         Save the method name context (unless it's __init__) and gather param-based guesses.
         """
-        # Typically, we skip __init__ from building connection triples, 
-        # but you can remove this if you want to parse __init__ too.
-        if node.name == '__init__':
-            self.generic_visit(node)
-            return
 
         self.current_method = node.name
 
@@ -85,9 +80,6 @@ class ConnectionFinder(ast.NodeVisitor):
             if isinstance(node.func, ast.Attribute) and isinstance(node.func.value, ast.Name):
                 var_name = node.func.value.id       # e.g. 'book'
                 method_attr = node.func.attr        # e.g. 'borrow'
-                # print(self.current_class)
-                # print(self.current_method)
-                # print(var_name, method_attr)
                 self._refine_guess_from_method(var_name, method_attr)
             elif isinstance(node.func, ast.Call):
                 self._add_to_connections([self.current_class])
@@ -193,4 +185,5 @@ def extract_connection_triples(code_content: str, classes: list, class_to_method
     finder = ConnectionFinder(classes, class_to_methods, class_to_attrs)
     finder.visit(tree)
     # connections = list(set(finder.connections))
+    print(finder.connections)
     return finder.connections

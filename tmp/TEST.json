@@ -1,0 +1,72 @@
+{
+    "classes": [
+        "Project",
+        "Task",
+        "Developer",
+        "Manager"
+    ],
+    "classToMethods": {
+        "Project": [
+            "addTask()",
+            "assignDeveloper()",
+            "overview()",
+            "addTask()",
+            "assignDeveloper()",
+            "overview()"
+        ],
+        "Task": [
+            "assignTo()",
+            "complete()",
+            "getName()",
+            "getAssignee()",
+            "assignTo()",
+            "complete()",
+            "getName()",
+            "getAssignee()"
+        ],
+        "Developer": [
+            "takeTask()",
+            "finishTask()",
+            "addTask()",
+            "getName()",
+            "takeTask()",
+            "finishTask()",
+            "addTask()",
+            "getName()"
+        ],
+        "Manager": [
+            "createProject()",
+            "hireDeveloper()",
+            "addTaskToProject()",
+            "assignDevToProject()",
+            "createProject()",
+            "hireDeveloper()",
+            "addTaskToProject()",
+            "assignDevToProject()"
+        ]
+    },
+    "classToAttributes": {
+        "Project": [
+            "title",
+            "deadline",
+            "title",
+            "deadline"
+        ],
+        "Task": [
+            "name",
+            "description",
+            "name",
+            "description"
+        ],
+        "Developer": [
+            "name",
+            "specialty",
+            "name",
+            "specialty"
+        ],
+        "Manager": [
+            "name",
+            "name"
+        ]
+    }
+}

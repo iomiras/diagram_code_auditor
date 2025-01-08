@@ -47,48 +47,8 @@ def compare_methods(code_class_to_methods: dict, diagram_class_to_methods: dict)
 
 
 def parse_json(code_tree: str) -> tuple:
-    """
-    Parse JSON AST representation of PHP code.
-    
-    Args:
-        code_tree: JSON string containing PHP AST
-        
-    Returns:
-        tuple: (classes, methods)
-    """
-    code_classes = []
-    code_methods = {}
     parsed_json = json.loads(code_tree)
-    if len(parsed_json) == 1:
-        statements = parsed_json[0]['stmts']
-    else:
-        statements = parsed_json
-    
-    for stmt in statements:
-        if stmt['nodeType'] == 'Stmt_Class':
-            class_name = stmt['name']['name']
-            
-            # Handle inheritance
-            if stmt['extends']:
-                parent_class = stmt['extends']['name']
-                if parent_class in code_methods:
-                    code_methods[class_name] = code_methods[parent_class].copy()
-                    
-            code_classes.append(class_name)
-            
-            # Process class methods
-            for class_stmt in stmt['stmts']:
-                if class_stmt['nodeType'] == 'Stmt_ClassMethod':
-                    method_name = class_stmt['name']['name']
-                    if method_name == '__construct':
-                        continue
-                    method_name += '()'
-                    
-                    if class_name in code_methods:
-                        code_methods[class_name].append(method_name)
-                    else:
-                        code_methods[class_name] = [method_name]
-    return code_classes, code_methods, ""
+    return parsed_json['classes'], parsed_json['classToMethods'], parsed_json['classToAttributes']
 
 
 def parse_code_file(file_path: str) -> tuple:
@@ -101,19 +61,20 @@ def parse_code_file(file_path: str) -> tuple:
     Returns:
         tuple: (classes, methods)
     """
-    php_parser = 'php_parser.php'
 
     if file_path.endswith('.py'):
         with open(file_path, 'r') as f:
             content = f.read()
         return analyze_code(content)
     elif file_path.endswith('.php'):
-        json_output = './tmp/ast.json'
+        php_parser = 'php_parser.php'
+        json_output = './tmp/TEST.json'
         subprocess.run(['php', php_parser, file_path, json_output])
         with open(json_output, 'r') as f:
             content = f.read()
         return parse_json(content)
     else:
+        print(file_path)
         log_error("Unsupported file type. Only .py and .php are supported.")
         sys.exit(1)
 

@@ -1,5 +1,6 @@
 import ast
 from logging_utils import log_error
+from pprint import pprint
 
 class CodeVisitor(ast.NodeVisitor):
     """AST Visitor to parse code classes and methods, including inheritance resolution."""

@@ -7,6 +7,7 @@ from code_parser import analyze_code
 from connection_parser import extract_connection_triples
 from diagram_parser import analyze_diagram
 import os
+from diagram_code_auditor import parse_code_file
 
 
 def write_diagram(file_path, diagram_name, classes, class_to_methods, connections):
@@ -64,28 +65,31 @@ def write_diagram(file_path, diagram_name, classes, class_to_methods, connection
     f.close()
     subprocess.run(['python3', file_path])
 
-
+# def extract_connection_triples_php(filename):
+#     subprocess.run(['php', php_parser, file_path, json_output])
 
 def main():
     file_path = sys.argv[1]
+    connections = []
 
     diagram_path = './diagrams_from_codes/diagram_for_' + file_path.split('/')[-1]
 
-    print(file_path)
-    print(diagram_path)
-    
+    classes, class_to_methods, class_to_attributes = parse_code_file(file_path)
     if file_path.endswith('.py'):
         with open(file_path, 'r') as f:
             content = f.read()
-
-        classes, class_to_methods, class_to_attributes = analyze_code(content)
         connections = extract_connection_triples(content, classes, class_to_methods, class_to_attributes)
-        # pprint(connections)
-        write_diagram(diagram_path, diagram_path, classes, class_to_methods, connections)
     elif file_path.endswith('.php'):
-        print("Sorry, PHP files are not supported yet.")
-    else:
-        print("Unsupported file format.")
+        php_data = './tmp/data.json'
+        php_connections = './tmp/connections.json'
+
+        subprocess.run(['php', 'connection_parser.php', file_path, php_data, php_connections])
+
+        with open(php_connections, 'r') as f:
+            content = f.read()
+
+        connections = json.loads(content)
+    write_diagram(diagram_path + '.py', diagram_path, classes, class_to_methods, connections)
 
 if __name__ == "__main__":
     main()
