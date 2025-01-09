@@ -1,12 +1,10 @@
 import ast
 import sys
-import json
-import glob
-import subprocess
 from pprint import pprint
-from logging_utils import log_error
-from code_parser import analyze_code
-from diagram_parser import analyze_diagram
+from utils.logging_utils import log_error
+from utils.python_code_parser import PythonCodeVisitor
+from utils.diagram_parser import DiagramVisitor
+from utils.php_code_parser import extract_php_data
 
 def compare_classes(code_classes: list, diagram_classes: list) -> tuple:
     """
@@ -32,11 +30,11 @@ def compare_methods(code_class_to_methods: dict, diagram_class_to_methods: dict)
     all_classes = set(code_class_to_methods) | set(diagram_class_to_methods)
 
     for cls in all_classes:
-        code_methods = set(code_class_to_methods.get(cls, []))
+        class_methods = set(code_class_to_methods.get(cls, []))
         diagram_methods = set(diagram_class_to_methods.get(cls, []))
 
-        missing = diagram_methods - code_methods
-        extra = code_methods - diagram_methods
+        missing = diagram_methods - class_methods
+        extra = class_methods - diagram_methods
 
         if missing:
             missing_methods[cls] = missing
@@ -46,37 +44,97 @@ def compare_methods(code_class_to_methods: dict, diagram_class_to_methods: dict)
     return missing_methods, extra_methods
 
 
-def parse_json(code_tree: str) -> tuple:
-    parsed_json = json.loads(code_tree)
-    return parsed_json['classes'], parsed_json['classToMethods'], parsed_json['classToAttributes']
+def parse_python(file_path: str) -> tuple:
+    """
+    Parse and analyze a code file's content.
+
+    Args:
+        file_path: File path to the code file.
+
+    Returns:
+        tuple: (classes, methods, attributes)
+    """
+    try:
+        with open(file_path, 'r') as f:
+            content = f.read()
+        tree = ast.parse(content)
+    except SyntaxError as e:
+        log_error(f"Error parsing code: {e}")
+        return [], {}
+
+    code_visitor = PythonCodeVisitor()
+    code_visitor.visit(tree)
+    
+    return code_visitor.get_results()
+
+
+def parse_php(file_path: str) -> tuple:
+    """
+    Parse and analyze a PHP code file's content.
+
+    Args:
+        file_path: File path to the PHP code file.
+    Returns:
+         tuple: (classes, methods, attributes)
+    """
+    return extract_php_data(file_path)
+
+
+def parse_diagram_file(diagram_file_name: str) -> tuple:
+    """
+    Parse and analyze a diagram file's content.
+
+    Args:
+        diagram_file_name: File path to the diagram file.
+
+    Returns:
+        tuple: (classes, methods, connections, variable_mappings)
+    """
+    try:
+        with open(diagram_file_name, "r") as f:
+            diagram_content = f.read()
+            tree = ast.parse(diagram_content)
+    except SyntaxError as e:
+        log_error(f"Error parsing diagram: {e}")
+        sys.exit(1)
+
+    diagram_visitor = DiagramVisitor()
+    diagram_visitor.visit(tree)
+
+    return diagram_visitor.get_results()
 
 
 def parse_code_file(file_path: str) -> tuple:
-    """
-    Parse a code file (Python or PHP).
-    
-    Args:
-        file_path: Path to the code file
-        
-    Returns:
-        tuple: (classes, methods)
-    """
-
     if file_path.endswith('.py'):
-        with open(file_path, 'r') as f:
-            content = f.read()
-        return analyze_code(content)
+        return parse_python(file_path)
     elif file_path.endswith('.php'):
-        php_parser = 'php_parser.php'
-        json_output = './tmp/TEST.json'
-        subprocess.run(['php', php_parser, file_path, json_output])
-        with open(json_output, 'r') as f:
-            content = f.read()
-        return parse_json(content)
+        return parse_php(file_path)
     else:
-        print(file_path)
         log_error("Unsupported file type. Only .py and .php are supported.")
         sys.exit(1)
+
+
+def output_results(code_file_name, missing_classes, extra_classes, missing_methods, extra_methods):
+    print("\n===== Comparison Results =====")
+    if missing_classes:
+        log_error(f"Missing Classes in Code {code_file_name}:")
+        pprint(missing_classes)
+        print()
+
+    if extra_classes:
+        log_error(f"Extra Classes in Code {code_file_name}:")
+        pprint(extra_classes)
+        print()
+
+    if missing_methods:
+        log_error(f"Missing Methods in Code {code_file_name}:")
+        pprint(missing_methods)
+        print()
+
+    if extra_methods:
+        log_error(f"Extra Methods in Code {code_file_name}:")
+        pprint(extra_methods)
+        print()
 
 
 def main():
@@ -87,58 +145,23 @@ def main():
     # Process the given code and diagram file pair
     try:
         
-        code_classes, code_methods, *_ = parse_code_file(code_file_name)
-        # pprint(code_classes)
-        # pprint(code_methods)
+        code_classes, class_methods, class_attributes = parse_code_file(code_file_name)
     except FileNotFoundError:
         log_error(f"Error: Code file {code_file_name} not found.")
         discrepancies_found = True
         return
 
-    all_diagram_classes = set()
-    aggregated_diagram_methods = {}
-
-    try:
-        with open(diagram_file_name, "r") as f:
-            diagram_content = f.read()
-    except FileNotFoundError:
-        log_error(f"Error: Diagram file {diagram_file_name} not found.")
-        discrepancies_found = True
-        return
-
     # Analyze diagram
-    diagram_classes, diagram_methods, all_connections, var_to_class = analyze_diagram(diagram_content)
-    all_diagram_classes.update(diagram_classes)
-    for cls, methods in diagram_methods.items():
-        aggregated_diagram_methods.setdefault(cls, set()).update(methods)
+    diagram_classes, diagram_methods, *_ = parse_diagram_file(diagram_file_name)
 
     # Compare classes and methods
-    missing_classes, extra_classes = compare_classes(code_classes, all_diagram_classes)
-    missing_methods, extra_methods = compare_methods(code_methods, aggregated_diagram_methods)
+    missing_classes, extra_classes = compare_classes(code_classes, diagram_classes)
+    missing_methods, extra_methods = compare_methods(class_methods, diagram_methods)
 
     # Show results for each file and track discrepancies
     if missing_classes or extra_classes or missing_methods or extra_methods:
         discrepancies_found = True
-        print("\n===== Comparison Results =====")
-        if missing_classes:
-            log_error(f"Missing Classes in Code {code_file_name}:")
-            pprint(missing_classes)
-            print()
-
-        if extra_classes:
-            log_error(f"Extra Classes in Code {code_file_name}:")
-            pprint(extra_classes)
-            print()
-
-        if missing_methods:
-            log_error(f"Missing Methods in Code {code_file_name}:")
-            pprint(missing_methods)
-            print()
-
-        if extra_methods:
-            log_error(f"Extra Methods in Code {code_file_name}:")
-            pprint(extra_methods)
-            print()
+        output_results(code_file_name, missing_classes, extra_classes, missing_methods, extra_methods)
 
     # Exit based on discrepancies
     if discrepancies_found:

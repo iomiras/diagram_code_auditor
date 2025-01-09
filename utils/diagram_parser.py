@@ -1,5 +1,5 @@
 import ast
-from logging_utils import log_error, log_warning
+from utils.logging_utils import log_error, log_warning
 
 def extract_method_from_edge(node: ast.Call, variable_to_value: dict = {}) -> str:
     """
@@ -362,23 +362,3 @@ class DiagramVisitor(ast.NodeVisitor):
     def get_results(self) -> tuple:
         """Get the analysis results."""
         return self.all_classes, self.all_class_to_methods, self.all_connections, self.variable_to_class
-
-def analyze_diagram(diagram_content: str) -> tuple:
-    """
-    Parse and analyze a diagram file's content.
-    
-    Args:
-        diagram_content: Content of the diagram file
-        
-    Returns:
-        tuple: (classes, methods, connections, variable_mappings)
-    """
-    try:
-        tree = ast.parse(diagram_content)
-    except SyntaxError as e:
-        log_error(f"Error parsing diagram: {e}")
-        return [], {}, [], {}
-
-    diagram_visitor = DiagramVisitor()
-    diagram_visitor.visit(tree)
-    return diagram_visitor.get_results()

@@ -1,14 +1,9 @@
-import sys
-import json
+import sys, ast
 import subprocess
-from pprint import pprint
-from logging_utils import log_error
-from code_parser import analyze_code
-from connection_parser import extract_connection_triples
-from diagram_parser import analyze_diagram
-import os
 from diagram_code_auditor import parse_code_file
-
+from utils.php_code_parser import extract_connections
+from utils.logging_utils import log_error
+from utils.connection_parser import extract_connection_triples
 
 def write_diagram(file_path, diagram_name, classes, class_to_methods, connections):
     """
@@ -21,6 +16,7 @@ def write_diagram(file_path, diagram_name, classes, class_to_methods, connection
         class_to_methods (dict): Methods for each class.
         connections (list): Relationships between classes.
     """
+    file_path = '.'.join(file_path.split('.')[:-1]) + '.py'
     graph_attr = {"splines": "polyline"}
 
     with open(file_path, 'w') as f:
@@ -29,7 +25,7 @@ def write_diagram(file_path, diagram_name, classes, class_to_methods, connection
         f.write("from diagrams.c4 import Container\n")
 
         f.write(f"graph_attr = {graph_attr}\n\n")
-        f.write(f"with Diagram(\"{' '.join(diagram_name.split('/')[-1].split('_'))}\", filename= \"./{file_path.split('.')[1]}\", direction=\"LR\", show=False, graph_attr=graph_attr):\n")
+        f.write(f"with Diagram(\"{' '.join(diagram_name.split('/')[-1].split('_'))}\", filename= \"./{file_path.split('.')[0]}\", direction=\"LR\", show=False, graph_attr=graph_attr):\n")
 
         # Define classes as variables
         for cls in classes:
@@ -65,31 +61,38 @@ def write_diagram(file_path, diagram_name, classes, class_to_methods, connection
     f.close()
     subprocess.run(['python3', file_path])
 
-# def extract_connection_triples_php(filename):
-#     subprocess.run(['php', php_parser, file_path, json_output])
+def extract_connection(file_path, classes, class_to_methods, class_to_attributes):
+    """
+    Extract connections from a code file.
 
-def main():
-    file_path = sys.argv[1]
+    Args:
+        file_path (str): The path of the code file.
+        classes (list): List of class names.
+        class_to_methods (dict): Methods for each class.
+        class_to_attributes (dict): Attributes for each class.
+
+    Returns:
+        connections (list): A list of connections between classes.
+    """
     connections = []
-
-    diagram_path = './diagrams_from_codes/diagram_for_' + file_path.split('/')[-1]
-
-    classes, class_to_methods, class_to_attributes = parse_code_file(file_path)
     if file_path.endswith('.py'):
         with open(file_path, 'r') as f:
             content = f.read()
         connections = extract_connection_triples(content, classes, class_to_methods, class_to_attributes)
     elif file_path.endswith('.php'):
-        php_data = './tmp/data.json'
-        php_connections = './tmp/connections.json'
+        connections = extract_connections(file_path)
+    return connections
 
-        subprocess.run(['php', 'connection_parser.php', file_path, php_data, php_connections])
+def main():
+    file_path = sys.argv[1]
 
-        with open(php_connections, 'r') as f:
-            content = f.read()
+    diagram_path = 'diagram_creator_test_examples/diagrams_from_codes/diagram_for_' + file_path.split('/')[-1]
 
-        connections = json.loads(content)
-    write_diagram(diagram_path + '.py', diagram_path, classes, class_to_methods, connections)
+    classes, class_to_methods, class_to_attributes = parse_code_file(file_path)
+
+    connections = extract_connection(file_path, classes, class_to_methods, class_to_attributes)
+
+    write_diagram(diagram_path, file_path, classes, class_to_methods, connections)
 
 if __name__ == "__main__":
     main()

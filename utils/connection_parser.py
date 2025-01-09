@@ -1,13 +1,7 @@
 import ast
-from logging_utils import log_error
-from pprint import pprint
+from utils.logging_utils import log_error
 
-
-############################################################
-# NEW FUNCTIONALITY: EXTRACTING CONNECTION TRIPLES (with attributes)
-############################################################
-
-class ConnectionFinder(ast.NodeVisitor):
+class ConnectionParser(ast.NodeVisitor):
     """
     A second-pass visitor that scans for:
       1) Method calls (e.g. `book.borrow(self)`)
@@ -169,6 +163,7 @@ class ConnectionFinder(ast.NodeVisitor):
                 candidate_classes
             ])
 
+
 def extract_connection_triples(code_content: str, classes: list, class_to_methods=None, class_to_attrs=None):
     """
     1. Parse the code into an AST.
@@ -182,8 +177,7 @@ def extract_connection_triples(code_content: str, classes: list, class_to_method
         log_error(f"Error parsing code for connection extraction: {e}")
         return []
 
-    finder = ConnectionFinder(classes, class_to_methods, class_to_attrs)
+    finder = ConnectionParser(classes, class_to_methods, class_to_attrs)
     finder.visit(tree)
-    # connections = list(set(finder.connections))
     print(finder.connections)
     return finder.connections

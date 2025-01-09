@@ -2,7 +2,7 @@ from diagrams import Diagram, Edge
 from diagrams.c4 import Container
 graph_attr = {'splines': 'polyline'}
 
-with Diagram("diagram for project classes.php", filename= ".//diagrams_from_codes/diagram_for_project_classes", direction="LR", show=False, graph_attr=graph_attr):
+with Diagram("project classes.php", filename= "./diagram_creator_test_examples/diagrams_from_codes/diagram_for_project_classes", direction="LR", show=False, graph_attr=graph_attr):
     project = Container(name="Project")
     task = Container(name="Task")
     developer = Container(name="Developer")
