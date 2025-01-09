@@ -1,72 +1,75 @@
 {
     "classes": [
-        "Project",
-        "Task",
-        "Developer",
-        "Manager"
+        "Vehicle",
+        "Car",
+        "Motorcycle",
+        "Garage",
+        "Maintenance"
     ],
     "classToMethods": {
-        "Project": [
-            "addTask()",
-            "assignDeveloper()",
-            "overview()",
-            "addTask()",
-            "assignDeveloper()",
-            "overview()"
+        "Vehicle": [
+            "getDescription()",
+            "getDescription()"
         ],
-        "Task": [
-            "assignTo()",
-            "complete()",
-            "getName()",
-            "getAssignee()",
-            "assignTo()",
-            "complete()",
-            "getName()",
-            "getAssignee()"
+        "Car": [
+            "getDescription()",
+            "getDescription()"
         ],
-        "Developer": [
-            "takeTask()",
-            "finishTask()",
-            "addTask()",
-            "getName()",
-            "takeTask()",
-            "finishTask()",
-            "addTask()",
-            "getName()"
+        "Motorcycle": [
+            "getDescription()",
+            "getDescription()"
         ],
-        "Manager": [
-            "createProject()",
-            "hireDeveloper()",
-            "addTaskToProject()",
-            "assignDevToProject()",
-            "createProject()",
-            "hireDeveloper()",
-            "addTaskToProject()",
-            "assignDevToProject()"
+        "Garage": [
+            "addVehicle()",
+            "listVehicles()",
+            "reportMaintenance()",
+            "stores()",
+            "addVehicle()",
+            "listVehicles()",
+            "reportMaintenance()",
+            "stores()"
+        ],
+        "Maintenance": [
+            "performMaintenance()",
+            "operatesIn()",
+            "Test()",
+            "performMaintenance()",
+            "operatesIn()",
+            "Test()"
         ]
     },
     "classToAttributes": {
-        "Project": [
-            "title",
-            "deadline",
-            "title",
-            "deadline"
+        "Vehicle": [
+            "make",
+            "model",
+            "year",
+            "make",
+            "model",
+            "year"
         ],
-        "Task": [
-            "name",
-            "description",
-            "name",
-            "description"
+        "Car": [
+            "make",
+            "model",
+            "year",
+            "doorCount",
+            "make",
+            "model",
+            "year",
+            "doorCount"
         ],
-        "Developer": [
-            "name",
-            "specialty",
-            "name",
-            "specialty"
+        "Motorcycle": [
+            "make",
+            "model",
+            "year",
+            "type",
+            "make",
+            "model",
+            "year",
+            "type"
         ],
-        "Manager": [
-            "name",
-            "name"
+        "Maintenance": [
+            "garage",
+            "garage"
         ]
     }
 }

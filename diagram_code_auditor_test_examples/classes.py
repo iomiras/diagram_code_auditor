@@ -81,6 +81,3 @@ class Order:
 
     def apply_discount(self, discount):
         print(f"Order {self.order_id} received a discount of {discount}%.")
-
-    def hello(self):
-        print("Hello")
