@@ -1,0 +1,3 @@
+[console_scripts]
+diagram-audit = diagramAudit.diagram_code_auditor:main
+diagram-create = diagramAudit.diagram_creator:main

@@ -1,0 +1,75 @@
+{
+    "classes": [
+        "Vehicle",
+        "Car",
+        "Motorcycle",
+        "Garage",
+        "Maintenance"
+    ],
+    "classToMethods": {
+        "Vehicle": [
+            "getDescription()",
+            "getDescription()"
+        ],
+        "Car": [
+            "getDescription()",
+            "getDescription()"
+        ],
+        "Motorcycle": [
+            "getDescription()",
+            "getDescription()"
+        ],
+        "Garage": [
+            "addVehicle()",
+            "listVehicles()",
+            "reportMaintenance()",
+            "stores()",
+            "addVehicle()",
+            "listVehicles()",
+            "reportMaintenance()",
+            "stores()"
+        ],
+        "Maintenance": [
+            "performMaintenance()",
+            "operatesIn()",
+            "Test()",
+            "performMaintenance()",
+            "operatesIn()",
+            "Test()"
+        ]
+    },
+    "classToAttributes": {
+        "Vehicle": [
+            "make",
+            "model",
+            "year",
+            "make",
+            "model",
+            "year"
+        ],
+        "Car": [
+            "make",
+            "model",
+            "year",
+            "doorCount",
+            "make",
+            "model",
+            "year",
+            "doorCount"
+        ],
+        "Motorcycle": [
+            "make",
+            "model",
+            "year",
+            "type",
+            "make",
+            "model",
+            "year",
+            "type"
+        ],
+        "Maintenance": [
+            "garage",
+            "garage"
+        ]
+    }
+}

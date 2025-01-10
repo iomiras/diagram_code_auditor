@@ -1,0 +1,11 @@
+{
+    "require": {
+        "nikic/php-parser": "v3.1.1",
+      "ext-json": "*"
+    },
+    "config": {
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
+    }
+}

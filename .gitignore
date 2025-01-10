@@ -1,4 +1,6 @@
 .DS_Store
-utils/vendor
 __pycache__
 .idea
+/diagramAudit/utils/vendor
+venv
+utils/__pycache__
